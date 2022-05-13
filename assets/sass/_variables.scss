@@ -1,0 +1,20 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$background: rgb(17, 17, 17);
+$banner: rgb(30, 30, 30);
+$foreground: #a7e4ff;
+$foregroundFocus: darken($foreground, 10%);
+
+$nav-link-color: $foreground;
+$nav-link-hover-color: $foregroundFocus;
+
+$nav-tabs-link-active-bg: $body-bg;
+
+$nav-pills-link-active-color: $background;
+$nav-pills-link-active-bg: $foreground;

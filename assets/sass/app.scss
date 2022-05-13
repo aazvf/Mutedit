@@ -1,0 +1,78 @@
+// Fonts
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Medium-1051a531d3e1ee3483a6533158557139-font.woff
+
+// Variables
+@import "variables";
+
+// Bootstrap
+// @import "~/node_modules/bootstrap/scss/bootstrap";
+
+@font-face {
+    font-family: "IBMPlexSans";
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Medium-1051a531d3e1ee3483a6533158557139-font.woff)
+        format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+// body {
+//     background: $background;
+//     color: $foreground;
+// }
+// a {
+//     color: $foreground;
+//     font-weight: bold;
+//     text-decoration: underline;
+//     &:hover {
+//         color: lighten($foreground, 5%);
+//     }
+// }
+
+p a {
+    text-decoration: underline;
+}
+
+// .article {
+//     transition: border 0.1s linear, max-height 0.3s linear, padding 0.5s ease-in, margin 0.4s linear, opacity 0.1s linear;
+//     &.showPreview {
+//         max-height: 1000px;
+//     }
+//     max-height: 9999px;
+//     opacity: 1;
+// }
+
+// .article.hiding {
+//     max-height: 0;
+//     padding: 0;
+//     margin: 0 !important;
+//     opacity: 0;
+// }
+
+// .selfpost {
+//     word-break: break-word;
+//     max-width: 100%;
+//     overflow-x: hidden;
+//     max-height: 300px;
+//     overflow: hidden;
+//     &.expanded {
+//         max-height: 100%;
+//     }
+// }
+
+// .bolden {
+//     text-decoration: underline;
+//     font-weight: bold;
+//     color: rebeccapurple;
+// }
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
