@@ -1,7 +1,7 @@
 <template>
     <label
         for="default-toggle"
-        class="inline-flex relative items-center cursor-pointer mr-3"
+        class="inline-flex relative items-center cursor-pointer mr-5 whitespace-nowrap"
         v-bind="$attrs"
     >
         <input type="checkbox" class="sr-only peer" v-model="value" />

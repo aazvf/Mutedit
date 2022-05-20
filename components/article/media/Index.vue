@@ -1,18 +1,7 @@
 <template>
     <div class="mb-3" v-if="!isText">
         <Transition>
-            <div class="preview p-4" v-show="hasPreview && showPreview" v-on:click="onClickPreview">
-                <div
-                    class="preview-underlay"
-                    :style="{backgroundImage: 'url(' + previewSource + ')'}"
-                >
-                    <div class="preview-overlay"></div>
-                </div>
-                <img :src="previewSource" alt="preview" referrerpolicy="no-referrer" />
-                <div class="preview-overlay" v-if="article.isPlayable">
-                    <div class="play-icon"></div>
-                </div>
-            </div>
+            <article-media-preview v-show="hasPreview && showPreview" v-on:click="onClickPreview" />
         </Transition>
 
         <Transition>
@@ -27,7 +16,7 @@
                     </div>
 
                     <iframe
-                        v-if="article.youtubeId"
+                        v-if="article.isYoutube"
                         width="560"
                         height="315"
                         :src="'https://www.youtube-nocookie.com/embed/' + article.youtubeId + '?rel=0&amp;controls=1&amp;showinfo=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;color=white'"
@@ -36,14 +25,14 @@
                         allowfullscreen
                     ></iframe>
                     <iframe
-                        v-if="article.streamableId"
+                        v-if="article.isStreamable"
                         :src="'https://streamable.com/o/' + article.streamableId"
                         allowfullscreen
                         scrolling="no"
                         allow="encrypted-media;"
                     ></iframe>
                     <iframe
-                        v-if="article.gfycatId"
+                        v-if="article.isGfyCat"
                         :src="'https://gfycat.com/ifr/' + article.gfycatId"
                         allowfullscreen
                         frameborder="0"
@@ -81,16 +70,13 @@
                     <article-video-player-red
                         ref="red-player"
                         :article="article"
-                        v-if="article.redgifId"
+                        v-if="article.isRGif"
                     />
                     <article-video-player-gifv
                         ref="gifv-player"
                         :article="article"
                         v-if="article.isGifv"
                     />
-                    <div class="inline-block float-right mt-1" v-if="article.isEmbed">
-                        <tailwind-badge theme="yellow" v-on:click="showPreview = true">Close</tailwind-badge>
-                    </div>
                 </div>
             </div>
         </Transition>

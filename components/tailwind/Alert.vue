@@ -8,7 +8,8 @@
 <script>
 import { defineComponent } from "@vue/composition-api";
 
-const base = "py-2 px-3 mx-3 my-2 text-sm rounded-lg text-center ";
+const base =
+    "py-2 px-3 mx-3 my-2 text-sm rounded-lg text-left inline-block text-ellipsis ";
 const classes = {
     info: "text-blue-700 bg-blue-100 dark:bg-blue-200 dark:text-blue-800",
     danger: "text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800",

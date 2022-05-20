@@ -1,9 +1,9 @@
 <template>
     <div
-        :class="{'overflow-hidden break-words dark:text-gray-300 mb-4': true, 'max-h-44': article.showPreview}"
+        :class="{'overflow-hidden break-words dark:text-gray-300 mb-4 px-1': true, 'max-h-44': showPreview}"
         v-html="postHtml"
-        v-on:click="article.showPreview = false"
-    ></div>
+        v-on:click="showPreview = false"
+    />
 </template>
 
 
@@ -12,8 +12,14 @@ export default defineComponent({
     props: {
         article: { type: Object, required: true },
     },
+    data() {
+        return {
+            showPreview: true,
+        };
+    },
     computed: {
         postHtml() {
+            // return this.$markdown(this.article.data.selftext);
             const txt = document.createElement("textarea");
             txt.innerHTML = this.article.data.selftext_html;
             return txt.value;

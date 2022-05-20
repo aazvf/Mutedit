@@ -1,7 +1,7 @@
 
 
 <template>
-    <article-feed :sort="sort" :timeperiod="time" />
+    <mutedit-app />
 </template>
 
 <script setup>
@@ -12,20 +12,7 @@ useHead({
 
 
 <script>
-import ArticleFeed from "~/components/ArticleFeed.vue";
 definePageMeta({
     middleware: "front-redirect",
 });
-export default {
-    components: { ArticleFeed },
-    mounted() {},
-    data() {
-        return {
-            sort: this.$route.params.slug[0] || "best",
-            time: this.$route.params.slug[1] || "day",
-            type: this.$route.params.slug[2],
-        };
-    },
-    // page properties go here
-};
 </script>

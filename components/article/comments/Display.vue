@@ -1,0 +1,93 @@
+<template>
+    <ul
+        class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        v-if="comments.length > 0"
+    >
+        <li
+            v-for="(comment, index) in filteredComments"
+            :key="index"
+            v-on:click="comment.expanded = true"
+            :class="listClassNames(index)"
+        >
+            <div :class="commentClassNames(comment)" v-html="$markdown(comment.text)" />
+            <tailwind-badge
+                theme="indigo"
+                v-if="comment.children.length > 0 && !comment.expanded"
+                class="text-purple dark:text-violet-300 absolute right-0 bottom-2"
+            >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
+            <article-comments-display :comments="comment.children" v-if="comment.expanded"></article-comments-display>
+        </li>
+        <li v-if="hasMoreComments" :class="listClassNames(-1)">
+            <tailwind-badge
+                class="my-1"
+                theme="indigo"
+                v-on:click="showMoreComments"
+            >show {{ hiddenCommentcount }} remaining comment{{ $s(hiddenCommentcount) }}</tailwind-badge>
+        </li>
+    </ul>
+</template>
+
+<script>
+export default {
+    props: {
+        comments: { type: Array },
+    },
+    data() {
+        return {
+            commmentLimit: 7,
+        };
+    },
+    mounted() {},
+    computed: {
+        isLoading() {
+            return (
+                typeof this.comments[0] === "object" &&
+                this.comments[0].text === "loading"
+            );
+        },
+        filteredComments() {
+            return this.comments.slice(0, this.commmentLimit);
+        },
+        hiddenCommentcount() {
+            return Math.max(0, this.comments.length - this.commmentLimit);
+        },
+        hasMoreComments() {
+            return this.hiddenCommentcount > 0;
+        },
+    },
+    methods: {
+        commentClassNames(comment) {
+            console.log(comment, comment.children?.length);
+            return {
+                "break-word text-clip whitespace-pre-wrap text-ellipsis py-1 px-1": true,
+                "pr-24": comment.children?.length > 0,
+            };
+        },
+        showMoreComments() {
+            this.commmentLimit = parseInt(this.commmentLimit * 2.5);
+        },
+        listClassNames(index) {
+            return {
+                "relative w-full px-1 py-1 border-b border-gray-200 dark:border-gray-600": true,
+                "rounded-t-lg": index === 0,
+                "rounded-b-lg": index === -1,
+                "rounded-b-lg":
+                    index === this.filteredComments.length - 1 &&
+                    !this.hasMoreComments,
+            };
+        },
+    },
+};
+</script>
+
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+</style>

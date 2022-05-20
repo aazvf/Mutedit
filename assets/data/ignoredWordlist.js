@@ -3135,3 +3135,7 @@ youth
 zone`;
 
 export default words;
+
+export const isCommonWord = (word) => {
+    return words.includes(`\n${word}\n`);
+};

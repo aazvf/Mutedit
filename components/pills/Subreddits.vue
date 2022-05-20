@@ -20,13 +20,11 @@ import localforage from "localforage";
 
 export default {
     data() {
-        const { focusSubreddit } = useFeedFilters();
         return {
+            ...useFeedFilters(),
             showsubredditlimit: 10,
             showsubredditbite: 20,
-
-            showsubreddit: focusSubreddit,
-            subredditRulesStrings: useFeedSubredditPrefs(),
+            articles: useArticles(),
         };
     },
     computed: {
@@ -44,7 +42,7 @@ export default {
         },
         subredditmap() {
             const map = {};
-            this.$parent.articles.forEach((a) => {
+            this.articles.forEach((a) => {
                 const s = a.data.subreddit;
                 map[s] =
                     typeof map[s] === "object"
@@ -56,41 +54,39 @@ export default {
     },
     methods: {
         badgeTheme(subreddit) {
-            return this.showsubreddit === subreddit.name
+            return this.focusSubreddit === subreddit.name
                 ? "green"
                 : this.isSubredditMuted(subreddit.name)
                 ? "red"
                 : "default";
         },
         isSubredditMuted(subreddit) {
-            return this.subredditRulesStrings.indexOf(subreddit) > -1;
+            return this.mutedSubs.indexOf(subreddit) > -1;
         },
 
         onClickSubreddit(subreddit) {
             const isMuted = this.isSubredditMuted(subreddit);
-            const isFeatured = this.showsubreddit === subreddit;
+            const isFeatured = this.focusSubreddit === subreddit;
 
             if (!isMuted && !isFeatured) {
-                this.subredditRulesStrings.push(subreddit);
+                this.mutedSubs.push(subreddit);
                 this.saveSubredditRules();
             }
 
             if (isMuted && !isFeatured) {
-                this.showsubreddit = subreddit;
+                this.focusSubreddit = subreddit;
             }
 
             if (isFeatured) {
-                this.showsubreddit = "";
-                this.subredditRulesStrings = this.subredditRulesStrings.filter(
-                    (r) => r != subreddit
-                );
+                this.focusSubreddit = "";
+                this.mutedSubs = this.mutedSubs.filter((r) => r != subreddit);
                 this.saveSubredditRules();
             }
         },
         saveSubredditRules() {
             localforage.setItem(
                 "subreddit-rules",
-                JSON.stringify(this.subredditRulesStrings)
+                JSON.stringify(this.mutedSubs)
             );
         },
     },

@@ -1,11 +1,8 @@
 <template>
-    <div class="bg-gray-800 font-sans">
-        <!-- <div class> -->
-        <div class="container mx-auto">
-            <NuxtLayout>
-                <NuxtPage />
-            </NuxtLayout>
-        </div>
+    <div class="container mx-auto p-5">
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
     </div>
 </template>
 
@@ -27,7 +24,7 @@ useHead({
         class: "dark",
     },
     bodyAttrs: {
-        class: "dark:bg-gray-800",
+        class: "dark:bg-gray-800 font-sans",
     },
 });
 </script>

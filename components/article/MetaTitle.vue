@@ -3,24 +3,32 @@
         <small class="mb-0 text-md font-light tracking-tight text-gray-900 dark:text-gray-500">
             <span v-if="article.isLink">Link</span>
             <span v-if="article.isImage">Image</span>
-            <span v-if="article.isGif">Gif</span>
+            <span v-if="article.isGif || article.isGifv || article.isVideoGif">Gif</span>
             <span v-if="article.isGallery">Gallery</span>
             <span v-if="article.isText">Text</span>
-            <span v-if="article.isVideo">Video</span>
-            <span v-if="article.isVideoGif">Gif</span>
+            <span v-if="article.isVideo || article.isEmbed">Video</span>
             <a
                 target="blank"
                 :href="'https://old.reddit.com' + article.data.permalink"
                 rel="nofollow noopener"
                 class="font-italic ml-1 dark:text-violet-300"
+                v-if="!article.data.pinned"
             >posted</a>
-            {{ $timeSince(article.data.created) }} ago to
             <a
+                target="blank"
+                :href="'https://old.reddit.com' + article.data.permalink"
+                rel="nofollow noopener"
+                class="font-italic ml-1 dark:text-green-500"
+                v-if="article.data.pinned"
+            >pinned</a>
+            {{ $timeSince(article.data.created) }} ago to
+            <NuxtLink
                 class="dark:text-violet-300"
                 target="blank"
                 rel="noopener noreferer"
-                :href="'/' + article.data.subreddit_name_prefixed"
-            >{{article.data.subreddit_name_prefixed}}</a>
+                :href="$buildUrl({query: article.data.subreddit})"
+            >{{article.data.subreddit_name_prefixed}}</NuxtLink>
+            <span class="ml-2 text-gray-500">({{ article.data.domain }})</span>
         </small>
     </div>
 </template>

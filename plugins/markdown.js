@@ -6,6 +6,11 @@ const converter = new showdown.Converter({
     extensions: [
         {
             type: "output",
+            regex: new RegExp(`==(.*)==`, "g"),
+            replace: `<span class="text-gray-500">$1</span>`,
+        },
+        {
+            type: "output",
             regex: new RegExp(`<a(.*)>`, "g"),
             replace: `<a target="_blank" rel="noopener noreferer" $1>`,
         },

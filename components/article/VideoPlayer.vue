@@ -2,34 +2,35 @@
     <div>
         <div class="video">
             <video
-                :width="article.data.secure_media.reddit_video.width"
-                :height="article.data.secure_media.reddit_video.height"
+                :width="videoWidth"
+                :height="videoHeight"
                 ref="video"
                 v-on:play="onPlayVideo"
                 v-on:pause="onPauseVideo"
                 :controls="isVideoGif"
                 autoplay
             >
+                <source v-if="source.length > 1" :src="source" type="video/mp4" />
                 <source
-                    v-for="(source, index) in videoSources"
+                    v-for="(source, index) in article.videoSources"
                     :key="index"
                     type="video/mp4"
                     :src="source"
                 />Your browser does not support the video tag.
             </video>
             <audio
-                v-if="!isVideoGif"
+                v-if="!isVideoGif && !source"
                 controls
                 ref="audio"
                 v-on:play="onPlayAudio"
                 v-on:pause="onPauseAudio"
             >
-                <source v-on:error="article.isVideoGif = true" :src="audioSource" />
+                <source v-on:error="article.isVideoGif = true" :src="article.audioSource" />
             </audio>
         </div>
         <div class="inline-block float-right mt-1">
             <tailwind-badge theme="yellow" v-on:click="closePreview">Close</tailwind-badge>
-            <tailwind-badge theme="red" v-if="!isVideoGif" v-on:click="muteAudio">Mute</tailwind-badge>
+            <tailwind-badge theme="red" v-if="!isVideoGif && !source" v-on:click="muteAudio">Mute</tailwind-badge>
         </div>
     </div>
 </template>
@@ -40,6 +41,7 @@
 export default defineComponent({
     props: {
         article: { type: Object, required: true },
+        source: { type: String, required: false, default: "" },
     },
     data() {
         const { isVideoGif } = this.article;
@@ -48,15 +50,20 @@ export default defineComponent({
         };
     },
     computed: {
-        videoSources() {
-            return this.$getVideoSources(
-                this.article.data.secure_media.reddit_video.fallback_url
+        isRedditVideo() {
+            return (
+                typeof this.article.data.secure_media.reddit_video === "object"
             );
         },
-        audioSource() {
-            return this.$getAudioSource(
-                this.article.data.secure_media.reddit_video.fallback_url
-            );
+        videoWidth() {
+            return this.isRedditVideo
+                ? this.article.data.secure_media.reddit_video.width
+                : 1280;
+        },
+        videoHeight() {
+            return this.isRedditVideo
+                ? this.article.data.secure_media.reddit_video.height
+                : 720;
         },
         video() {
             return this.$refs["video"] || {};

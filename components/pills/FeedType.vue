@@ -1,30 +1,17 @@
 <template>
-    <div>
-        <tailwind-badge
-            v-for="(type, name) in articleTypes"
-            :key="name"
-            v-on:click="setType(type)"
-            :theme="focusArticleType === type ? 'green' : 'default'"
-        >{{ $ucfirst(name) }}</tailwind-badge>
-    </div>
+    <NuxtLink v-for="(type, index) in articleTypes" :key="index" :href="$buildUrl({type})">
+        <tailwind-badge :theme="activeFeedType === type ? 'green' : 'default'">{{ $ucfirst(type) }}</tailwind-badge>
+    </NuxtLink>
 </template>
 
 <script>
+import articleTypes from "~/assets/data/articleTypes";
+
 export default {
     data() {
-        const { focusArticleType } = useFeedFilters();
-
         return {
-            focusArticleType: focusArticleType,
-            articleTypes: {
-                all: "",
-                link: "link",
-                gallery: "gallery",
-                image: "image",
-                gif: "gif",
-                video: "video",
-                text: "text",
-            },
+            activeFeedType: useFeedTypeParam(),
+            ...{ articleTypes },
         };
     },
     mounted() {
@@ -32,8 +19,7 @@ export default {
     },
     methods: {
         setType(type) {
-            this.focusArticleType = type;
-            console.log(this.focusArticleType);
+            this.activeFeedType = type;
         },
     },
 };

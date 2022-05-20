@@ -1,7 +1,7 @@
 <template>
-    <button type="button" :class="classNames" v-bind="$attrs">
+    <a type="button" :class="classNames" v-bind="$attrs">
         <slot></slot>
-    </button>
+    </a>
 </template>
 
 <script>

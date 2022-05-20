@@ -4,17 +4,20 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "deploy": "nuxt generate && aws s3 sync .output/public s3://mutedit.icey.one/ --profile mutedit --delete"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.0.4",
-    "nuxt": "3.0.0-rc.1",
+    "nuxt": "3.0.0-rc.3",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "localforage": "^1.10.0",
     "showdown": "^2.1.0"
-  }
+  },
+  "overrides": {
+    "ufo": "^0.8.4"
+ }
 }
