@@ -1,6 +1,11 @@
 <template>
-    <NuxtLink v-for="(sort, index) in sortTypes" :href="$buildUrl({sort})" :key="index">
-        <tailwind-badge :theme="sort === activeSort ? 'green' : 'default'">{{ $ucfirst(sort) }}</tailwind-badge>
+    <NuxtLink
+        v-for="(sort, index) in sortTypes"
+        :href="$buildUrl({sort})"
+        :key="index"
+        :class="{'pointer-events-none': waiting}"
+    >
+        <tailwind-badge :theme="badgeTheme(sort)">{{ $ucfirst(sort) }}</tailwind-badge>
     </NuxtLink>
 </template>
 
@@ -12,7 +17,17 @@ export default defineComponent({
         return {
             ...{ sortTypes },
             activeSort: useFeedSortParam(),
+            waiting: useWaitingForArticles(),
         };
+    },
+    methods: {
+        badgeTheme(sort) {
+            return this.activeSort === sort
+                ? "green"
+                : this.waiting
+                ? "red"
+                : "default";
+        },
     },
 });
 </script>

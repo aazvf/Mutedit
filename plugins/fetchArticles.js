@@ -103,25 +103,27 @@ const fetchArticles = (reset = false) => {
     const timeperiod = useFeedTimeperiodParam().value;
     const q = query === "/" ? query : "/r/" + query + "/";
 
-    if (reset) {
-        articles.value = [];
-        after.value = "";
-    }
-
     const url =
         "https://www.reddit.com" +
         q +
         sort +
         ".json" +
         "?limit=100" +
-        (after.value.length > 1 ? "&after=" + after.value : "") +
+        (after.length > 1 ? "&after=" + after : "") +
         "&t=" +
         timeperiod;
 
+    if (reset) {
+        articles.value = [];
+    }
     waitingForArticles.value = true;
     fetch(url)
         .then((response) => response.json())
         .then((response) => {
+            if (reset) {
+                articles.value = [];
+            }
+
             console.info("Got response from api", { response });
 
             after.value = response.data.after;

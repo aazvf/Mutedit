@@ -3,10 +3,9 @@
         v-for="(timeperiod, index) in timePeriods"
         :key="index"
         :href="$buildUrl({timeperiod})"
+        :class="{'pointer-events-none': waiting}"
     >
-        <tailwind-badge
-            :theme="timeperiod === activeTimeperiod ? 'green' : 'default'"
-        >{{ $ucfirst(timeperiod) }}</tailwind-badge>
+        <tailwind-badge :theme="badgeTheme(timeperiod)">{{ $ucfirst(timeperiod) }}</tailwind-badge>
     </NuxtLink>
 </template>
 
@@ -18,7 +17,17 @@ export default {
         return {
             timePeriods,
             activeTimeperiod,
+            waiting: useWaitingForArticles(),
         };
+    },
+    methods: {
+        badgeTheme(time) {
+            return this.activeTimeperiod === time
+                ? "green"
+                : this.waiting
+                ? "red"
+                : "default";
+        },
     },
 };
 </script>
