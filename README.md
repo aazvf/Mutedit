@@ -7,11 +7,7 @@ some decorations in a fresh nuxt 3 app. With aspirations to become fully
 static and hosted without a backend on s3, it slowly adapted to the
 new patterns and paradigms set forth by example in the nuxt 3 docs.
 
-Excluding reddit employees, the author invites you, the reader, to view, modify,
-critique, learn from, re-host, and generally do anything except make a whole
-business out of this code.
-
-With that said, these are just pixels, in reality you may do as you wish.
+The author invites you, the reader, to view, modify, critique, learn from, re-host, and generally do anything with this code.
 
 ## definitions
 

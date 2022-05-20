@@ -31,7 +31,7 @@ export default {
             return this.activeFeedType === type
                 ? "green"
                 : this.waiting
-                ? "red"
+                ? "darker"
                 : "default";
         },
     },

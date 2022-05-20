@@ -16,6 +16,7 @@ const classes = {
     indigo: "bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900",
     purple: "bg-purple-100 text-purple-800 dark:bg-purple-200 dark:text-purple-900",
     pink: "bg-pink-100 text-pink-800 dark:bg-pink-200 dark:text-pink-900",
+    darker: "bg-zinc-800 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-400",
 };
 
 export default defineComponent({

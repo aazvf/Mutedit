@@ -25,7 +25,7 @@ export default defineComponent({
             return this.activeSort === sort
                 ? "green"
                 : this.waiting
-                ? "red"
+                ? "darker"
                 : "default";
         },
     },

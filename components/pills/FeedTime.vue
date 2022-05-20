@@ -25,7 +25,7 @@ export default {
             return this.activeTimeperiod === time
                 ? "green"
                 : this.waiting
-                ? "red"
+                ? "darker"
                 : "default";
         },
     },
