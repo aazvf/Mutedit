@@ -48,7 +48,7 @@ export default defineComponent({
             // But we can build it ourselves by converting the lowercase id to having
             //  the correct capital letters.
             //  eg acclaimedwiltedwhippoorwill becomes AcclaimedWiltedWhipPoorwill
-            //  @see /plugins/ucfirst and /assets/data/urlWordlist
+            //  @see /plugins/ucwords and /assets/data/urlWordlist
             let url = this.article.redgifId;
             url = this.$ucwords(url);
             url = `https://thumbs2.redgifs.com/${url}`;

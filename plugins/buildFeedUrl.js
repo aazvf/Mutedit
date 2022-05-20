@@ -1,4 +1,4 @@
-// Builds a url that will pass the checks in /middleware/*
+// Builds a url (path) that will pass the checks in /middleware/*
 // The parameter is an object of optional parameters, like named params
 // Means we can generate urls while retaining the current path.
 // So if the current url is /r/news/top/day/image

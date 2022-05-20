@@ -1,6 +1,5 @@
 <template>
     <div class>
-        <!-- <div class="row mx-0 justify-content-center mt-4"> -->
         <div>
             <header-menu />
 
@@ -55,30 +54,15 @@
 </template>
 
 <script>
-import ConfigState from "./mixins/ConfigState.vue";
-import localforage from "localforage";
 import { isCommonWord } from "~/assets/data/ignoredWordlist";
 
 export default {
-    mixins: [ConfigState],
     data() {
         return {
             ...useFeedFilters(),
 
             sort: useFeedSortParam(),
-            query: useFeedQueryParam(),
-            timeperiod: useFeedTimeperiodParam(),
 
-            showsubredditlimit: 10,
-            showsubredditbite: 20,
-            showwordlimit: 10,
-            showwordbite: 20,
-
-            initialScrapePages: 2,
-            username: "",
-            started: false,
-            scraped: 0,
-            after: "",
             selTop: 0,
             selLeft: 0,
             selectedWord: "",
@@ -87,7 +71,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.$ucfirst("asdf"));
+        this.$localstorage.restoreAll();
 
         setInterval(this.waitForSelection, 500);
     },
@@ -97,7 +81,7 @@ export default {
     methods: {
         onAgreeMuteWord() {
             this.mutedWords.push({ s: this.selectedWord, w: false });
-            localforage.setItem("title-rules", JSON.stringify(this.mutedWords));
+            this.$localstorage.saveMutedWords();
         },
         waitForSelection() {
             const selection = window.getSelection();
@@ -124,17 +108,6 @@ export default {
             } else {
                 this.selectedWord = "";
             }
-        },
-        urlForTimeperiod(timeperiod) {
-            let u = "";
-
-            if (this.query != "/" && this.query.length > 1) {
-                u += this.query;
-            }
-
-            u += `/${this.sort}/${timeperiod}`;
-
-            return u;
         },
     },
 };

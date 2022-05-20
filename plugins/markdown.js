@@ -1,6 +1,10 @@
+// Wrapper around showdown.js which converts markdown text to real markup.
+// Used to make "selftext" articles and comments into rich text
+
 import showdown from "showdown";
 
-// use showdownjs with a custom extension to open links in new tab
+// Adds custom extensions to showdown so we can open links in new tab and
+//  add make text surrounded by == turn gray.
 const converter = new showdown.Converter({
     simplifiedAutoLink: true,
     extensions: [

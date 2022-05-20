@@ -93,6 +93,7 @@ class Article {
 
 // Gets articles from the reddit api and appends them to the useArticles composable
 //  It builds the api url based on the params at /composables/use-feed-params
+//  @param reset = whether to clear the article feed and load from the start.
 const fetchArticles = (reset = false) => {
     const articles = useArticles();
     const waitingForArticles = useWaitingForArticles();
@@ -103,7 +104,6 @@ const fetchArticles = (reset = false) => {
     const q = query === "/" ? query : "/r/" + query + "/";
 
     if (reset) {
-        console.log("resetting!!!");
         articles.value = [];
         after.value = "";
     }

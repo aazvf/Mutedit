@@ -37,13 +37,16 @@ export default defineComponent({
         },
 
         // Makes a regular expression out of the users muted words preferences
-        // exclude words less than 3 chars, words less than 5 chars must be whole words.
+        // exclude words less than 3 chars, words less than 5 chars must be "whole words".
+        //  ie, must have whitespace on either side or start/end of string.
         wordRegex() {
             const words = this.mutedWords
                 .filter((word) => word.length > 2)
                 .map((word) => this.escapeRegex(word))
                 .map((word) => {
-                    return word.length < 5 ? "\b" + word + "\b" : word;
+                    return word.length < 5
+                        ? "(?:^| )" + word + "(?: |$)"
+                        : word;
                 })
                 .join("|");
 

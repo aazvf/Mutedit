@@ -1,3 +1,5 @@
+<!-- This page catches any requests that look like /anything/anything/anything -->
+<!-- The middleware 'front-redirect' will enforce a proper url path -->
 
 
 <template>

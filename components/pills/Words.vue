@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import localforage from "localforage";
-
 export default {
     data() {
         return {
@@ -78,7 +76,7 @@ export default {
 
             if (!isMuted && !isFeatured) {
                 this.mutedWords.push(word);
-                this.saveTitleRules();
+                this.$localstorage.saveMutedWords();
             }
 
             if (isMuted && !isFeatured) {
@@ -88,11 +86,8 @@ export default {
             if (isFeatured) {
                 this.focusWord = "";
                 this.mutedWords = this.mutedWords.filter((r) => r != word);
-                this.saveTitleRules();
+                this.$localstorage.saveMutedWords();
             }
-        },
-        saveTitleRules() {
-            localforage.setItem("title-rules", JSON.stringify(this.mutedWords));
         },
     },
 };

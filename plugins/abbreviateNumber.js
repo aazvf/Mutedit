@@ -1,3 +1,7 @@
+// Taken from https://stackoverflow.com/questions/10599933/
+// Call this.$abbreviateNumber(number) from any vue component
+// eg 1257499 -> 1.2m
+
 export default defineNuxtPlugin(() => {
     return {
         provide: {

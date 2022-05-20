@@ -73,7 +73,6 @@ export default {
     data() {
         return {
             invertFilter: false,
-            query: this.$parent.query,
         };
     },
     mounted() {

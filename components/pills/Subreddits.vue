@@ -9,26 +9,24 @@
         >/r/{{ $ucfirst(subreddit.name) }} ({{ subreddit.count }})</tailwind-badge>
         <tailwind-badge
             theme="purple"
-            v-on:click="showsubredditlimit += showsubredditbite ; showsubredditbite *= 1.5"
-            v-if="subredditcount > showsubredditlimit"
-        >show {{ parseInt(subredditcount - showsubredditlimit) }} more subreddits</tailwind-badge>
+            v-on:click="limit += take ; take *= 1.5"
+            v-if="count > limit"
+        >show {{ parseInt(count - limit) }} more subreddits</tailwind-badge>
     </div>
 </template>
 
 <script>
-import localforage from "localforage";
-
 export default {
     data() {
         return {
             ...useFeedFilters(),
-            showsubredditlimit: 10,
-            showsubredditbite: 20,
+            limit: 10,
+            take: 20,
             articles: useArticles(),
         };
     },
     computed: {
-        subredditcount() {
+        count() {
             return Object.keys(this.subredditmap).length;
         },
         subredditmapsorted() {
@@ -38,7 +36,7 @@ export default {
                     return { name: s, count: map[s].length - 1 };
                 })
                 .sort((a, b) => b.count - a.count)
-                .splice(0, this.showsubredditlimit);
+                .splice(0, this.limit);
         },
         subredditmap() {
             const map = {};
@@ -61,7 +59,7 @@ export default {
                 : "default";
         },
         isSubredditMuted(subreddit) {
-            return this.mutedSubs.indexOf(subreddit) > -1;
+            return this.mutedSubs.includes(subreddit);
         },
 
         onClickSubreddit(subreddit) {
@@ -70,7 +68,7 @@ export default {
 
             if (!isMuted && !isFeatured) {
                 this.mutedSubs.push(subreddit);
-                this.saveSubredditRules();
+                this.$localstorage.saveMutedSubs();
             }
 
             if (isMuted && !isFeatured) {
@@ -80,14 +78,8 @@ export default {
             if (isFeatured) {
                 this.focusSubreddit = "";
                 this.mutedSubs = this.mutedSubs.filter((r) => r != subreddit);
-                this.saveSubredditRules();
+                this.$localstorage.saveMutedSubs();
             }
-        },
-        saveSubredditRules() {
-            localforage.setItem(
-                "subreddit-rules",
-                JSON.stringify(this.mutedSubs)
-            );
         },
     },
     mounted() {

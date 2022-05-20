@@ -1,3 +1,6 @@
+// Taken from https://stackoverflow.com/questions/3177836/ and modified slightly
+// Given a date, returns how long ago that was in human readable words.
+
 export default defineNuxtPlugin(() => {
     return {
         provide: {

@@ -1,3 +1,6 @@
+<!-- This page is shown when visiting /muted-subs -->
+<!-- Allows the user to manually edit the subreddits they are muting -->
+
 <template>
     <div>
         <NuxtLink
@@ -52,11 +55,7 @@ useHead({
 </script>
 
 
-
-
 <script>
-import localforage from "localforage";
-
 export default {
     props: {},
     data() {
@@ -68,7 +67,7 @@ export default {
     },
 
     mounted() {
-        this.restoreSubredditRules();
+        this.$localstorage.restoreMutedSubs();
     },
 
     computed: {},
@@ -78,7 +77,7 @@ export default {
             if (this.sub.length > 2 && !this.mutedSubs.includes(this.sub)) {
                 this.mutedSubs.push(this.sub);
                 this.sub = "";
-                this.saveSubredditRules();
+                this.$localstorage.saveMutedSubs();
             }
         },
 
@@ -93,28 +92,7 @@ export default {
                 this.removedSubs = this.removedSubs.filter((s) => s !== sub);
             }
 
-            this.saveSubredditRules();
-        },
-        saveSubredditRules() {
-            localforage.setItem(
-                "subreddit-rules",
-                JSON.stringify(this.mutedSubs)
-            );
-        },
-        restoreSubredditRules() {
-            localforage
-                .getItem("subreddit-rules")
-                .then((value) => {
-                    value = JSON.parse(value);
-                    if (
-                        typeof value === "object" &&
-                        Array.isArray(value) &&
-                        value.length > 0
-                    ) {
-                        this.mutedSubs = value;
-                    }
-                })
-                .catch(console.error);
+            this.$localstorage.saveMutedSubs();
         },
     },
 };

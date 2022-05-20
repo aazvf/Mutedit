@@ -1,3 +1,6 @@
+<!-- This page is shown when visiting /muted-words -->
+<!-- Allows the user to manually edit the words thei are muting -->
+
 <template>
     <div>
         <NuxtLink
@@ -53,8 +56,6 @@ useHead({
 
 
 <script>
-import localforage from "localforage";
-
 export default {
     props: {},
     data() {
@@ -66,7 +67,7 @@ export default {
     },
 
     mounted() {
-        this.restoreTitleRules();
+        this.$localstorage.restoreMutedWords();
     },
 
     computed: {},
@@ -76,7 +77,7 @@ export default {
             if (this.word.length > 2 && !this.mutedWords.includes(this.word)) {
                 this.mutedWords.push(this.word);
                 this.word = "";
-                this.saveTitleRules();
+                this.$localstorage.saveMutedWords();
             }
         },
         onWordClick(word) {
@@ -89,24 +90,6 @@ export default {
                 this.mutedWords.push(word);
                 this.removedWords = this.removedWords.filter((w) => w !== word);
             }
-        },
-        saveTitleRules() {
-            localforage.setItem("title-rules", JSON.stringify(this.mutedWords));
-        },
-        restoreTitleRules() {
-            localforage
-                .getItem("title-rules")
-                .then((value) => {
-                    value = JSON.parse(value);
-                    if (
-                        typeof value === "object" &&
-                        Array.isArray(value) &&
-                        value.length > 0
-                    ) {
-                        this.mutedWords = value;
-                    }
-                })
-                .catch(console.error);
         },
     },
 };

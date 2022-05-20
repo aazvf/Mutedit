@@ -1,6 +1,12 @@
 <template>
-    <NuxtLink v-for="(name, index) in timePeriods" :key="index" :href="urlForTimeperiod(name)">
-        <tailwind-badge :theme="name === timeperiod ? 'green' : 'default'">{{ $ucfirst(name) }}</tailwind-badge>
+    <NuxtLink
+        v-for="(timeperiod, index) in timePeriods"
+        :key="index"
+        :href="$buildUrl({timeperiod})"
+    >
+        <tailwind-badge
+            :theme="timeperiod === activeTimeperiod ? 'green' : 'default'"
+        >{{ $ucfirst(timeperiod) }}</tailwind-badge>
     </NuxtLink>
 </template>
 
@@ -8,28 +14,11 @@
 import timePeriods from "~/assets/data/timePeriods";
 export default {
     data() {
-        const timeperiod = useFeedTimeperiodParam();
-        const { query } = useFeedTimeperiodParam();
-        const { sort } = useFeedTimeperiodParam();
+        const activeTimeperiod = useFeedTimeperiodParam();
         return {
             timePeriods,
-            timeperiod,
+            activeTimeperiod,
         };
-    },
-
-    methods: {
-        urlForTimeperiod(timeperiod) {
-            return this.$buildUrl({ timeperiod });
-            let u = "";
-
-            if (this.$parent.query != "/" && this.$parent.query.length > 1) {
-                u += this.$parent.query;
-            }
-
-            u += `/${this.$parent.sort}/${timeperiod}`;
-
-            return u;
-        },
     },
 };
 </script>
