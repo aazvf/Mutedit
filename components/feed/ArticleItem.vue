@@ -5,6 +5,7 @@
 
             <article-title :article="article" />
 
+            <!-- <article-media :article="article" v-if="!article.isText" /> -->
             <article-media-display :article="article" v-if="!article.isText" />
             <article-media-text :article="article" v-if="article.isText" />
             <article-media-link :article="article" v-if="article.isLink" />

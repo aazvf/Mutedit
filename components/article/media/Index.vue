@@ -1,38 +1,31 @@
 <template>
     <div class="mb-3" v-if="!isText">
         <Transition>
-            <article-media-preview v-show="hasPreview && showPreview" v-on:click="onClickPreview" />
+            <article-media-preview
+                :article="article"
+                v-show="hasPreview && showPreview"
+                v-on:click="onClickPreview"
+            />
         </Transition>
 
         <Transition>
             <div class="laterload" v-if="!showPreview || !hasPreview">
                 <div class="preview">
-                    <div
-                        class="preview-underlay"
-                        v-if="hasPreview || isGallery"
-                        :style=" {backgroundImage: 'url(' + (isGallery ? gallerySource :previewSource) + ')'}"
-                    >
-                        <div class="preview-overlay"></div>
-                    </div>
+                    <article-media-preview-underlay
+                        :src="isGallery ? gallerySource :previewSource"
+                    />
+
+                    <article-media-embed-youtube />
 
                     <iframe
-                        v-if="article.isYoutube"
-                        width="560"
-                        height="315"
-                        :src="'https://www.youtube-nocookie.com/embed/' + article.youtubeId + '?rel=0&amp;controls=1&amp;showinfo=0&amp;modestbranding=1&amp;iv_load_policy=3&amp;color=white'"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                    ></iframe>
-                    <iframe
-                        v-if="article.isStreamable"
+                        v-if="article.streamableId"
                         :src="'https://streamable.com/o/' + article.streamableId"
                         allowfullscreen
                         scrolling="no"
                         allow="encrypted-media;"
                     ></iframe>
                     <iframe
-                        v-if="article.isGfyCat"
+                        v-if="article.gfycatId"
                         :src="'https://gfycat.com/ifr/' + article.gfycatId"
                         allowfullscreen
                         frameborder="0"
@@ -70,13 +63,16 @@
                     <article-video-player-red
                         ref="red-player"
                         :article="article"
-                        v-if="article.isRGif"
+                        v-if="article.redgifId"
                     />
                     <article-video-player-gifv
                         ref="gifv-player"
                         :article="article"
                         v-if="article.isGifv"
                     />
+                    <div class="inline-block float-right mt-1" v-if="article.isEmbed">
+                        <tailwind-badge theme="yellow" v-on:click="showPreview = true">Close</tailwind-badge>
+                    </div>
                 </div>
             </div>
         </Transition>
@@ -124,18 +120,6 @@ export default defineComponent({
             );
 
             return this.$htmlDecode(res[res.length - 1].u);
-        },
-
-        previewSource() {
-            if (typeof this.article.data.preview !== "object") {
-                return "";
-            }
-            const image = this.article.data.preview.images[0];
-            if (image.resolutions.length === 0) {
-                return this.$htmlDecode(image.source.url);
-            }
-            const res = image.resolutions.filter((p) => p.width < 650);
-            return this.$htmlDecode(res[res.length - 1].url);
         },
     },
 

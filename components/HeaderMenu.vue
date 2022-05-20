@@ -42,21 +42,21 @@
                     class="flex flex-col mt-0 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"
                 >
                     <li>
-                        <div :class="menuClass($route.fullPath === '/')">
+                        <div :class="menuClass('/')">
                             <NuxtLink :href="$buildUrl({query: '/'})">
                                 <tailwind-badge theme="purple">front page</tailwind-badge>
                             </NuxtLink>
                         </div>
                     </li>
                     <li>
-                        <div :class="menuClass($route.fullPath === '/muted-words')">
+                        <div :class="menuClass('/muted-words')">
                             <NuxtLink href="/muted-words">
                                 <tailwind-badge theme="purple">muted words</tailwind-badge>
                             </NuxtLink>
                         </div>
                     </li>
                     <li>
-                        <div :class="menuClass($route.fullPath === '/muted-subs')">
+                        <div :class="menuClass('/muted-subs')">
                             <NuxtLink href="/muted-subs">
                                 <tailwind-badge theme="purple">muted subs</tailwind-badge>
                             </NuxtLink>
@@ -69,29 +69,14 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            invertFilter: false,
-        };
-    },
-    mounted() {
-        console.log("Headernav Component mounted.");
-    },
-    computed: {
-        filterCount() {
-            return (
-                this.$parent.articles.length -
-                this.$parent.filteredArticles.length
-            );
-        },
-    },
+export default defineComponent({
+    name: "Header Menu",
     methods: {
-        menuClass(active) {
-            return active
+        menuClass(path) {
+            return this.$route.fullPath === path
                 ? "block py-2 pr-4 pl-1 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                 : "block py-2 pr-4 pl-1 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
         },
     },
-};
+});
 </script>

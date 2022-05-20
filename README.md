@@ -80,20 +80,35 @@ Both middlewares also set the use-feed-params composables after validation.
 
     images - just a play icon for the video preview
 
-# Opinions, thoughts and wonders
+---
+
+### Opinions, thoughts, wonders and comments
+
+Some ramblings of mine about nuxt3 having never used it before.
+
+I'm pretty happy how it compiles to a static site and worked perfectly when delpoyed to s3, it's exactly what I was looking for. The pages auto loading naming scheme is very flexible, but it took a moment at first to figure out the exact naming for what I wanted, in combination with middleware I was able to impose restrictions and validation on what data reaches the app from the url.
+
+-   components
+    I don't know if I'm supposed to use defineComponent or not, seen it somewhere online and used it.
 
 -   composables
-    These were used a couple different ways. I found that when using them in the vue data function it worked as you might expect, but from a plugin or middleware I found myself having to use `.value` for it to work, and hit fatal errors if used incorrectly.
+    These were used a couple different ways. I found that when using them in the vue `data()` function it worked as you might expect, but from a plugin or middleware I found myself having to use `.value` for it to work, and frequently hit fatal errors trying to figure out the exact syntax for what I wanted.
 
 I also found if the composable returns an object, like in use-feed-filters, it can be destructured easily in the vue component. like so.
 
 ```
 data() {
+    const { focusWord } = useFeedFilters();
     return {
-        ...{ useFeedFilters() }
+        ...useFeedFilters()
     };
 }
 ```
 
+I tried storing an object as a composable, but it would not destructure and keep reactivity.
+
 -   dev server
     Found myself having to restart the dev server every so often, especially after creating/removing files
+
+-   plugins
+    I figured this is where I should put helper bits of code that many components might want to use. Globally accessible methods that don't make sense being a component.

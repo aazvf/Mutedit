@@ -1,9 +1,9 @@
 <template>
-    <div class="p-4">
-        <article-media-preview-underlay :src="previewSource" />
-        <div class="preview-underlay" :style="{backgroundImage: 'url(' + previewSource + ')'}">
+    <div class="p-4 preview align-center">
+        <div class="preview-underlay" :style="{backgroundImage: 'url(' + src + ')'}">
             <div class="preview-overlay"></div>
         </div>
+
         <img :src="previewSource" alt="preview" referrerpolicy="no-referrer" />
         <div class="preview-overlay" v-if="article.isPlayable">
             <div class="play-icon"></div>
@@ -13,15 +13,33 @@
 
 
 <script>
-import { defineComponent } from "@vue/composition-api";
-
 export default defineComponent({
-    setup() {},
+    props: {
+        article: { type: Object, required: true },
+    },
+
+    computed: {
+        previewSource() {
+            if (typeof this.article.data.preview !== "object") {
+                return "";
+            }
+            const image = this.article.data.preview.images[0];
+            if (image.resolutions.length === 0) {
+                return this.$htmlDecode(image.source.url);
+            }
+            const res = image.resolutions.filter((p) => p.width < 650);
+            return this.$htmlDecode(res[res.length - 1].url);
+        },
+    },
 });
 </script>
 
 
 <style scoped>
+.preview {
+    position: relative;
+    z-index: 1;
+}
 .preview-overlay {
     border-radius: 20px;
     position: absolute;
