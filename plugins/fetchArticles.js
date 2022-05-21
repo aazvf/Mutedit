@@ -1,4 +1,5 @@
 import dictwords from "~/assets/data/ignoredWordlist";
+import { htmlDecode } from "./htmlDecode";
 
 const videoSizes = [360, 480, 720, 240, 1080];
 
@@ -12,7 +13,12 @@ class Article {
         this.data = data;
         this.words = this.toWordsArr; // store this array to reduce memory during loops
         this.loadingComments = false;
-        this.comments = [];
+        this.comments = []; // Gets populated by /components/article/comments/FetchButtons
+        this.galleryIndex = 0; // Tracks which gallery image currently being shown
+        this.hasPreview =
+            typeof this.data.preview === "object" &&
+            typeof this.data.preview.images === "object" &&
+            this.data.preview.images.length > 0;
         // These 'is' properties tell us which of our components should be
         //  used to display the main content of the article.
         this.isText = data.is_self || false;
@@ -25,6 +31,22 @@ class Article {
         this.isEmbed = this.streamableId || this.youtubeId || this.gfycatId || this.redgifId;
         this.isPlayable = this.isVideo || this.isGif || this.isGifv || this.isEmbed;
         this.isLink = !(this.isText || this.isPlayable || this.isImage || this.isGallery);
+    }
+
+    get galleryCount() {
+        return typeof this.data.media_metadata === "object" ? Object.keys(this.data.media_metadata).length : 0;
+    }
+
+    get gallerySource() {
+        if (!this.data.is_gallery) {
+            return "";
+        }
+        const keys = Object.keys(this.data.media_metadata);
+        const key = keys[this.galleryIndex % keys.length];
+
+        const res = this.data.media_metadata[key].p.filter((r) => r.x < 650);
+
+        return htmlDecode(res[res.length - 1].u);
     }
 
     get videoSources() {
@@ -59,6 +81,18 @@ class Article {
         ];
     }
 
+    get previewSource() {
+        if (typeof this.data.preview !== "object") {
+            return "";
+        }
+        const image = this.data.preview.images[0];
+        if (image.resolutions.length === 0) {
+            return htmlDecode(image.source.url);
+        }
+        const res = image.resolutions.filter((p) => p.width < 650);
+        return htmlDecode(res[res.length - 1].url);
+    }
+
     get countGalleryItems() {
         return Object.keys(this.data.media_metadata || []).length;
     }
@@ -68,7 +102,7 @@ class Article {
     }
 
     get youtubeId() {
-        return this.urlRegex(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, 7);
+        return this.urlRegex(/^.*((youtu.be\/)|(youtube.*v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, 7);
     }
 
     get gfycatId() {

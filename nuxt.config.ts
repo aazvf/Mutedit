@@ -7,17 +7,6 @@ export default defineNuxtConfig({
         '~/assets/sass/app.scss'
     ],
     buildModules: ['@nuxtjs/tailwindcss',],
-    // components: {
-    //     global: true,
-    //     dirs: [
-    //       '~/components',
-    //       {
-    //         path: '~/components/tailwind',
-    //         extensions: ['vue'],
-    //         prefix: 'T'
-    //       }
-    //     ]
-    //   },
     tailwindcss: {
         cssPath: '~/assets/css/tailwind.css',
         configPath: 'tailwind.config.js',
@@ -25,5 +14,5 @@ export default defineNuxtConfig({
         config: {},
         injectPosition: 0,
         viewer: true,
-      },
+    },
 })

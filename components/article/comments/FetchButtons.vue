@@ -18,10 +18,9 @@
     </div>
 </template>
 
-
-
 <script>
 export default defineComponent({
+    name: "Comment Fetcher Buttons",
     props: {
         article: { type: Object, required: true },
     },

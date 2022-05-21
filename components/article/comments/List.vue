@@ -1,7 +1,7 @@
 <template>
     <ul
-        class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         v-if="comments.length > 0"
+        class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
     >
         <li
             v-for="(comment, index) in filteredComments"
@@ -15,7 +15,7 @@
                 v-if="comment.children.length > 0 && !comment.expanded"
                 class="text-purple dark:text-violet-300 absolute right-0 bottom-2"
             >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
-            <article-comments-display :comments="comment.children" v-if="comment.expanded"></article-comments-display>
+            <article-comments :comments="comment.children" v-if="comment.expanded"></article-comments>
         </li>
         <li v-if="hasMoreComments" :class="listClassNames(-1)">
             <tailwind-badge
@@ -27,10 +27,12 @@
     </ul>
 </template>
 
+
 <script>
-export default {
+export default defineComponent({
+    name: "Comment List",
     props: {
-        comments: { type: Array },
+        comments: { type: Array, default: [] },
     },
     data() {
         return {
@@ -39,12 +41,6 @@ export default {
     },
     mounted() {},
     computed: {
-        isLoading() {
-            return (
-                typeof this.comments[0] === "object" &&
-                this.comments[0].text === "loading"
-            );
-        },
         filteredComments() {
             return this.comments.slice(0, this.commmentLimit);
         },
@@ -77,8 +73,10 @@ export default {
             };
         },
     },
-};
+});
 </script>
+
+
 
 <style scoped>
 .list-enter-active,

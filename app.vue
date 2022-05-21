@@ -8,10 +8,11 @@
 
 
 <script setup>
+// https://v3.nuxtjs.org/guide/features/head-management/
 useHead({
     titleTemplate: "Mutedit - %s",
     title: "",
-    viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+    viewport: "width=device-width, initial-scale=1, maximum-scale=1.5",
     charset: "utf-8",
     meta: [
         {
@@ -24,7 +25,7 @@ useHead({
         class: "dark",
     },
     bodyAttrs: {
-        class: "dark:bg-gray-800 font-sans",
+        class: "bg-lime-100 dark:bg-gray-900 font-sans",
     },
 });
 </script>

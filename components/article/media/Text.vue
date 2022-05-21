@@ -1,7 +1,7 @@
 <template>
     <div
         :class="{'overflow-hidden break-words dark:text-gray-300 mb-4 px-1': true, 'max-h-44': showPreview}"
-        v-html="postHtml"
+        v-html="$htmlDecode(article.data.selftext_html)"
         v-on:click="showPreview = false"
     />
 </template>

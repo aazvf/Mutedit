@@ -4,7 +4,11 @@
 // https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Medium-1051a531d3e1ee3483a6533158557139-font.woff
 
 // Variables
-@import "variables";
+// @import "variables";
+
+.max-h-media {
+    max-height: 60vh;
+}
 
 // Bootstrap
 // @import "~/node_modules/bootstrap/scss/bootstrap";

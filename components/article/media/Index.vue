@@ -1,78 +1,44 @@
 <template>
-    <div class="mb-3" v-if="!isText">
+    <div class="mb-5">
         <Transition>
             <article-media-preview
                 :article="article"
-                v-show="hasPreview && showPreview"
+                v-show="article.hasPreview && showPreview"
                 v-on:click="onClickPreview"
             />
         </Transition>
 
+        <article-media-text :article="article" v-if="article.isText" />
+        <article-media-link :article="article" v-if="article.isLink" />
+
         <Transition>
-            <div class="laterload" v-if="!showPreview || !hasPreview">
-                <div class="preview">
-                    <article-media-preview-underlay
-                        :src="isGallery ? gallerySource :previewSource"
-                    />
+            <div
+                class="relative z-0"
+                v-if="!article.isText && !article.isLink && !showPreview || !article.hasPreview"
+            >
+                <article-media-preview-underlay
+                    :src="isGallery ? article.gallerySource : article.previewSource"
+                />
 
-                    <article-media-embed-youtube />
+                <article-media-image
+                    v-if="article.isImage || article.isGif"
+                    :src="article.data.url"
+                    v-on:click="showPreview = true"
+                />
+                <article-media-gallery v-if="article.isGallery" :article="article" />
 
-                    <iframe
-                        v-if="article.streamableId"
-                        :src="'https://streamable.com/o/' + article.streamableId"
-                        allowfullscreen
-                        scrolling="no"
-                        allow="encrypted-media;"
-                    ></iframe>
-                    <iframe
-                        v-if="article.gfycatId"
-                        :src="'https://gfycat.com/ifr/' + article.gfycatId"
-                        allowfullscreen
-                        frameborder="0"
-                        scrolling="no"
-                        allow="encrypted-media;"
-                    ></iframe>
-                    <img
-                        v-if="article.isImage"
-                        :src="article.data.url"
-                        alt="Image"
-                        referrerpolicy="no-referrer"
-                        v-on:click="showPreview = true"
-                    />
-                    <img
-                        v-if="article.isGif"
-                        :src="article.data.url"
-                        alt="Gif"
-                        referrerpolicy="no-referrer"
-                        v-on:click="showPreview = true"
-                    />
-                    <img
-                        v-if="isGallery"
-                        :src="gallerySource"
-                        alt="Gallery"
-                        v-on:click="galleryIndex++"
-                        referrerpolicy="no-referrer"
-                    />
+                <article-media-video-youtube v-if="article.youtubeId" :src="article.youtubeId" />
+                <article-media-video-streamable
+                    v-if="article.streamableId"
+                    :src="article.streamableId"
+                />
+                <article-media-video-gfycat v-if="article.gfycatId" :src="article.gfycatId" />
+                <article-media-video-reddit :article="article" v-if="article.isVideo" />
+                <article-media-video-redgif :article="article" v-if="article.redgifId" />
+                <article-media-video-gifv :article="article" v-if="article.isGifv" />
 
-                    <div
-                        class="text-center m-2"
-                        v-if="isGallery"
-                    >{{galleryIndex % galleryCount + 1}} of {{ galleryCount }}</div>
-
-                    <article-video-player ref="player" :article="article" v-if="article.isVideo" />
-                    <article-video-player-red
-                        ref="red-player"
-                        :article="article"
-                        v-if="article.redgifId"
-                    />
-                    <article-video-player-gifv
-                        ref="gifv-player"
-                        :article="article"
-                        v-if="article.isGifv"
-                    />
-                    <div class="inline-block float-right mt-1" v-if="article.isEmbed">
-                        <tailwind-badge theme="yellow" v-on:click="showPreview = true">Close</tailwind-badge>
-                    </div>
+                <div class="inline-block float-right mt-1" v-if="article.isPlayable">
+                    <tailwind-badge theme="yellow" v-on:click="showPreview = true">Close</tailwind-badge>
                 </div>
             </div>
         </Transition>
@@ -81,6 +47,7 @@
 
 <script>
 export default defineComponent({
+    name: "Media Display Container",
     props: {
         article: { type: Object, required: true },
     },
@@ -89,49 +56,18 @@ export default defineComponent({
         const { isGallery, isText } = this.article;
 
         return {
-            galleryIndex: 0,
             showPreview: true,
             ...{ isGallery, isText },
         };
     },
 
-    computed: {
-        hasPreview() {
-            return (
-                typeof this.article.data.preview === "object" &&
-                typeof this.article.data.preview.images === "object" &&
-                this.article.data.preview.images.length > 0
-            );
-        },
-        galleryCount() {
-            return typeof this.article.data.media_metadata === "object"
-                ? Object.keys(this.article.data.media_metadata).length
-                : 0;
-        },
-        gallerySource() {
-            if (!this.article.data.is_gallery) {
-                return "";
-            }
-            const keys = Object.keys(this.article.data.media_metadata);
-            const key = keys[this.galleryIndex % keys.length];
-
-            const res = this.article.data.media_metadata[key].p.filter(
-                (r) => r.x < 650
-            );
-
-            return this.$htmlDecode(res[res.length - 1].u);
-        },
-    },
-
     methods: {
         onClickPreview() {
-            console.log("onclickpreview");
-            // this.showPreview = false;
-            this.showPreview =
-                this.article.isLink && !this.article.isEmbed ? true : false;
+            this.showPreview = !(
+                this.article.isPlayable || this.article.isImage
+            );
         },
     },
-    setup() {},
 });
 </script>
 
@@ -142,72 +78,5 @@ export default defineComponent({
 
 .v-enter-from {
     opacity: 0;
-}
-
-img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    max-height: 45vh;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.laterload img {
-    max-height: 80vh;
-}
-
-iframe {
-    display: block;
-    width: 100%;
-    height: 50vh;
-}
-.preview {
-    position: relative;
-    z-index: 1;
-}
-
-.preview-overlay {
-    border-radius: 20px;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: block;
-    background: rgba(0, 0, 0, 0.6);
-    pointer-events: none;
-}
-
-.preview-underlay {
-    border-radius: 20px;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: center no-repeat;
-    background-size: cover;
-    filter: grayscale(70%) blur(4px);
-    z-index: -1;
-}
-
-.play-icon {
-    background: url("/images/play.svg") center no-repeat;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 25%;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    pointer-events: none;
-    cursor: pointer;
-}
-.play-icon path {
-    stroke: white;
-    fill: white;
 }
 </style>

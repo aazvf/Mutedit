@@ -1,21 +1,14 @@
 <template>
     <tailwind-card>
         <div ref="content">
-            <article-meta-title :article="article" />
+            <article-title-meta-info :article="article" />
 
             <article-title :article="article" />
 
-            <!-- <article-media :article="article" v-if="!article.isText" /> -->
-            <article-media-display :article="article" v-if="!article.isText" />
-            <article-media-text :article="article" v-if="article.isText" />
-            <article-media-link :article="article" v-if="article.isLink" />
-            <article-comments-display
-                :comments="article.comments"
-                v-if="article.comments.length > 0"
-                class="mb-3"
-            />
+            <article-media :article="article" />
 
-            <tailwind-spinner theme="pink" v-if="article.loadingComments" />
+            <article-comments :article="article" class="mb-3" />
+
             <div class="px-1 pb-2">
                 <article-comments-fetch-buttons :article="article" />
 
