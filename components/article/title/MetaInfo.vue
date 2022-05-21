@@ -1,6 +1,8 @@
 <template>
     <div>
-        <small class="mb-0 text-md font-light tracking-tight text-gray-900 dark:text-gray-500">
+        <small
+            class="mb-0 text-md font-light tracking-tight max-w-fit truncate text-ellipsis overflow-hidden"
+        >
             <span v-if="article.isLink">Link</span>
             <span v-if="article.isImage">Image</span>
             <span v-if="article.isGif || article.isGifv || article.isVideoGif">Gif</span>

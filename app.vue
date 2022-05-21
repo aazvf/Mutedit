@@ -1,8 +1,18 @@
 <template>
-    <div class="container mx-auto p-5">
-        <NuxtLayout>
-            <NuxtPage />
-        </NuxtLayout>
+    <div :class="classList">
+        <div class="container mx-auto p-5 p-sm-2">
+            <div>
+                <div
+                    v-for="(color, index) in theme.colors"
+                    :key="index"
+                    :class="`rounded-lg inline-block w-10 h-10 m-3 bg-${color}-500`"
+                    v-on:click="onColorClick(color)"
+                ></div>
+            </div>
+            <NuxtLayout>
+                <NuxtPage />
+            </NuxtLayout>
+        </div>
     </div>
 </template>
 
@@ -25,8 +35,32 @@ useHead({
         class: "dark",
     },
     bodyAttrs: {
-        class: "bg-lime-100 dark:bg-gray-900 font-sans",
+        // class: "bg-lime-100 dark:bg-gray-900 font-sans",
     },
 });
 </script>
 
+
+<script>
+export default defineComponent({
+    data() {
+        return {
+            theme: useTheme(),
+        };
+    },
+    computed: {
+        classList() {
+            const { lightBg, lightText, darkBg, darkText } = this.theme;
+            const classes = [lightBg, lightText, darkBg, darkText].join(" ");
+            return "w-full min-h-screen " + classes;
+        },
+    },
+
+    methods: {
+        onColorClick(color) {
+            this.theme.color = color;
+            this.$localstorage.saveUserTheme();
+        },
+    },
+});
+</script>

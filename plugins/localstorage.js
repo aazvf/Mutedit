@@ -6,8 +6,12 @@ import localforage from "localforage";
 class storageApi {
     constructor() {
         this.filters = useFeedFilters();
+        this.theme = useTheme();
     }
 
+    saveUserTheme() {
+        localforage.setItem("user-theme", this.theme.value.color);
+    }
     saveMutedWords() {
         localforage.setItem("muted-words", JSON.stringify(this.filters.mutedWords.value));
     }
@@ -23,6 +27,18 @@ class storageApi {
         this.restoreMutedWords();
         this.restoreMutedSubs();
         this.restoreBlocked();
+        this.restoreTheme();
+    }
+    restoreTheme() {
+        localforage
+            .getItem("user-theme")
+            .then((value) => {
+                if (value) {
+                    console.log({ value });
+                    this.theme.value.color = value;
+                }
+            })
+            .catch(console.error);
     }
     restoreMutedWords() {
         localforage

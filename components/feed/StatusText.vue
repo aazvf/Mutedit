@@ -1,7 +1,7 @@
 <template>
     <div class v-show="articles.length > 0">
         <tailwind-alert
-            theme="dark"
+            theme="transparent"
             v-if="focusWord === '' && focusSubreddit === '' && 
             !showBlocked && !invertFilter"
         >

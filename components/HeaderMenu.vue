@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white border-gray-200 px-2 sm:px-4 pt-2.5 pb-1 rounded dark:bg-gray-800">
+    <nav class="border-gray-200 px-2 sm:px-4 pt-2.5 pb-1 rounded">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <feed-description />
 
