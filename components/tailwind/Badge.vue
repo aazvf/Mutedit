@@ -6,7 +6,7 @@
 
 <script>
 const base =
-    "transition-colors text-xs font-semibold mr-2 px-2.5 py-0.5 rounded cursor-pointer select-none ";
+    "lg:transition-colors text-xs font-semibold mr-2 px-2.5 py-0.5 rounded cursor-pointer select-none ";
 const classes = {
     default: "bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-800",
     dark: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",

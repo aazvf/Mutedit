@@ -1,5 +1,5 @@
 <template>
-    <hr :class="['transition-colors', theme.border4]" :attrs="$attrs" />
+    <hr :class="['lg:transition-colors', theme.border4]" :attrs="$attrs" />
 </template>
 
 <script>
