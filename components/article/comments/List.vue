@@ -1,26 +1,23 @@
 <template>
-    <ul
-        v-if="comments.length > 0"
-        class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-    >
+    <ul v-if="comments.length > 0" :class="classList" :attrs="$attrs">
         <li
             v-for="(comment, index) in filteredComments"
             :key="index"
             v-on:click="comment.expanded = true"
             :class="listClassNames(index)"
         >
-            <div :class="commentClassNames(comment)" v-html="$markdown(comment.text)" />
+            <div :class="commentClassNames(comment)" v-html="commentHtml(comment)" />
             <tailwind-badge
-                theme="indigo"
+                theme="bordered"
                 v-if="comment.children.length > 0 && !comment.expanded"
-                class="text-purple dark:text-violet-300 absolute right-0 bottom-2"
+                class="absolute right-0 bottom-1.5"
             >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
-            <article-comments :comments="comment.children" v-if="comment.expanded"></article-comments>
+            <article-comments-list :comments="comment.children" v-if="comment.expanded"></article-comments-list>
         </li>
         <li v-if="hasMoreComments" :class="listClassNames(-1)">
             <tailwind-badge
                 class="my-1"
-                theme="indigo"
+                theme="active"
                 v-on:click="showMoreComments"
             >show {{ hiddenCommentcount }} remaining comment{{ $s(hiddenCommentcount) }}</tailwind-badge>
         </li>
@@ -37,10 +34,17 @@ export default defineComponent({
     data() {
         return {
             commmentLimit: 7,
+            theme: useTheme(),
         };
     },
     mounted() {},
     computed: {
+        classList() {
+            return [
+                this.theme.border5,
+                "w-100 text-sm font-medium border rounded-lg",
+            ].join(" ");
+        },
         filteredComments() {
             return this.comments.slice(0, this.commmentLimit);
         },
@@ -52,25 +56,29 @@ export default defineComponent({
         },
     },
     methods: {
+        commentHtml(comment) {
+            return this.$markdown(comment.text);
+        },
         commentClassNames(comment) {
-            console.log(comment, comment.children?.length);
             return {
-                "break-word text-clip whitespace-pre-wrap text-ellipsis py-1 px-1": true,
-                "pr-24": comment.children?.length > 0,
+                "break-words text-clip whitespace-pre-wrap text-ellipsis py-1 px-1": true,
+                // "pr-24": comment.children?.length > 0,
             };
         },
         showMoreComments() {
             this.commmentLimit = parseInt(this.commmentLimit * 2.5);
         },
         listClassNames(index) {
-            return {
-                "relative w-full px-1 py-1 border-b border-gray-200 dark:border-gray-600": true,
+            const classes = {
+                "relative w-full px-1 py-1 border-b": true,
                 "rounded-t-lg": index === 0,
                 "rounded-b-lg": index === -1,
                 "rounded-b-lg":
                     index === this.filteredComments.length - 1 &&
                     !this.hasMoreComments,
             };
+            classes[this.theme.border5] = true;
+            return classes;
         },
     },
 });

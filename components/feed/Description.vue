@@ -1,26 +1,26 @@
 <template>
     <tailwind-alert
-        theme="warning"
+        theme="bordered"
         class="ml-0"
         v-on:click="expanded = !expanded"
         :class="{truncate: !expanded}"
     >
         Showing
-        <span class="text-purple-700 mr-1">{{ activeSortType }}</span>
-        <span class="text-purple-700" v-if="activeFeedType !== 'all'">{{ activeFeedType }}s</span>
+        <span :class="`${theme.text4} mr-1`">{{ activeSortType }}</span>
+        <span :class="theme.text4" v-if="activeFeedType !== 'all'">{{ activeFeedType }}s</span>
         <span v-if="activeFeedType === 'all'">articles</span>
         <span v-if="['top', 'controversial'].includes(activeSortType)">
             over the past
-            <span class="text-purple-700">{{ activeTimeperiod }}</span>
+            <span :class="theme.text4">{{ activeTimeperiod }}</span>
         </span>
         <span v-if="activeSubreddits.length > 0">
             from
-            <span class="text-purple-700">{{ subredditList }}</span>
+            <span :class="theme.text4">{{ subredditList }}</span>
             {{ activeSubreddits.length > 3 ? `and ${activeSubreddits.length - 3} more` : '' }}
         </span>
         <span v-if="activeSubreddits.length === 0">
             from
-            <span class="text-purple-700">front page</span>
+            <span :class="theme.text4">front page</span>
         </span>
     </tailwind-alert>
 </template>
@@ -34,6 +34,7 @@ export default defineComponent({
             activeSortType: useFeedSortParam(),
             activeTimeperiod: useFeedTimeperiodParam(),
             activeFeedType: useFeedTypeParam(),
+            theme: useTheme(),
         };
     },
 

@@ -1,29 +1,32 @@
 <template>
     <div>
         <div>
-            <header-menu />
-            <hr />
+            <!-- <header-menu /> -->
+            <tailwind-hr />
             <div class="mx-3 my-1">
                 <pills-feed-sort />
             </div>
             <div class="mx-3 my-1" v-if="['top', 'controversial'].includes(sort)">
                 <pills-feed-time />
             </div>
-            <hr />
+            <tailwind-hr />
             <div class="mx-3 my-1">
                 <pills-feed-type />
             </div>
-            <hr />
-            <div class="mx-3 my-1">
+            <!-- <tailwind-hr /> -->
+            <feed-description />
+
+            <div class="mx-3 mb-3">
                 <pills-subreddits />
             </div>
+            <tailwind-hr />
             <pills-words />
             <feed-status-text />
-            <div class="mx-3 my-1">
+            <div class="mx-3 mt-3 mb-1">
                 <feed-toggle-options />
             </div>
         </div>
-        <hr class="mb-2 mt-1" />
+        <tailwind-hr class="mb-4 mt-1" />
         <floating-muter />
         <feed-filtered-articles />
         <feed-article-fetcher />
@@ -38,6 +41,7 @@ export default defineComponent({
             sort: useFeedSortParam(),
         };
     },
+    computed: {},
     mounted() {
         this.$localstorage.restoreAll();
     },

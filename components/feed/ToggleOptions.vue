@@ -1,7 +1,5 @@
 <template>
     <div>
-        <tailwind-toggle :value="darkMode" v-on:toggle="toggleDarkMode">Dark Mode</tailwind-toggle>
-
         <tailwind-toggle
             v-if="filterCount > 0"
             :value="invertFilter"
@@ -18,13 +16,7 @@
 <script>
 export default defineComponent({
     data() {
-        return { ...useFeedFilters(), darkMode: true };
-    },
-    methods: {
-        toggleDarkMode() {
-            document.documentElement.classList.toggle("dark");
-            this.darkMode = !this.darkMode;
-        },
+        return { ...useFeedFilters() };
     },
 });
 </script>

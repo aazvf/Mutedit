@@ -29,10 +29,10 @@ export default {
         },
         badgeTheme(type) {
             return this.activeFeedType === type
-                ? "green"
+                ? "active"
                 : this.waiting
-                ? "darker"
-                : "default";
+                ? "disabled"
+                : "inactive";
         },
     },
 };

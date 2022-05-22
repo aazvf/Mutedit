@@ -1,15 +1,14 @@
 <template>
     <div class="mx-3 my-1" v-show="articles.length > 0">
-        <hr />
+        <span :class="['px-1', theme.text3]">mute words:</span>
         <tailwind-badge
             v-for="(word, index) in wordmapsorted"
             :key="index"
             v-on:click="onClickWordmap(word.name)"
             :theme="badgeTheme(word)"
-            :asdf="badgeTheme(word)"
         >{{ $ucfirst(word.name) }} ({{ word.count }})</tailwind-badge>
         <tailwind-badge
-            theme="purple"
+            theme="bordered"
             v-on:click="focusWordlimit += focusWordbite ; focusWordbite *= 1.5"
             v-if="wordcount > focusWordlimit"
         >show {{ parseInt(wordcount - focusWordlimit) }} more words</tailwind-badge>
@@ -20,6 +19,7 @@
 export default {
     data() {
         return {
+            theme: useTheme(),
             ...useFeedFilters(),
             articles: useArticles(),
             focusWordlimit: 10,
@@ -60,10 +60,10 @@ export default {
     methods: {
         badgeTheme(word) {
             return this.focusWord === word.name
-                ? "green"
+                ? "active"
                 : this.isWordMuted(word.name)
-                ? "red"
-                : "default";
+                ? "focused"
+                : "inactive";
         },
         isWordMuted(word) {
             return this.mutedWords.indexOf(word) > -1;

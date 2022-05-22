@@ -23,10 +23,10 @@ export default defineComponent({
     methods: {
         badgeTheme(sort) {
             return this.activeSort === sort
-                ? "green"
+                ? "active"
                 : this.waiting
-                ? "darker"
-                : "default";
+                ? "disabled"
+                : "inactive";
         },
     },
 });

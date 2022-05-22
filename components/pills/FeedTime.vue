@@ -23,10 +23,10 @@ export default {
     methods: {
         badgeTheme(time) {
             return this.activeTimeperiod === time
-                ? "green"
+                ? "active"
                 : this.waiting
-                ? "darker"
-                : "default";
+                ? "disabled"
+                : "inactive";
         },
     },
 };

@@ -9,9 +9,8 @@
 import { defineComponent } from "@vue/composition-api";
 
 const base =
-    "py-2 px-3 mx-3 my-2 text-sm rounded-lg text-left inline-block text-ellipsis ";
+    "py-2 px-3 mx-3 mt-2 text-sm rounded-lg text-left inline-block text-ellipsis rounded ";
 const classes = {
-    transparent: "dark:bg-gray-700/25 bg-gray-700/25",
     info: "text-blue-700 bg-blue-100 dark:bg-blue-200 dark:text-blue-800",
     danger: "text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800",
     success:
@@ -27,13 +26,34 @@ export default defineComponent({
         theme: { type: String, required: true },
         title: { type: String, required: false, default: "" },
     },
-    setup(props) {
-        const classNames =
-            base +
-            (typeof classes[props.theme] === "string"
-                ? classes[props.theme]
-                : classes["default"]);
-        return { classNames };
+    data() {
+        return {
+            userTheme: useTheme(),
+        };
+    },
+    computed: {
+        classNames() {
+            const themed = {
+                active: [this.userTheme.bg(800, true), this.userTheme.text8],
+                inactive: [this.userTheme.bg2, this.userTheme.text2],
+                filled: [this.userTheme.bg3, this.userTheme.text1],
+                bordered: [
+                    "border",
+                    this.userTheme.border3,
+                    this.userTheme.text2,
+                ],
+            };
+            if (typeof themed[this.theme] === "object") {
+                return [base, ...themed[this.theme]].join(" ");
+            }
+
+            return (
+                base +
+                (typeof classes[this.theme] === "string"
+                    ? classes[this.theme]
+                    : classes["default"])
+            );
+        },
     },
 });
 </script>

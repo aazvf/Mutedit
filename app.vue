@@ -1,14 +1,8 @@
 <template>
-    <div :class="classList">
-        <div class="container mx-auto p-5 p-sm-2">
-            <div>
-                <div
-                    v-for="(color, index) in theme.colors"
-                    :key="index"
-                    :class="`rounded-lg inline-block w-10 h-10 m-3 bg-${color}-500`"
-                    v-on:click="onColorClick(color)"
-                ></div>
-            </div>
+    <div :class="themeClassList">
+        <div class="container mx-auto p-1 md:p-5">
+            <theme-picker />
+            <theme-dark-switch />
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
@@ -49,17 +43,9 @@ export default defineComponent({
         };
     },
     computed: {
-        classList() {
-            const { lightBg, lightText, darkBg, darkText } = this.theme;
-            const classes = [lightBg, lightText, darkBg, darkText].join(" ");
-            return "w-full min-h-screen " + classes;
-        },
-    },
-
-    methods: {
-        onColorClick(color) {
-            this.theme.color = color;
-            this.$localstorage.saveUserTheme();
+        themeClassList() {
+            const { bg1, text1 } = this.theme;
+            return ["w-full min-h-screen ", bg1, text1].join(" ");
         },
     },
 });

@@ -6,7 +6,7 @@
 
 <script>
 const base =
-    "block py-1 px-4 my-2 mb-2 mx-3 rounded-lg border border-transparent shadow-md  ";
+    "block py-1 px-2 md:px-4 my-2 mb-2 mx-3 rounded-lg border border-transparent shadow-md  ";
 const classes = {
     default: "",
 };
@@ -24,11 +24,7 @@ export default defineComponent({
     },
     computed: {
         classNames() {
-            const baseclasses = [
-                base,
-                this.userTheme.darkBg2,
-                this.userTheme.lightBg2,
-            ].join(" ");
+            const baseclasses = [base, this.userTheme.bg2].join(" ");
             return (
                 baseclasses +
                 (typeof classes[this.theme] === "string"

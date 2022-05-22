@@ -11,7 +11,7 @@ const converter = new showdown.Converter({
         {
             type: "output",
             regex: new RegExp(`==(.*)==`, "g"),
-            replace: `<span class="text-gray-500">$1</span>`,
+            replace: `<span class="text-gray-500 whitespace-pre">$1           </span>`,
         },
         {
             type: "output",

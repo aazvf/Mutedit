@@ -12,8 +12,8 @@
                 <source type="video/mp4" :src="videoSource" />Your browser does not support the video tag.
             </video>
         </div>
-        <div class="inline-block float-right mt-1">
-            <tailwind-badge theme="red" v-on:click="muteAudio">Mute</tailwind-badge>
+        <div class="inline-block float-right mt-0">
+            <tailwind-badge theme="bordered" v-on:click="muteAudio">Mute</tailwind-badge>
         </div>
     </div>
 </template>

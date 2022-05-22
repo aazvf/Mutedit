@@ -10,7 +10,8 @@ class storageApi {
     }
 
     saveUserTheme() {
-        localforage.setItem("user-theme", this.theme.value.color);
+        const { color, accent, dark } = this.theme.value;
+        localforage.setItem("user-theme", JSON.stringify({ color, accent, dark }));
     }
     saveMutedWords() {
         localforage.setItem("muted-words", JSON.stringify(this.filters.mutedWords.value));
@@ -34,8 +35,13 @@ class storageApi {
             .getItem("user-theme")
             .then((value) => {
                 if (value) {
-                    console.log({ value });
-                    this.theme.value.color = value;
+                    value = JSON.parse(value);
+                    if (typeof value === "object") {
+                        const { color, accent, dark } = value;
+                        this.theme.value.color = color;
+                        this.theme.value.accent = accent;
+                        this.theme.value.setDark(dark);
+                    }
                 }
             })
             .catch(console.error);

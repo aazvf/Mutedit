@@ -1,5 +1,7 @@
 <template>
     <div>
+        <span :class="['px-1', theme.text3]">mute subreddits:</span>
+        <span :class="['px-1', theme.text2]" v-if="count === 0">loading...</span>
         <tailwind-badge
             v-for="(subreddit, index) in subredditmapsorted"
             :key="index"
@@ -8,7 +10,7 @@
             v-show="subreddit.count > 0"
         >/r/{{ $ucfirst(subreddit.name) }} ({{ subreddit.count }})</tailwind-badge>
         <tailwind-badge
-            theme="purple"
+            theme="bordered"
             v-on:click="limit += take ; take *= 1.5"
             v-if="count > limit"
         >show {{ parseInt(count - limit) }} more subreddits</tailwind-badge>
@@ -19,6 +21,7 @@
 export default {
     data() {
         return {
+            theme: useTheme(),
             ...useFeedFilters(),
             limit: 10,
             take: 20,
@@ -53,10 +56,10 @@ export default {
     methods: {
         badgeTheme(subreddit) {
             return this.focusSubreddit === subreddit.name
-                ? "green"
+                ? "focused"
                 : this.isSubredditMuted(subreddit.name)
-                ? "red"
-                : "default";
+                ? "active"
+                : "inactive";
         },
         isSubredditMuted(subreddit) {
             return this.mutedSubs.includes(subreddit);

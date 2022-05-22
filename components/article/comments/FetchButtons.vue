@@ -2,17 +2,17 @@
     <div class="inline-block">
         <tailwind-badge
             :disabled="article.loadingComments || lastSort === 'top'"
-            :theme="lastSort === 'top' ? 'dark' : 'green'"
+            :theme="lastSort === 'top' ? 'active' : 'bordered'"
             v-on:click="getComments('top')"
         >Top</tailwind-badge>
         <tailwind-badge
-            :theme="lastSort === 'controversial' ? 'dark' : 'green'"
+            :theme="lastSort === 'controversial' ? 'active' : 'bordered'"
             v-on:click="getComments('controversial')"
         >Controversial</tailwind-badge>
 
         <tailwind-badge
             v-if="article.comments.length > 0"
-            theme="yellow"
+            theme="focused"
             v-on:click="clearComments"
         >close comments</tailwind-badge>
     </div>

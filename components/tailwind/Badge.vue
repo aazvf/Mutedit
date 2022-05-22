@@ -1,5 +1,5 @@
 <template>
-    <span type="button" :class="classNames" v-bind="$attrs">
+    <span type="button" :class="classNames">
         <slot></slot>
     </span>
 </template>
@@ -25,8 +25,30 @@ export default defineComponent({
         theme: { type: String, required: true },
         attrs: { type: Object, required: false, default: {} },
     },
+    data() {
+        return {
+            userTheme: useTheme(),
+        };
+    },
     computed: {
         classNames() {
+            const themed = {
+                static: [this.userTheme.bg(100, false), this.userTheme.text3],
+                active: [this.userTheme.bg(300, true), this.userTheme.text1],
+                inactive: [this.userTheme.bg2, this.userTheme.text1],
+                disabled: [this.userTheme.bg2, "text-transparent"],
+                focused: [this.userTheme.bg(800, true), this.userTheme.text8],
+                bordered: [
+                    "border",
+                    this.userTheme.border3,
+                    this.userTheme.text3,
+                    this.userTheme.bg3,
+                ],
+            };
+            if (typeof themed[this.theme] === "object") {
+                return [base, ...themed[this.theme]].join(" ");
+            }
+
             return (
                 base +
                 (typeof classes[this.theme] === "string"

@@ -1,10 +1,10 @@
 <template>
-    <feed-article-item
+    <article-container
         v-for="(article) in filtered"
         :key="article.id"
         :article="article"
         ref="article"
-    ></feed-article-item>
+    ></article-container>
 </template>
 
 

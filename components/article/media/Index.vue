@@ -36,9 +36,8 @@
                 <article-media-video-reddit :article="article" v-if="article.isVideo" />
                 <article-media-video-redgif :article="article" v-if="article.redgifId" />
                 <article-media-video-gifv :article="article" v-if="article.isGifv" />
-
-                <div class="inline-block float-right mt-1" v-if="article.isPlayable">
-                    <tailwind-badge theme="yellow" v-on:click="showPreview = true">Close</tailwind-badge>
+                <div class="inline-block float-right mt-0" v-if="article.isPlayable">
+                    <tailwind-badge theme="focused" v-on:click="showPreview = true">Close</tailwind-badge>
                 </div>
             </div>
         </Transition>

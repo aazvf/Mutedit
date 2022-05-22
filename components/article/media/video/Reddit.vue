@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="video">
+        <div class>
             <video
                 class="w-full mb-0 max-h-media"
                 :width="videoWidth"
@@ -29,8 +29,8 @@
                 <source v-on:error="article.isVideoGif = true" :src="article.audioSource" />
             </audio>
         </div>
-        <div class="inline-block float-right mt-1">
-            <tailwind-badge theme="red" v-if="!isVideoGif" v-on:click="muteAudio">Mute</tailwind-badge>
+        <div class="inline-block float-right mt-0">
+            <tailwind-badge theme="bordered" v-if="!isVideoGif" v-on:click="muteAudio">Mute</tailwind-badge>
         </div>
     </div>
 </template>

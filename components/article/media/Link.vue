@@ -1,11 +1,8 @@
 <template>
     <div class="display-block py-2">
-        <tailwind-button
-            target="_blank"
-            rel="noopener noreferer"
-            :href="article.data.url"
-            theme="green"
-        >{{ urlHumanView }}</tailwind-button>
+        <NuxtLink target="_blank" rel="noopener noreferer" :href="article.data.url">
+            <tailwind-badge class="block pt-2 pb-2 px-5 text-lg" theme="active">> {{ urlHumanView }}</tailwind-badge>
+        </NuxtLink>
     </div>
 </template>
 
