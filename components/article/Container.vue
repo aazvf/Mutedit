@@ -26,9 +26,9 @@ export default {
         article: { type: Object, default: {} },
     },
     data() {
-        const { blocked } = useFeedFilters();
+        const { blocked, hideAfterSeen } = useFeedFilters();
         return {
-            ...{ blocked },
+            ...{ blocked, hideAfterSeen },
             scrolledPast: false,
             ratio: 0,
             observer: new IntersectionObserver(this.onObserve),
@@ -36,7 +36,9 @@ export default {
     },
 
     mounted() {
-        this.waitForArticle();
+        if (this.hideAfterSeen) {
+            this.waitForArticle();
+        }
     },
 
     methods: {
@@ -59,15 +61,15 @@ export default {
         onScroll() {
             // Triggers on scroll after article enters viewport
 
-            if (this.$refs.content === null) {
+            if (this.$refs.content === null || !this.hideAfterSeen) {
                 return this.stopWatchingScroll();
             }
 
             const { scrollY, innerHeight } = window;
             const { offsetTop, offsetHeight } = this.$refs.content;
 
-            // If scrolled past the bottom of article
-            if (scrollY > offsetTop + offsetHeight) {
+            // If scrolled enough past the bottom of article
+            if (scrollY > offsetTop + offsetHeight + innerHeight) {
                 this.stopWatchingScroll();
                 setTimeout(this.blockArticleDelayed, 5000);
             }

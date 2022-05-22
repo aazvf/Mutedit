@@ -1,6 +1,12 @@
 <template>
     <div>
         <tailwind-toggle
+            v-if="false"
+            :value="hideAfterSeen"
+            v-on:toggle="hideAfterSeen = !hideAfterSeen"
+        >auto hide articles you scroll past (requires refresh)</tailwind-toggle>
+
+        <tailwind-toggle
             v-if="filterCount > 0"
             :value="invertFilter"
             v-on:toggle="invertFilter = !invertFilter; showBlocked = false"

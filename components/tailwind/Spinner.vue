@@ -32,7 +32,7 @@ export default defineComponent({
             return [
                 "mx-auto w-8 h-8 text-gray-200 animate-spin",
                 this.theme.text3,
-                this.theme.fill(500),
+                this.theme.fill(700),
             ].join(" ");
         },
     },

@@ -6,7 +6,7 @@
 
 <script>
 const base =
-    "lg:transition-colors block py-1 px-2 md:px-4 my-4 mx-3 rounded-lg border border-transparent drop-shadow-md  ";
+    "block py-1 px-2 md:px-4 my-4 mx-3 rounded-lg border border-transparent drop-shadow-md  ";
 const classes = {
     default: "",
 };
