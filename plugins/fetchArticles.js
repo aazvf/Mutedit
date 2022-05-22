@@ -168,6 +168,7 @@ const fetchArticles = (reset = false) => {
                 .map((a) => {
                     return new Article(a.data);
                 });
+            console.log(children);
 
             console.log(articles);
             articles.value.push(...children);

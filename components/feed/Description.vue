@@ -1,7 +1,7 @@
 <template>
     <tailwind-alert
         theme="bordered"
-        class="ml-0"
+        class="ml-3"
         v-on:click="expanded = !expanded"
         :class="{truncate: !expanded}"
     >

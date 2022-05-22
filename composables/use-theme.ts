@@ -35,6 +35,17 @@ class Theme {
         this.accent = accent;
     }
 
+    randColor (except = []) {
+        const colors = this.colors.filter((c) => except.length > this.colors.length-1 || !except.includes(c));
+        return colors[(colors.length * Math.random()) | 0];
+    }
+
+    randTheme (except = []) {
+        return [this.randColor(except), this.randColor(except)];
+    }
+
+
+
     toggleDark() {
         document.documentElement.classList.toggle("dark");
         this.dark = !this.dark;
@@ -67,6 +78,10 @@ class Theme {
 
     get text8 () {
         return this.text(200);
+    }
+
+    get text9 () {
+        return this.text(100);
     }
 
     get bg1 () {

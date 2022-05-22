@@ -16,9 +16,7 @@
             <!-- <tailwind-hr /> -->
             <feed-description />
 
-            <div class="mx-3 mb-3">
-                <pills-subreddits />
-            </div>
+            <pills-subreddits />
             <tailwind-hr />
             <pills-words />
             <feed-status-text />
@@ -42,8 +40,6 @@ export default defineComponent({
         };
     },
     computed: {},
-    mounted() {
-        this.$localstorage.restoreAll();
-    },
+    mounted() {},
 });
 </script>

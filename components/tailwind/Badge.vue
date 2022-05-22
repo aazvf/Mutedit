@@ -1,5 +1,5 @@
 <template>
-    <span type="button" :class="classNames" :attrs="$attrs">
+    <span type="button" :attrs="$attrs" :class="classNames">
         <slot></slot>
     </span>
 </template>
@@ -33,15 +33,20 @@ export default defineComponent({
         classNames() {
             const themed = {
                 static: [this.userTheme.bg(100, false), this.userTheme.text3],
-                active: [this.userTheme.bg(300, true), this.userTheme.text1],
+                active: [this.userTheme.bg(500, true), this.userTheme.text1],
                 inactive: [this.userTheme.bg2, this.userTheme.text1],
                 disabled: [this.userTheme.bg2, "text-transparent"],
-                focused: [this.userTheme.bg(800, true), this.userTheme.text8],
+                focused: [
+                    this.userTheme.bg(800, true),
+                    this.userTheme.text9,
+                    // "underline decoration-2",
+                ],
                 bordered: [
                     "border",
-                    this.userTheme.border3,
-                    this.userTheme.text3,
-                    this.userTheme.bg3,
+                    this.userTheme.border5,
+                    this.userTheme.text8,
+                    this.userTheme.bg(900, true),
+                    // this.userTheme.bg3,
                 ],
             };
             if (typeof themed[this.theme] === "object") {

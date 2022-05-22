@@ -31,7 +31,7 @@
         >{{article.data.subreddit_name_prefixed}}</NuxtLink>
         <tailwind-badge
             theme="static"
-            :class="['py-0 pt-0.5 px-5 leading-4 float-right block', $theme().text8]"
+            :class="['py-0 pt-0.5 px-4 leading-4 float-right block', $theme().text8]"
         >({{ article.data.domain }})</tailwind-badge>
     </div>
 </template>

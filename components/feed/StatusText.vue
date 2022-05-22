@@ -35,10 +35,10 @@
             v-if="showBlocked"
         >Showing only the {{ blockedCount }} article{{ $s(blockedCount) }} you've already seen</tailwind-alert>
 
-        <tailwind-alert
-            theme="active"
-            v-if="focusWord != ''"
-        >Showing only articles containing the word "{{ $ucfirst(focusWord)}}"</tailwind-alert>
+        <tailwind-alert theme="active" v-if="focusWord != ''">
+            Showing only articles containing the word "{{ $ucfirst(focusWord)}}"
+            <tailwind-badge theme="active" v-on:click="focusWord = ''">(undo?)</tailwind-badge>
+        </tailwind-alert>
         <tailwind-alert
             theme="active"
             v-if="focusSubreddit != ''"

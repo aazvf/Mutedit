@@ -9,10 +9,10 @@
             <div :class="commentClassNames(comment)" v-html="commentHtml(comment)" />
             <tailwind-badge
                 theme="bordered"
-                v-if="comment.children.length > 0 && !comment.expanded"
+                v-if="comment.children.length > 0 && !comment.expanded && false"
                 class="absolute right-0 bottom-1.5"
             >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
-            <article-comments-list :comments="comment.children" v-if="comment.expanded"></article-comments-list>
+            <article-comments-list :comments="comment.children" v-if="true"></article-comments-list>
         </li>
         <li v-if="hasMoreComments" :class="listClassNames(-1)">
             <tailwind-badge
@@ -42,7 +42,7 @@ export default defineComponent({
         classList() {
             return [
                 this.theme.border5,
-                "w-100 text-sm font-medium border rounded-lg",
+                "w-100 text-sm font-medium border rounded-lg shadow-lg",
             ].join(" ");
         },
         filteredComments() {
@@ -62,7 +62,6 @@ export default defineComponent({
         commentClassNames(comment) {
             return {
                 "break-words text-clip whitespace-pre-wrap text-ellipsis py-1 px-1": true,
-                // "pr-24": comment.children?.length > 0,
             };
         },
         showMoreComments() {

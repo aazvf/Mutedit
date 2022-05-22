@@ -1,8 +1,7 @@
 <template>
     <div :class="themeClassList">
-        <div class="container mx-auto p-1 md:p-5">
+        <div class="p-1 md:p-5">
             <theme-picker />
-            <theme-dark-switch />
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>

@@ -1,6 +1,8 @@
 <template>
-    <div class="mx-3 my-1" v-show="articles.length > 0">
+    <div class="mx-3 my-1 leading-7">
         <span :class="['px-1', theme.text3]">mute words:</span>
+        <span :class="['px-1', theme.text2]" v-if="wordcount === 0">loading...</span>
+
         <tailwind-badge
             v-for="(word, index) in wordmapsorted"
             :key="index"
@@ -60,9 +62,9 @@ export default {
     methods: {
         badgeTheme(word) {
             return this.focusWord === word.name
-                ? "active"
-                : this.isWordMuted(word.name)
                 ? "focused"
+                : this.isWordMuted(word.name)
+                ? "active"
                 : "inactive";
         },
         isWordMuted(word) {

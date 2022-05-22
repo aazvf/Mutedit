@@ -34,7 +34,7 @@ export default defineComponent({
     computed: {
         classNames() {
             const themed = {
-                active: [this.userTheme.bg(800, true), this.userTheme.text8],
+                active: [this.userTheme.bg(500, true), this.userTheme.text1],
                 inactive: [this.userTheme.bg2, this.userTheme.text2],
                 filled: [this.userTheme.bg3, this.userTheme.text1],
                 bordered: [
