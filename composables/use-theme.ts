@@ -4,6 +4,10 @@ class Theme {
     color: string;
     accent: string;
     dark = false;
+    align = 'left';
+    container = true;
+    columns = 0;
+    textTransform = 'lowercase';
 
     colors = [
         'slate', 

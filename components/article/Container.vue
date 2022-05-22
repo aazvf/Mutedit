@@ -1,6 +1,6 @@
 <template>
-    <tailwind-card>
-        <div ref="content">
+    <tailwind-card class="break-inside-avoid">
+        <div ref="content" v-if="!scrolledPast">
             <article-title-meta-info :article="article" />
 
             <article-title :article="article" />
@@ -13,6 +13,12 @@
                 <article-meta-badges :article="article" />
             </div>
             <article-comments :article="article" class="mb-1" />
+        </div>
+        <div v-if="scrolledPast">
+            <tailwind-badge theme="focused" v-on:click="scrolledPast = false">auto hidden (show)</tailwind-badge>
+            <span
+                class="text-xs"
+            >[{{ article.data.subreddit.toLowerCase() }}] {{ article.data.title.substr(0,30) }}{{ article.data.title.length > 30 ? '...' : '' }}</span>
         </div>
     </tailwind-card>
 </template>
@@ -99,9 +105,10 @@ export default {
             // check again if scrolled past the bottom of article
             if (scrollY > offsetTop + offsetHeight) {
                 this.scrolledPast = true;
-                if (!this.blocked.includes(this.article.data.id)) {
-                    this.blocked.push(this.article.data.id);
-                }
+                console.log("HIDDDINGGG");
+                // if (!this.blocked.includes(this.article.data.id)) {
+                //     this.blocked.push(this.article.data.id);
+                // }
             } else {
                 this.waitForArticle();
             }

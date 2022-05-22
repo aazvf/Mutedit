@@ -1,7 +1,7 @@
 <template>
     <div :class="themeClassList">
-        <div class="p-1 md:p-5">
-            <theme-picker />
+        <div :class="containerClassList">
+            <theme />
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
@@ -42,9 +42,21 @@ export default defineComponent({
         };
     },
     computed: {
+        containerClassList() {
+            return [
+                "p-1 md:p-5",
+                this.theme.container ? "container mx-auto" : "",
+            ];
+        },
         themeClassList() {
-            const { bg1, text1 } = this.theme;
-            return ["w-full min-h-screen", bg1, text1].join(" ");
+            const { bg1, text1, align, textTransform } = this.theme;
+            return [
+                "w-full min-h-screen subpixel-antialiased",
+                bg1,
+                text1,
+                `text-${align}`,
+                textTransform,
+            ].join(" ");
         },
     },
     mounted() {

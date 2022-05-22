@@ -21,8 +21,8 @@ export default {
     },
     computed: {
         themeClassList() {
-            const { bg1, text1 } = this.theme;
-            return ["", bg1, text1].join(" ");
+            const { bg1, text2 } = this.theme;
+            return ["mb-5", bg1, text2].join(" ");
         },
     },
 };

@@ -18,12 +18,12 @@
             />
             <tailwind-badge
                 theme="bordered"
-                v-if="comment.children.length > 0 && !comment.expanded && false"
+                v-if="comment.children.length > 0 && !comment.expanded"
                 class="absolute right-0 bottom-1.5"
             >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
             <article-comments-list
+                v-if="comment.expanded && filteredChildren(comment).length > 0"
                 :comments="comment.children"
-                v-if="filteredChildren(comment).length > 0"
             ></article-comments-list>
         </li>
         <li v-if="hasMoreComments" :class="listClassNames(-1)">

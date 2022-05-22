@@ -26,7 +26,9 @@
         </div>
         <tailwind-hr class="mb-4 mt-1" />
         <floating-muter />
-        <feed-filtered-articles />
+        <div :class="feedColumns">
+            <feed-filtered-articles />
+        </div>
         <feed-article-fetcher />
     </div>
 </template>
@@ -39,7 +41,13 @@ export default defineComponent({
             sort: useFeedSortParam(),
         };
     },
-    computed: {},
+    computed: {
+        feedColumns() {
+            // return "grid grid-cols-3 shrink";
+            const c = this.$theme().columns;
+            return `columns-1 lg:columns-${+c + 1}`;
+        },
+    },
     mounted() {},
 });
 </script>

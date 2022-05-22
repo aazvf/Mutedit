@@ -1,10 +1,9 @@
 <template>
     <div>
         <tailwind-toggle
-            v-if="false"
             :value="hideAfterSeen"
-            v-on:toggle="hideAfterSeen = !hideAfterSeen"
-        >auto hide articles you scroll past (requires refresh)</tailwind-toggle>
+            v-on:toggle="onHideSeenToggle"
+        >auto hide articles you scroll past</tailwind-toggle>
 
         <tailwind-toggle
             v-if="filterCount > 0"
@@ -23,6 +22,13 @@
 export default defineComponent({
     data() {
         return { ...useFeedFilters() };
+    },
+
+    methods: {
+        onHideSeenToggle() {
+            this.hideAfterSeen = !this.hideAfterSeen;
+            this.$fetchArticles(true);
+        },
     },
 });
 </script>
