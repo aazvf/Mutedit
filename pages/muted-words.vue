@@ -4,44 +4,47 @@
 <template>
     <div>
         <NuxtLink
-            class="text-purple-300 px-6 mb-3 block"
+            :class="['px-6 mb-3 block', $theme().text5]"
             :href="$buildUrl()"
         >&lt; back to front page</NuxtLink>
         <tailwind-card>
-            <h2 class="text-gray-200 px-5 py-3 text-lg">your muted words</h2>
-            <hr />
+            <h2
+                class="px-5 py-3 text-lg"
+            >your {{ mutedWords.length }} muted word{{ $s(mutedWords.length) }}</h2>
+            <tailwind-hr />
             <div class="p-5">
                 <tailwind-badge
                     v-for="(word, index) in mutedWords"
                     :key="index"
                     v-on:click="onWordClick(word)"
-                    theme="default"
+                    theme="focused"
                 >{{ $ucfirst(word) }}</tailwind-badge>
 
                 <tailwind-badge
                     v-for="(word, index) in removedWords"
                     :key="index"
-                    theme="dark"
+                    theme="active"
                     v-on:click="onWordClick(word)"
-                >{{ $ucfirst(word) }} (undo?)</tailwind-badge>
+                >{{ $ucfirst(word) }} (removed, undo?)</tailwind-badge>
             </div>
-            <hr />
+            <tailwind-hr />
 
             <div class="mt-5 p-5">
                 <input
                     type="text"
-                    class="max-w-sm mr-4 p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    v-model="word"
+                    class="max-w-sm mr-4 mb-3 p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    v-model="userWord"
                     placeholder="new muted word"
                 />
-                <tailwind-button
-                    :theme="word.length > 2 ? 'yellow' : 'dark'"
+                <tailwind-badge
+                    class="text-lg py-1.5 px-5"
+                    :theme="userWord.length > 2 ? 'active' : 'inactive'"
                     v-on:click="addNewWord"
-                >add {{ word.includes(' ') ? 'phrase' : 'word' }}</tailwind-button>
+                >add muted {{ userWord.includes(' ') ? 'phrase' : 'word' }}</tailwind-badge>
             </div>
         </tailwind-card>
         <NuxtLink
-            class="text-purple-300 px-6 mb-3 block"
+            :class="['px-6 mb-3 block', $theme().text5]"
             href="/muted-subs"
         >&gt; configure muted subs</NuxtLink>
     </div>
@@ -61,22 +64,21 @@ export default {
     data() {
         return {
             ...useFeedFilters(),
-            word: "",
+            userWord: "",
             removedWords: [],
         };
-    },
-
-    mounted() {
-        this.$localstorage.restoreMutedWords();
     },
 
     computed: {},
 
     methods: {
         addNewWord() {
-            if (this.word.length > 2 && !this.mutedWords.includes(this.word)) {
-                this.mutedWords.push(this.word);
-                this.word = "";
+            if (
+                this.userWord.length > 2 &&
+                !this.mutedWords.includes(this.userWord)
+            ) {
+                this.mutedWords.push(this.userWord);
+                this.userWord = "";
                 this.$localstorage.saveMutedWords();
             }
         },

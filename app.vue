@@ -48,5 +48,9 @@ export default defineComponent({
             return ["w-full min-h-screen ", bg1, text1].join(" ");
         },
     },
+    mounted() {
+        console.log("MOUNTTINNNNGGG");
+        this.$localstorage.restoreAll();
+    },
 });
 </script>

@@ -29,12 +29,9 @@ export default defineComponent({
             return [
                 base,
                 "peer-focus:ring-slate-700 dark:peer-focus:ring-slate-200",
-                this.theme.bg3,
-                this.theme.border2,
+                this.theme.bg2,
+                this.theme.border5,
                 "peer-checked:" + this.theme.bg(700, true),
-                // "bg-gray-200 dark:bg-gray-700",
-                // "peer-checked:bg-purple-600",
-                // "dark:border-gray-600"
             ].join(" ");
         },
     },

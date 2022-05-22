@@ -1,5 +1,5 @@
 <template>
-    <span type="button" :class="classNames">
+    <span type="button" :class="classNames" :attrs="$attrs">
         <slot></slot>
     </span>
 </template>
@@ -23,7 +23,6 @@ export default defineComponent({
     name: "Badge",
     props: {
         theme: { type: String, required: true },
-        attrs: { type: Object, required: false, default: {} },
     },
     data() {
         return {

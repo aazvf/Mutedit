@@ -1,5 +1,5 @@
 <template>
-    <tailwind-card class="mb-4">
+    <tailwind-card class="mb-5">
         <div ref="content">
             <article-title-meta-info :article="article" />
 

@@ -55,7 +55,6 @@ export default defineComponent({
 
         // Filters the array of articles only returning those which pass user preferences
         filtered() {
-            console.log(this.wordRegex);
             // Initialise these counters each time this property is computed
             this.filterCount = 0;
             this.blockedCount = 0;

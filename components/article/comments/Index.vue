@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tailwind-spinner class="m-5" theme="pink" v-if="article.loadingComments" />
+        <tailwind-spinner class="m-5" v-if="article.loadingComments" />
 
         <article-comments-list
             :comments="article.comments"

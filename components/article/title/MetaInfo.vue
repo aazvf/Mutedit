@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="[' pl-1 inline-block mb-0 text-xs max-w-fit truncate text-ellipsis overflow-hidden', $theme().text3]"
+        :class="[' pl-1 block pt-1 text-xs w-full leading-4 truncate text-ellipsis overflow-hidden', $theme().text3]"
     >
         <span v-if="article.isLink">Link</span>
         <span v-if="article.isImage">Image</span>
@@ -29,7 +29,10 @@
             rel="noopener noreferer"
             :href="$buildUrl({query: article.data.subreddit})"
         >{{article.data.subreddit_name_prefixed}}</NuxtLink>
-        <span :class="['ml-2', $theme().text8]">({{ article.data.domain }})</span>
+        <tailwind-badge
+            theme="static"
+            :class="['py-0 pt-0.5 px-5 leading-4 float-right block', $theme().text8]"
+        >({{ article.data.domain }})</tailwind-badge>
     </div>
 </template>
 

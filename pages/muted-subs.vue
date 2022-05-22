@@ -4,45 +4,48 @@
 <template>
     <div>
         <NuxtLink
-            class="text-purple-300 px-6 mb-3 block"
+            :class="['px-6 mb-3 block', $theme().text5]"
             :href="$buildUrl()"
         >&lt; back to front page</NuxtLink>
 
         <tailwind-card>
-            <h2 class="text-gray-200 px-5 py-3 pt-3 text-lg">your muted subs</h2>
+            <h2
+                class="px-5 py-3 pt-3 text-lg"
+            >your {{ mutedSubs.length }} muted sub{{ $s(mutedSubs.length) }}</h2>
             <hr />
             <div class="p-5">
                 <tailwind-badge
                     v-for="(sub, index) in mutedSubs"
                     :key="index"
                     v-on:click="onSubClick(sub)"
-                    theme="default"
-                >{{ $ucfirst(sub) }}</tailwind-badge>
+                    theme="focused"
+                >r/{{ $ucfirst(sub) }}</tailwind-badge>
 
                 <tailwind-badge
                     v-for="(sub, index) in removedSubs"
                     :key="index"
-                    theme="dark"
+                    theme="active"
                     v-on:click="onSubClick(sub)"
-                >{{ $ucfirst(sub) }} (undo?)</tailwind-badge>
+                >r/{{ $ucfirst(sub) }} (removed, undo?)</tailwind-badge>
             </div>
             <hr />
 
             <div class="mt-5 p-5">
                 <input
                     type="text"
-                    class="max-w-sm mr-4 p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="max-w-sm mr-4 mb-3 p-2 min-w-full md:min-w-[40%] grow max-w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     v-model="sub"
                     placeholder="new muted sub"
                 />
-                <tailwind-button
-                    :theme="sub.length > 2 ? 'yellow' : 'dark'"
+                <tailwind-badge
+                    class="text-lg py-1.5 px-5"
+                    :theme="sub.length > 2 ? 'active' : 'inactive'"
                     v-on:click="addNewSub"
-                >add sub</tailwind-button>
+                >add sub</tailwind-badge>
             </div>
         </tailwind-card>
         <NuxtLink
-            class="text-purple-300 px-6 mb-3 block"
+            :class="['px-6 mb-3 block', $theme().text5]"
             href="/muted-words"
         >&gt; configure muted words</NuxtLink>
     </div>
@@ -64,10 +67,6 @@ export default {
             sub: "",
             removedSubs: [],
         };
-    },
-
-    mounted() {
-        this.$localstorage.restoreMutedSubs();
     },
 
     computed: {},

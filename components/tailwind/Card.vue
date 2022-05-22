@@ -24,7 +24,7 @@ export default defineComponent({
     },
     computed: {
         classNames() {
-            const baseclasses = [base, this.userTheme.bg2].join(" ");
+            const baseclasses = [base, this.$theme().bg2].join(" ");
             return (
                 baseclasses +
                 (typeof classes[this.theme] === "string"
