@@ -44,7 +44,9 @@ export default defineComponent({
     computed: {
         themeClassList() {
             const { bg1, text1 } = this.theme;
-            return ["w-full min-h-screen ", bg1, text1].join(" ");
+            return ["w-full min-h-screen transition-colors", bg1, text1].join(
+                " "
+            );
         },
     },
     mounted() {

@@ -6,21 +6,21 @@
         :class="{truncate: !expanded}"
     >
         Showing
-        <span :class="`${theme.text4} mr-1`">{{ activeSortType }}</span>
-        <span :class="theme.text4" v-if="activeFeedType !== 'all'">{{ activeFeedType }}s</span>
+        <span :class="`${focusColor} mr-1`">{{ activeSortType }}</span>
+        <span :class="focusColor" v-if="activeFeedType !== 'all'">{{ activeFeedType }}s</span>
         <span v-if="activeFeedType === 'all'">articles</span>
         <span v-if="['top', 'controversial'].includes(activeSortType)">
             over the past
-            <span :class="theme.text4">{{ activeTimeperiod }}</span>
+            <span :class="focusColor">{{ activeTimeperiod }}</span>
         </span>
         <span v-if="activeSubreddits.length > 0">
             from
-            <span :class="theme.text4">{{ subredditList }}</span>
+            <span :class="focusColor">{{ subredditList }}</span>
             {{ activeSubreddits.length > 3 ? `and ${activeSubreddits.length - 3} more` : '' }}
         </span>
         <span v-if="activeSubreddits.length === 0">
             from
-            <span :class="theme.text4">front page</span>
+            <span :class="focusColor">front page</span>
         </span>
     </tailwind-alert>
 </template>
@@ -39,6 +39,9 @@ export default defineComponent({
     },
 
     computed: {
+        focusColor() {
+            return this.theme.text3;
+        },
         subredditList() {
             return this.activeSubreddits.slice(0, 3).join(", ");
         },

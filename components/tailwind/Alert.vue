@@ -9,7 +9,7 @@
 import { defineComponent } from "@vue/composition-api";
 
 const base =
-    "py-2 px-3 mx-3 mt-2 text-sm rounded-lg text-left inline-block text-ellipsis rounded ";
+    "transition-colors tracking-wide py-2 px-3 mx-3 mt-2 text-sm rounded-lg text-left inline-block text-ellipsis rounded ";
 const classes = {
     info: "text-blue-700 bg-blue-100 dark:bg-blue-200 dark:text-blue-800",
     danger: "text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800",
@@ -34,13 +34,13 @@ export default defineComponent({
     computed: {
         classNames() {
             const themed = {
-                active: [this.userTheme.bg(500, true), this.userTheme.text1],
+                active: [this.userTheme.bg(300, true), this.userTheme.text1],
                 inactive: [this.userTheme.bg2, this.userTheme.text2],
                 filled: [this.userTheme.bg3, this.userTheme.text1],
                 bordered: [
                     "border",
                     this.userTheme.border3,
-                    this.userTheme.text2,
+                    this.userTheme.text(900, false),
                 ],
             };
             if (typeof themed[this.theme] === "object") {

@@ -31,28 +31,28 @@ class Theme {
     ];
 
     colorMap = {
-        slate: ["f1f5f9", "0f172a"],
-        gray: ["f3f4f6", "111827"],
-        zinc: ["f4f4f5", "18181b"],
-        neutral: ["f5f5f5", "171717"],
-        stone: ["f5f5f4", "1c1917"],
-        red: ["fee2e2", "7f1d1d"],
-        orange: ["ffedd5", "7c2d12"],
-        amber: ["fef3c7", "78350f"],
-        yellow: ["fef9c3", "713f12"],
-        lime: ["ecfccb", "365314"],
-        green: ["dcfce7", "14532d"],
-        emerald: ["d1fae5", "064e3b"],
-        teal: ["ccfbf1", "134e4a"],
-        cyan: ["cffafe", "164e63"],
-        sky: ["e0f2fe", "0c4a6e"],
-        blue: ["dbeafe", "1e3a8a"],
-        indigo: ["e0e7ff", "312e81"],
-        violet: ["ede9fe", "4c1d95"],
-        purple: ["f3e8ff", "581c87"],
-        fuchsia: ["fae8ff", "701a75"],
-        pink: ["fce7f3", "831843"],
-        rose: ["ffe4e6", "881337"],
+        slate: ["cbd5e1", "0f172a"],
+        gray: ["d1d5db", "111827"],
+        zinc: ["d4d4d8", "18181b"],
+        neutral: ["d4d4d4", "171717"],
+        stone: ["d6d3d1", "1c1917"],
+        red: ["fca5a5", "7f1d1d"],
+        orange: ["fdba74", "7c2d12"],
+        amber: ["fcd34d", "78350f"],
+        yellow: ["fde047", "713f12"],
+        lime: ["bef264", "365314"],
+        green: ["86efac", "14532d"],
+        emerald: ["6ee7b7", "064e3b"],
+        teal: ["5eead4", "134e4a"],
+        cyan: ["67e8f9", "164e63"],
+        sky: ["7dd3fc", "0c4a6e"],
+        blue: ["93c5fd", "1e3a8a"],
+        indigo: ["a5b4fc", "312e81"],
+        violet: ["c4b5fd", "4c1d95"],
+        purple: ["d8b4fe", "581c87"],
+        fuchsia: ["f0abfc", "701a75"],
+        pink: ["f9a8d4", "831843"],
+        rose: ["fda4af", "881337"],
     };
 
     constructor(color, accent) {
@@ -111,11 +111,9 @@ class Theme {
     get text5 () {
         return this.text(500);
     }
-
     get text8 () {
         return this.text(200);
     }
-
     get text9 () {
         return this.text(100);
     }
@@ -157,8 +155,9 @@ class Theme {
     }
 
 
-    text(i) {
-        return `text-${this.accent}-${i} dark:text-${this.accent}-${1000-i}`;
+    text(i, accent = true) {
+        const color = accent ? this.accent : this.color;
+        return `text-${color}-${i} dark:text-${color}-${1000-i}`;
     }
 
     bg(i, accent = false) {

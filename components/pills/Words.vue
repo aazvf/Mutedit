@@ -24,7 +24,7 @@ export default {
             theme: useTheme(),
             ...useFeedFilters(),
             articles: useArticles(),
-            focusWordlimit: 10,
+            focusWordlimit: 30,
             focusWordbite: 20,
         };
     },

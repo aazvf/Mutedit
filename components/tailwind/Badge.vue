@@ -6,7 +6,7 @@
 
 <script>
 const base =
-    "text-xs font-semibold mr-2 px-2.5 py-0.5 rounded cursor-pointer select-none ";
+    "transition-colors text-xs font-semibold mr-2 px-2.5 py-0.5 rounded cursor-pointer select-none ";
 const classes = {
     default: "bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-800",
     dark: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
@@ -33,19 +33,22 @@ export default defineComponent({
         classNames() {
             const themed = {
                 static: [this.userTheme.bg(100, false), this.userTheme.text3],
-                active: [this.userTheme.bg(500, true), this.userTheme.text1],
+                active: [
+                    this.userTheme.bg(800, true),
+                    this.userTheme.text(100, false),
+                ],
                 inactive: [this.userTheme.bg2, this.userTheme.text1],
                 disabled: [this.userTheme.bg2, "text-transparent"],
                 focused: [
-                    this.userTheme.bg(800, true),
-                    this.userTheme.text9,
+                    this.userTheme.bg(300, true),
+                    this.userTheme.text1,
                     // "underline decoration-2",
                 ],
                 bordered: [
                     "border",
                     this.userTheme.border5,
-                    this.userTheme.text8,
-                    this.userTheme.bg(900, true),
+                    this.userTheme.text(900, false),
+                    this.userTheme.bg(400, false),
                     // this.userTheme.bg3,
                 ],
             };

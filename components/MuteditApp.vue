@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="select-none">
             <!-- <header-menu /> -->
             <tailwind-hr />
             <div class="mx-3 my-1">

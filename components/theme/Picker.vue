@@ -1,5 +1,5 @@
 <template>
-    <div class="leading-squared px-3">
+    <div class="leading-squared px-3 select-none">
         <div>
             Theme:
             <div
@@ -21,7 +21,7 @@
             <theme-dark-switch />
         </div>
         <div v-if="expanded">
-            Background:
+            Primary:
             <div
                 v-for="(color, index) in theme.colors"
                 :key="index"

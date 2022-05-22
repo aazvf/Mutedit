@@ -6,7 +6,7 @@
             !showBlocked && !invertFilter"
         >
             Muting
-            <span :class="['mr-1', theme.text5]">
+            <span :class="['mr-1', focusColor]">
                 {{ mutedWords.length }}
                 word{{ $s(mutedWords.length) }}
                 {{ mutedSubs.length > 1 ? 'and ' + mutedSubs.length + ' subreddit' : '' }}{{ $s(mutedSubs.length) }}
@@ -14,15 +14,15 @@
             <span v-if="!showBlocked && blockedCount > 0">
                 as well as
                 <span
-                    :class="[theme.text5]"
+                    :class="[focusColor]"
                 >{{ blockedCount }} article{{ $s(blockedCount) }}</span> you've already seen
             </span>
             from feed, which is about
             <span
-                :class="[ theme.text5]"
+                :class="[focusColor]"
             >{{ percentageArticlesHidden }}%</span>
             of all
-            <span :class="[theme.text5]">{{ articleCount }} articles</span> loaded so far.
+            <span :class="[focusColor]">{{ articleCount }} articles</span> loaded so far.
         </tailwind-alert>
 
         <tailwind-alert
@@ -59,6 +59,9 @@ export default {
         console.log("StatusText mounted.");
     },
     computed: {
+        focusColor() {
+            return this.theme.text3;
+        },
         percentageArticlesHidden() {
             return this.articleCount > 1
                 ? parseInt((this.filterCount / this.articleCount) * 100)
