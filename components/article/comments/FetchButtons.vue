@@ -34,18 +34,6 @@ export default defineComponent({
             this.article.comments = [];
             this.lastSort = "";
         },
-        // Recursively maps the reddit comment object into a flatter object easier to iterate over.
-        mapComment(c) {
-            const meta = ` == - ${c.data.author} (${c.data.score}) ==`;
-            return {
-                text: c.data.body + meta,
-                expanded: false,
-                children:
-                    c.data.replies?.data?.children
-                        ?.filter((c) => typeof c.data.body === "string")
-                        .map(this.mapComment) || [],
-            };
-        },
 
         // Fetch the comments for this article and push them to the article.comments array
         getComments(sort) {
@@ -53,28 +41,7 @@ export default defineComponent({
                 return;
             }
             this.lastSort = sort;
-            this.article.loadingComments = true;
-            const url =
-                "https://www.reddit.com" +
-                this.article.data.permalink +
-                ".json?sort=" +
-                sort;
-            fetch(url)
-                .then((response) => response.json())
-                .then((response) => {
-                    const comments = response[1].data.children
-                        .filter((c) => {
-                            return (
-                                c.data.depth === 0 &&
-                                c.data.distinguished === null &&
-                                typeof c.data.body === "string" &&
-                                c.data.body.length > 1
-                            );
-                        })
-                        .map(this.mapComment);
-                    this.article.comments = comments;
-                    this.article.loadingComments = false;
-                });
+            this.$fetchComments(this.article, sort);
         },
     },
 });

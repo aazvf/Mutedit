@@ -6,13 +6,25 @@
             v-on:click="comment.expanded = true"
             :class="listClassNames(index)"
         >
-            <div :class="commentClassNames(comment)" v-html="commentHtml(comment)" />
+            <tailwind-badge
+                v-if="comment.more"
+                theme="inactive"
+                v-on:click="loadMoreReplies(comment)"
+            >{{ comment.text }}</tailwind-badge>
+            <div
+                :class="commentClassNames(comment)"
+                v-html="commentHtml(comment)"
+                v-if="!comment.more"
+            />
             <tailwind-badge
                 theme="bordered"
                 v-if="comment.children.length > 0 && !comment.expanded && false"
                 class="absolute right-0 bottom-1.5"
             >({{ comment.children.length }} repl{{ comment.children.length > 1 ? 'ies' : 'y' }})</tailwind-badge>
-            <article-comments-list :comments="comment.children" v-if="true"></article-comments-list>
+            <article-comments-list
+                :comments="comment.children"
+                v-if="filteredChildren(comment).length > 0"
+            ></article-comments-list>
         </li>
         <li v-if="hasMoreComments" :class="listClassNames(-1)">
             <tailwind-badge
@@ -45,8 +57,11 @@ export default defineComponent({
                 "w-100 text-sm font-medium border rounded-lg shadow-lg",
             ].join(" ");
         },
+
         filteredComments() {
-            return this.comments.slice(0, this.commmentLimit);
+            return this.comments
+                .filter((c) => !c.more || !c.more.loaded)
+                .slice(0, this.commmentLimit);
         },
         hiddenCommentcount() {
             return Math.max(0, this.comments.length - this.commmentLimit);
@@ -56,6 +71,14 @@ export default defineComponent({
         },
     },
     methods: {
+        filteredChildren(comment) {
+            return comment.children
+                .filter((c) => !c.more || !c.more.loaded)
+                .slice(0, this.commmentLimit);
+        },
+        loadMoreReplies(comment) {
+            this.$fetchCommentReplies(comment, this.comments);
+        },
         commentHtml(comment) {
             return this.$markdown(comment.text);
         },

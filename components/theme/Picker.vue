@@ -61,7 +61,7 @@ export default defineComponent({
             this.spinblur = true;
             setTimeout(() => (this.spinblur = false), 400);
             this.randThemes = [];
-            while (this.randThemes.length < 5) {
+            while (this.randThemes.length < 3) {
                 this.randThemes.push(
                     this.theme.randTheme(this.randThemes.flat())
                 );
