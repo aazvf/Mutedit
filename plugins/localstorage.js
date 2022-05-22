@@ -12,6 +12,7 @@ class storageApi {
     saveUserTheme() {
         const { color, accent, dark } = this.theme.value;
         localforage.setItem("user-theme", JSON.stringify({ color, accent, dark }));
+        this.theme.value.setMetaTheme();
     }
     saveMutedWords() {
         localforage.setItem("muted-words", JSON.stringify(this.filters.mutedWords.value));
@@ -24,7 +25,6 @@ class storageApi {
         localforage.setItem("blocked-ids", []);
     }
     restoreAll() {
-        console.log(this.filters);
         this.restoreMutedWords();
         this.restoreMutedSubs();
         this.restoreBlocked();
@@ -41,6 +41,7 @@ class storageApi {
                         this.theme.value.color = color;
                         this.theme.value.accent = accent;
                         this.theme.value.setDark(dark);
+                        this.theme.value.setMetaTheme();
                     }
                 }
             })
