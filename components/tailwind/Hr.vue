@@ -1,5 +1,5 @@
 <template>
-    <hr :class="[theme.border4]" :attrs="$attrs" />
+    <hr :class="[theme.border2]" :attrs="$attrs" />
 </template>
 
 <script>

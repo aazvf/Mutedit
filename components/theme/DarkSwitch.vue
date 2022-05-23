@@ -1,5 +1,5 @@
 <template>
-    <tailwind-toggle class="align-middle" :value="theme.dark" v-on:toggle="toggleDark"></tailwind-toggle>
+    <tailwind-toggle class="align-middle" :value="theme.dark" v-on:toggle="toggleDark">dark mode</tailwind-toggle>
 </template>
 
 

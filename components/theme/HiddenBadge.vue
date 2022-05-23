@@ -1,5 +1,5 @@
 <template>
-    <tailwind-badge theme="static" class="float-right">hidden</tailwind-badge>
+    <tailwind-badge theme="bordered" class="absolute top-2 right-1">hidden</tailwind-badge>
 </template>
 
 
