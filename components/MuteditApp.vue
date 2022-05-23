@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="select-none">
-            <tailwind-hr />
-            <div :class="uiClasses('sort', 'px-3 my-1')" v-if="uiShow('sort')">
+            <div :class="uiClasses('sort', 'px-3 my-1 pt-4')" v-if="uiShow('sort')">
+                <theme-hidden-badge v-if="!themeShow('sort')" v-on:click="theme.toggleUi('sort')" />
                 <div>
                     <pills-feed-sort />
                 </div>
@@ -10,19 +10,36 @@
                     <pills-feed-time />
                 </div>
             </div>
-            <!-- <tailwind-hr /> -->
             <div :class="uiClasses('type', 'px-3 my-1')" v-if="uiShow('type')">
+                <theme-hidden-badge v-if="!themeShow('type')" v-on:click="theme.toggleUi('type')" />
                 <pills-feed-type />
             </div>
             <div :class="uiClasses('description')" v-if="uiShow('description')">
+                <theme-hidden-badge
+                    v-if="!themeShow('description')"
+                    v-on:click="theme.toggleUi('description')"
+                />
                 <feed-description />
             </div>
-            <pills-subreddits :class="uiClasses('subs')" v-if="uiShow('subs')" />
-            <!-- <tailwind-hr /> -->
-            <pills-words :class="uiClasses('words')" v-if="uiShow('words')" />
-            <feed-status-text :class="uiClasses('status')" v-if="uiShow('status')" />
+            <div :class="uiClasses('subs')" v-if="uiShow('subs')">
+                <theme-hidden-badge v-if="!themeShow('subs')" v-on:click="theme.toggleUi('subs')" />
+                <pills-subreddits />
+            </div>
+            <div :class="uiClasses('words')" v-if="uiShow('words')">
+                <theme-hidden-badge
+                    v-if="!themeShow('words')"
+                    v-on:click="theme.toggleUi('words')"
+                />
+                <pills-words />
+            </div>
+            <div :class="uiClasses('status')" v-if="uiShow('status')">
+                <theme-hidden-badge
+                    v-if="!themeShow('status')"
+                    v-on:click="theme.toggleUi('status')"
+                />
+                <feed-status-text />
+            </div>
         </div>
-        <!-- <tailwind-hr class="mb-4 mt-1" /> -->
         <floating-muter />
         <div :class="feedColumns">
             <feed-filtered-articles />
@@ -43,23 +60,24 @@ export default defineComponent({
     },
     computed: {
         feedColumns() {
-            // return "grid grid-cols-3";
             const c = this.$theme().columns;
             return `grid lg:grid-cols-${+c + 1}`;
-            return `columns-1 lg:columns-${+c + 1}`;
         },
     },
     methods: {
         uiClasses(component, classes = "") {
             return [
                 classes,
-                this.settingsOpen && !this.theme.show.includes(component)
-                    ? "py-5 " + this.theme.bg3
+                this.settingsOpen && !this.themeShow(component)
+                    ? "py-4 " + this.theme.bg(200, true)
                     : "",
             ];
         },
         uiShow(component) {
-            return this.settingsOpen || this.theme.show.includes(component);
+            return this.settingsOpen || this.themeShow(component);
+        },
+        themeShow(component) {
+            return this.theme.show.includes(component);
         },
     },
 });

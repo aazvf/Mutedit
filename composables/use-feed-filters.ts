@@ -14,5 +14,6 @@ export default function () {
         blocked: useState('blocked-ids', () => []), // Array of article ids already seen by the user
         mutedSubs: useState('muted-subs', () => []), // Array of words the user wants to mute
         mutedWords: useState('muted-words', () => []), // Array of subreddits the user wants to mute
+        autoLoadMore: useState('auto-load-more', () => false), // Whether to show articles already seen by the user
     }
 }

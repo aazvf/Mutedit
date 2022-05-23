@@ -125,10 +125,6 @@ auto load more
 option for load amount
 regional front page
 
-hide ui : sorts, types, feed description, muted subs, muted words, filter status
-
-switches for hiding ui
-
 fix auto hide on mobile or new header
 
 new sticky header

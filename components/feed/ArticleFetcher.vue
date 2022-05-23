@@ -1,19 +1,29 @@
 <template>
-    <div class="text-center m-6 p-6">
+    <div class="text-center m-10 p-6" ref="toggle">
         <tailwind-spinner v-if="waitingForArticles" />
-        <tailwind-button
-            theme="focused"
+        <tailwind-toggle
             v-if="!waitingForArticles"
+            theme="focused"
+            :value="autoLoadMore"
+            v-on:toggle="onAutoLoadToggle"
+        >auto load articles</tailwind-toggle>
+        <tailwind-badge
+            theme="focused"
+            v-if="!waitingForArticles && !autoLoadMore"
+            class="px-5 py-3 text-lg block mt-8"
             v-on:click="$fetchArticles()"
-        >Load More</tailwind-button>
+        >fetch more articles</tailwind-badge>
     </div>
 </template>
 
 <script>
 export default {
     data() {
+        const { autoLoadMore } = useFeedFilters();
         return {
+            ...{ autoLoadMore },
             waitingForArticles: useWaitingForArticles(),
+            observer: new IntersectionObserver(this.onObserve),
         };
     },
     mounted() {
@@ -21,8 +31,34 @@ export default {
     },
     methods: {
         fetchArticles() {
-            console.log("fetching articles");
             this.$fetchArticles();
+        },
+        onAutoLoadToggle() {
+            this.autoLoadMore = !this.autoLoadMore;
+            if (this.autoLoadMore) {
+                this.waitForSeenAgain();
+            } else {
+                this.observer.unobserve(this.$refs.toggle);
+            }
+        },
+        waitForSeenAgain() {
+            this.observer.observe(this.$refs.toggle);
+        },
+        onObserve(entries, observer) {
+            // This runs when the element comes into view
+            const entry = entries[0];
+            this.ratio = entry.intersectionRatio;
+            if (entry.intersectionRatio > 0) {
+                observer.disconnect();
+                if (this.autoLoadMore) {
+                    this.fetchArticles();
+                }
+                setTimeout(() => {
+                    if (this.autoLoadMore) {
+                        this.waitForSeenAgain();
+                    }
+                }, 10000);
+            }
         },
     },
 };

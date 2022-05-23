@@ -12,16 +12,17 @@
             />
 
             <tailwind-badge
+                class="ml-2"
                 v-on:click="expanded = !expanded"
                 :theme="expanded ? 'active' : 'bordered'"
             >{{ expanded ? 'less' : 'more' }} settings</tailwind-badge>
         </div>
         <div v-if="expanded">
-            <div class="my-2">
+            <tailwind-card class="my-2 pt-3 pb-3 mb-0">
                 dark Mode:
                 <theme-dark-switch />
-            </div>
-            <div class="leading-squared">
+            </tailwind-card>
+            <tailwind-card class="leading-squared max-w-prose inline-block">
                 primary:
                 <theme-color
                     v-for="(color, index) in theme.colors"
@@ -29,8 +30,8 @@
                     :color="color"
                     v-on:click="onColorClick(color)"
                 />
-            </div>
-            <div class="leading-squared">
+            </tailwind-card>
+            <tailwind-card class="leading-squared max-w-prose inline-block">
                 accent:
                 <theme-color
                     v-for="(color, index) in theme.colors"
@@ -39,61 +40,63 @@
                     :accent="color"
                     v-on:click="onAccentClick(color)"
                 />
-            </div>
-            <div class="my-2">
-                align:
-                <tailwind-badge
-                    v-for="(align, index) in ['left', 'center', 'right']"
-                    :key="index"
-                    v-on:click="theme.align = align ; $localstorage.saveUserTheme()"
-                    :theme="align === theme.align ? 'active' : 'inactive'"
-                >{{ align }}</tailwind-badge>
-            </div>
-
-            <div class="my-2">
-                transform:
-                <tailwind-badge
-                    v-for="(transform, index) in ['uppercase', 'lowercase', 'capitalize']"
-                    :key="index"
-                    :class="transform"
-                    v-on:click="theme.transform = transform ; $localstorage.saveUserTheme()"
-                    :theme="transform === theme.transform ? 'active' : 'inactive'"
-                >{{ transform }}</tailwind-badge>
-            </div>
-
-            <div class="my-2">
-                layout:
-                <tailwind-badge
-                    v-for="(layout, index) in ['contained', 'full width']"
-                    :key="index"
-                    v-on:click="theme.container = layout === 'contained' ; $localstorage.saveUserTheme()"
-                    :theme="theme.container == index ? 'inactive' : 'active'"
-                >{{ layout }}</tailwind-badge>
-            </div>
-
-            <div class="my-2 hidden lg:block">
-                columns:
-                <tailwind-badge
-                    v-for="(columns, index) in ['one', 'two', 'three']"
-                    :key="index"
-                    v-on:click="theme.columns = index ; $localstorage.saveUserTheme()"
-                    :theme="theme.columns === index ? 'active' : 'inactive'"
-                >{{ columns }}</tailwind-badge>
-            </div>
-
-            <div class="my-2 hidden lg:block">
-                show:
-                <tailwind-badge
-                    v-for="(component, index) in ['sort', 'types', 'description', 'subs', 'words', 'status' ]"
-                    :key="index"
-                    v-on:click="theme.toggleUi(component) ; $localstorage.saveUserTheme()"
-                    :theme="theme.showing(component) ? 'active' : 'inactive'"
-                >{{ component }}</tailwind-badge>
-            </div>
-
-            <div class="mx-3 mt-3 mb-1">
+            </tailwind-card>
+            <tailwind-card class="mx-3 mt-0 mb-1 pt-3">
                 <feed-toggle-options />
-            </div>
+            </tailwind-card>
+            <tailwind-card>
+                <div class="my-2">
+                    align:
+                    <tailwind-badge
+                        v-for="(align, index) in ['left', 'center', 'right']"
+                        :key="index"
+                        v-on:click="theme.align = align ; $localstorage.saveUserTheme()"
+                        :theme="align === theme.align ? 'active' : 'inactive'"
+                    >{{ align }}</tailwind-badge>
+                </div>
+
+                <div class="my-2">
+                    transform:
+                    <tailwind-badge
+                        v-for="(transform, index) in ['uppercase', 'lowercase', 'capitalize']"
+                        :key="index"
+                        :class="transform"
+                        v-on:click="theme.transform = transform ; $localstorage.saveUserTheme()"
+                        :theme="transform === theme.transform ? 'active' : 'inactive'"
+                    >{{ transform }}</tailwind-badge>
+                </div>
+
+                <div class="my-2">
+                    layout:
+                    <tailwind-badge
+                        v-for="(layout, index) in ['contained', 'full width']"
+                        :key="index"
+                        v-on:click="theme.container = layout === 'contained' ; $localstorage.saveUserTheme()"
+                        :theme="theme.container == index ? 'inactive' : 'active'"
+                    >{{ layout }}</tailwind-badge>
+                </div>
+
+                <div class="my-2 hidden lg:block">
+                    columns:
+                    <tailwind-badge
+                        v-for="(columns, index) in ['one', 'two', 'three']"
+                        :key="index"
+                        v-on:click="theme.columns = index ; $localstorage.saveUserTheme()"
+                        :theme="theme.columns === index ? 'active' : 'inactive'"
+                    >{{ columns }}</tailwind-badge>
+                </div>
+            </tailwind-card>
+            <tailwind-card>
+                <div class="my-2 hidden lg:block">
+                    show/hide ui:
+                    <tailwind-badge
+                        v-for="(component, index) in ['sort', 'type', 'description', 'subs', 'words', 'status' ]"
+                        :key="index"
+                        v-on:click="theme.toggleUi(component) ; $localstorage.saveUserTheme()"
+                        :theme="theme.showing(component) ? 'active' : 'inactive'"
+                    >{{ component }}</tailwind-badge>
+                </div>
+            </tailwind-card>
         </div>
     </div>
 </template>

@@ -9,12 +9,13 @@ const videoSizes = [360, 480, 720, 240, 1080];
 //  such as extracting the youtube id from the url.
 // Each of these Articles end up in the array at /composables/use-articles
 class Article {
+    comments = []; // Gets populated by /components/article/comments/FetchButtons
+    loadingComments = false;
+    galleryIndex = 0; // Tracks which gallery image currently being shown
+
     constructor(data) {
         this.data = data;
         this.words = this.toWordsArr; // store this array to reduce memory during loops
-        this.loadingComments = false;
-        this.comments = []; // Gets populated by /components/article/comments/FetchButtons
-        this.galleryIndex = 0; // Tracks which gallery image currently being shown
         this.hasPreview =
             typeof this.data.preview === "object" &&
             typeof this.data.preview.images === "object" &&
@@ -143,7 +144,7 @@ const fetchArticles = (reset = false) => {
         sort +
         ".json" +
         "?limit=100" +
-        (after.length > 1 ? "&after=" + after : "") +
+        (after.value.length > 1 ? "&after=" + after.value : "") +
         "&t=" +
         timeperiod;
 

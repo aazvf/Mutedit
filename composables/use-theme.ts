@@ -14,7 +14,7 @@ class Theme {
     showDescription = true;
     showMutedSubs = true;
 
-    show = "sort,types,description,subs,words,status";
+    show = "sort,type,description,subs,words,status";
 
 
     showing(component) {
