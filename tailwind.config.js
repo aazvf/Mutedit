@@ -6,8 +6,9 @@ module.exports = {
     },
     plugins: [],
     safelist: [
+        "grid",
         {
-            pattern: /columns-(1|2|3)/,
+            pattern: /grid-cols-(1|2|3)/,
             variants: ["lg"],
         },
         {

@@ -112,3 +112,53 @@ I tried storing an object as a composable, but it would not destructure and keep
 
 -   plugins
     I figured this is where I should put helper bits of code that many components might want to use. Globally accessible methods that don't make sense being a component.
+
+### Todo & future ideas
+
+toggles & switches
+option compact mode
+option hide tags
+nsfw : allow, blur, hide
+mute domains
+mute users
+auto load more
+option for load amount
+regional front page
+
+hide ui : sorts, types, feed description, muted subs, muted words, filter status
+
+switches for hiding ui
+
+fix auto hide on mobile or new header
+
+new sticky header
+
+show sub meta info
+
+multireddit system & import from api & predefined
+search subreddits and normal search
+sticky muter - make stuck on mobile
+
+favicon
+secrets
+
+padding on right align
+
+dont transform title
+
+subreddit muter options floating
+
+auto change background & fade slowly
+
+cleanup on load more
+
+match url to reddit and show single article
+
+fake votes
+live comments
+
+watch mode - invert filter and load more on interval
+
+hire me / donate button
+
+allow auth with reddit ?

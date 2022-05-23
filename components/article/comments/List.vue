@@ -84,7 +84,7 @@ export default defineComponent({
         },
         commentClassNames(comment) {
             return {
-                "break-words text-clip whitespace-pre-wrap text-ellipsis py-1 px-1": true,
+                "break-words text-clip whitespace-pre-wrap text-ellipsis py-1 px-1 normal-case": true,
             };
         },
         showMoreComments() {

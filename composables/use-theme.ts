@@ -7,7 +7,52 @@ class Theme {
     align = 'left';
     container = true;
     columns = 0;
-    textTransform = 'lowercase';
+    transform = 'lowercase';
+
+    showSort = true;
+    showTypes = true;
+    showDescription = true;
+    showMutedSubs = true;
+
+    show = "sort,types,description,subs,words,status";
+
+
+    showing(component) {
+        return this.show.includes(component);
+    }
+
+    toggleUi(component) {
+        this.show = this.showing(component) ? 
+        this.show.split(',').filter(c => c !== component).join(',') :
+        this.show + ',' + component;
+    }
+
+    persistent = [
+        'color', 'accent', 'dark', 'align',
+        'container', 'columns', 'transform', 'show'
+    ]
+
+    get export () {
+        this.setMetaTheme();
+        return this.persistent.map(t => [t, this[t]]);
+    }
+
+    import (theme: Array<[string, string|number|boolean]>) {
+        try {
+            theme.forEach(t => {
+                if (typeof this[t[0]] !== undefined) {
+                    if (t[0] === 'dark') {
+                        this.setDark(t[1]);
+                    } else {
+                        this[t[0]] = t[1];
+                    }
+                }
+            });
+            this.setMetaTheme();
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     colors = [
         'slate', 
@@ -59,9 +104,9 @@ class Theme {
         rose: ["fda4af", "881337"],
     };
 
-    constructor(color, accent) {
-        this.color = color;
-        this.accent = accent;
+    constructor() {
+        this.color = this.randColor();
+        this.accent = this.randColor();
     }
 
     randColor (except = []) {
@@ -179,6 +224,12 @@ class Theme {
 
 }
 
+// Whether the settings are open or not
+export const useSettingsOpen = () => {
+    return useState('settings-open', () => false);
+}
+
+// Return an instance of the Theme class (above) accessible anywhere with useTheme()
 export default () => {
-    return useState('user-theme', () => new Theme('pink', 'pink'))
+    return useState('user-theme', () => new Theme())
 }

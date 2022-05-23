@@ -49,13 +49,13 @@ export default defineComponent({
             ];
         },
         themeClassList() {
-            const { bg1, text1, align, textTransform } = this.theme;
+            const { bg1, text1, align, transform } = this.theme;
             return [
                 "w-full min-h-screen subpixel-antialiased",
                 bg1,
                 text1,
                 `text-${align}`,
-                textTransform,
+                transform,
             ].join(" ");
         },
     },

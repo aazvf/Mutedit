@@ -1,9 +1,8 @@
 <template>
     <div class="text-center m-6 p-6">
-        <tailwind-spinner theme="purple" v-if="waitingForArticles" />
+        <tailwind-spinner v-if="waitingForArticles" />
         <tailwind-button
-            theme="purple"
-            class="font-bold"
+            theme="focused"
             v-if="!waitingForArticles"
             v-on:click="$fetchArticles()"
         >Load More</tailwind-button>

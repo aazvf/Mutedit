@@ -1,5 +1,8 @@
 <template>
-    <h5 class="mb-3 mt-0 pl-1 text-xl font-bold tracking-tight" v-bind="$attrs">{{ title }}</h5>
+    <h5
+        class="py-2 pb-4 px-1 text-xl font-bold tracking-tight normal-case"
+        v-bind="$attrs"
+    >{{ title }}</h5>
 </template>
 
 

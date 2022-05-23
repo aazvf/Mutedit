@@ -21,6 +21,25 @@
                 dark Mode:
                 <theme-dark-switch />
             </div>
+            <div class="leading-squared">
+                primary:
+                <theme-color
+                    v-for="(color, index) in theme.colors"
+                    :key="index"
+                    :color="color"
+                    v-on:click="onColorClick(color)"
+                />
+            </div>
+            <div class="leading-squared">
+                accent:
+                <theme-color
+                    v-for="(color, index) in theme.colors"
+                    :key="index"
+                    :color="theme.color"
+                    :accent="color"
+                    v-on:click="onAccentClick(color)"
+                />
+            </div>
             <div class="my-2">
                 align:
                 <tailwind-badge
@@ -36,8 +55,9 @@
                 <tailwind-badge
                     v-for="(transform, index) in ['uppercase', 'lowercase', 'capitalize']"
                     :key="index"
-                    v-on:click="theme.textTransform = transform ; $localstorage.saveUserTheme()"
-                    :theme="transform === theme.textTransform ? 'active' : 'inactive'"
+                    :class="transform"
+                    v-on:click="theme.transform = transform ; $localstorage.saveUserTheme()"
+                    :theme="transform === theme.transform ? 'active' : 'inactive'"
                 >{{ transform }}</tailwind-badge>
             </div>
 
@@ -61,24 +81,18 @@
                 >{{ columns }}</tailwind-badge>
             </div>
 
-            <div class="leading-squared">
-                primary:
-                <theme-color
-                    v-for="(color, index) in theme.colors"
+            <div class="my-2 hidden lg:block">
+                show:
+                <tailwind-badge
+                    v-for="(component, index) in ['sort', 'types', 'description', 'subs', 'words', 'status' ]"
                     :key="index"
-                    :color="color"
-                    v-on:click="onColorClick(color)"
-                />
+                    v-on:click="theme.toggleUi(component) ; $localstorage.saveUserTheme()"
+                    :theme="theme.showing(component) ? 'active' : 'inactive'"
+                >{{ component }}</tailwind-badge>
             </div>
-            <div class="leading-squared">
-                accent:
-                <theme-color
-                    v-for="(color, index) in theme.colors"
-                    :key="index"
-                    :color="theme.color"
-                    :accent="color"
-                    v-on:click="onAccentClick(color)"
-                />
+
+            <div class="mx-3 mt-3 mb-1">
+                <feed-toggle-options />
             </div>
         </div>
     </div>
@@ -89,10 +103,11 @@ export default defineComponent({
     data() {
         return {
             theme: useTheme(),
+
             showThemes: false,
             randThemes: [],
             spinblur: false,
-            expanded: false,
+            expanded: useSettingsOpen(),
         };
     },
     mounted() {

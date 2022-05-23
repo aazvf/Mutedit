@@ -13,7 +13,7 @@
     top: 0;
     left: 0;
     display: block;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
     pointer-events: none;
 }
 
@@ -22,7 +22,7 @@
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 0;
     right: 0;
     margin-left: auto;

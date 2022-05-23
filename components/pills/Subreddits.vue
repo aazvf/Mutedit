@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-3 my-1 leading-7 pb-1">
+    <div class="p-3 leading-7">
         <span :class="['px-1 mr-1', theme.text3]">mute subreddits:</span>
         <span :class="['px-1', theme.text2]" v-if="count === 0">loading...</span>
         <tailwind-badge
