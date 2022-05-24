@@ -1,5 +1,5 @@
 <template>
-    <div :class="classNames" role="alert" v-bind="$attrs">
+    <div v-bind="$attrs" :class="classNames" role="alert">
         <span class="font-medium" v-if="title.length > 0">{{ title }}</span>
         <slot />
     </div>

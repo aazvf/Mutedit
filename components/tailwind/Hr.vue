@@ -1,5 +1,5 @@
 <template>
-    <hr :class="[theme.border2]" :attrs="$attrs" />
+    <hr :class="[theme.border2]" />
 </template>
 
 <script>
@@ -12,3 +12,4 @@ export default defineComponent({
     },
 });
 </script>
+1

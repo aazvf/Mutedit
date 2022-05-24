@@ -138,6 +138,11 @@ const fetchArticles = (reset = false) => {
     const timeperiod = useFeedTimeperiodParam().value;
     const q = query === "/" ? query : "/r/" + query + "/";
 
+    if (reset) {
+        articles.value = [];
+        after.value = "";
+    }
+
     const url =
         "https://www.reddit.com" +
         q +
@@ -148,9 +153,6 @@ const fetchArticles = (reset = false) => {
         "&t=" +
         timeperiod;
 
-    if (reset) {
-        articles.value = [];
-    }
     waitingForArticles.value = true;
     fetch(url)
         .then((response) => response.json())

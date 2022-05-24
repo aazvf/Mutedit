@@ -1,6 +1,14 @@
 <template>
-    <tailwind-badge theme="bordered" class="absolute top-2 right-1">hidden</tailwind-badge>
+    <tailwind-badge
+        :theme="hidden ? 'focused' : 'bordered'"
+        class="rounded-full absolute top-2 -right-5"
+    >{{ hidden ? 'hidden' : 'hide?'}}</tailwind-badge>
 </template>
 
 
 
+<script>
+export default {
+    props: { hidden: { type: Boolean, required: true } },
+};
+</script>

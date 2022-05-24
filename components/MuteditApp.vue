@@ -1,49 +1,68 @@
 <template>
     <div>
         <div class="select-none">
-            <tailwind-card :class="uiClasses('description', 'pb-3')" v-if="uiShow('description')">
-                <theme-hidden-badge
-                    v-if="!themeShow('description')"
-                    v-on:click="theme.toggleUi('description')"
-                />
-                <feed-description class />
-            </tailwind-card>
-            <tailwind-card :class="uiClasses('sort', 'px-3 my-1 pb-2')" v-if="uiShow('sort')">
-                <theme-hidden-badge v-if="!themeShow('sort')" v-on:click="theme.toggleUi('sort')" />
-                <div>
-                    <pills-feed-sort />
+            <tailwind-card class v-if="uiShow(['sort', 'type', 'description'])">
+                <div class="px-2 py-2 relative">
+                    <div :class="uiClasses('sort', 'relative')" v-if="uiShow('sort')">
+                        <theme-hidden-badge
+                            v-if="settingsOpen"
+                            :hidden="!themeShow('sort')"
+                            v-on:click="toggleUi('sort')"
+                        />
+                        <pills-feed-sort />
+                        <div class="mt-2" v-if="['top', 'controversial'].includes(sort)">
+                            <pills-feed-time />
+                        </div>
+                    </div>
+
+                    <div :class="uiClasses('type', 'relative mt-2')" v-if="uiShow('type')">
+                        <pills-feed-type />
+                        <theme-hidden-badge
+                            v-if="settingsOpen"
+                            :hidden="!themeShow('type')"
+                            v-on:click="toggleUi('type')"
+                        />
+                    </div>
+                    <div :class="uiClasses('description', 'relative')" v-if="uiShow('description')">
+                        <feed-description class="text-lg" />
+                        <theme-hidden-badge
+                            v-if="settingsOpen"
+                            :hidden="!themeShow('description')"
+                            v-on:click="toggleUi('description')"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1" v-if="['top', 'controversial'].includes(sort)">
-                    <pills-feed-time />
-                </div>
-            </tailwind-card>
-            <tailwind-card :class="uiClasses('type', 'px-3 my-1 pb-2')" v-if="uiShow('type')">
-                <theme-hidden-badge v-if="!themeShow('type')" v-on:click="theme.toggleUi('type')" />
-                <pills-feed-type />
             </tailwind-card>
 
-            <tailwind-card :class="uiClasses('status', 'pb-3')" v-if="uiShow('status')">
-                <theme-hidden-badge
-                    v-if="!themeShow('status')"
-                    v-on:click="theme.toggleUi('status')"
-                />
-                <feed-status-text />
-            </tailwind-card>
-            <tailwind-card :class="uiClasses('subs')" v-if="uiShow('subs')">
-                <theme-hidden-badge v-if="!themeShow('subs')" v-on:click="theme.toggleUi('subs')" />
-                <pills-subreddits />
-            </tailwind-card>
-            <tailwind-card :class="uiClasses('words')" v-if="uiShow('words')">
-                <theme-hidden-badge
-                    v-if="!themeShow('words')"
-                    v-on:click="theme.toggleUi('words')"
-                />
-                <pills-words />
+            <tailwind-card v-if="uiShow(['subs', 'words', 'status'])">
+                <div :class="uiClasses('subs', 'relative')" v-if="uiShow('subs')">
+                    <theme-hidden-badge
+                        v-if="settingsOpen"
+                        :hidden="!themeShow('subs')"
+                        v-on:click="toggleUi('subs')"
+                    />
+                    <pills-subreddits />
+                </div>
+                <div :class="uiClasses('words', 'relative')" v-if="uiShow('words')">
+                    <theme-hidden-badge
+                        v-if="settingsOpen"
+                        :hidden="!themeShow('words')"
+                        v-on:click="toggleUi('words')"
+                    />
+                    <pills-words />
+                </div>
+                <div :class="uiClasses('status', 'pb-3 relative')" v-if="uiShow('status')">
+                    <theme-hidden-badge
+                        v-if="settingsOpen"
+                        :hidden="!themeShow('status')"
+                        v-on:click="toggleUi('status')"
+                    />
+                    <feed-status-text />
+                </div>
             </tailwind-card>
         </div>
         <floating-muter />
         <tailwind-hr />
-        <div class="text-center">---</div>
         <div :class="feedColumns">
             <feed-filtered-articles />
         </div>
@@ -68,6 +87,10 @@ export default defineComponent({
         },
     },
     methods: {
+        toggleUi(component) {
+            this.theme.toggleUi(component);
+            this.$localstorage.saveUserTheme();
+        },
         uiClasses(component, classes = "") {
             return classes;
             // return [classes, this.settingsOpen ? "py-4" : ""];
@@ -82,7 +105,10 @@ export default defineComponent({
             return this.settingsOpen || this.themeShow(component);
         },
         themeShow(component) {
-            return this.theme.show.includes(component);
+            return typeof component === "object"
+                ? component.some((c) => this.theme.show.includes(c))
+                : this.theme.show.includes(component);
+            // return this.theme.show.includes(component);
         },
     },
 });

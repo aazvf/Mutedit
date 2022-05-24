@@ -1,12 +1,14 @@
 <template>
     <tailwind-alert
-        theme="bordered"
-        class="ml-3"
+        theme="inactive"
+        class="ml-0 px-1 mt-0"
         v-on:click="expanded = !expanded"
         :class="{truncate: !expanded}"
     >
-        Showing
-        <span :class="`${focusColor} mr-1`">{{ activeSortType }}</span>
+        {{ articles.length > 1 ? 'showing' : 'loading' }}
+        <span
+            :class="`${focusColor} mr-1`"
+        >{{ activeSortType }}</span>
         <span :class="focusColor" v-if="activeFeedType !== 'all'">{{ activeFeedType }}s</span>
         <span v-if="activeFeedType === 'all'">articles</span>
         <span v-if="['top', 'controversial'].includes(activeSortType)">
@@ -29,6 +31,7 @@
 export default defineComponent({
     data() {
         return {
+            articles: useArticles(),
             expanded: false,
             activeQuery: useFeedQueryParam(),
             activeSortType: useFeedSortParam(),

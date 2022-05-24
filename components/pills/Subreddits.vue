@@ -23,7 +23,7 @@ export default {
         return {
             theme: useTheme(),
             ...useFeedFilters(),
-            limit: 30,
+            limit: 10,
             take: 20,
             articles: useArticles(),
         };

@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="article.data.selftext_html"
-        :class="{'overflow-hidden break-words dark:text-gray-300 mb-4 px-1 normal-case': true, 'max-h-44': showPreview}"
+        :class="classList"
         v-html="$htmlDecode(article.data.selftext_html)"
         v-on:click="showPreview = false"
     />
@@ -19,6 +19,15 @@ export default defineComponent({
         };
     },
     computed: {
+        classList() {
+            return [
+                "overflow-hidden break-words mb-4 px-1",
+                "normal-case border-t pt-4 dark:text-gray-300 selftext",
+                this.showPreview ? "max-h-44" : "",
+                this.$theme().border5,
+                this.$theme().text2,
+            ];
+        },
         postHtml() {
             // return this.$markdown(this.article.data.selftext);
             const txt = document.createElement("textarea");
@@ -28,3 +37,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style>
+.selftext p {
+    margin-bottom: 0.5em;
+}
+</style>

@@ -68,8 +68,7 @@
                 </div>
 
                 <div class="my-2">
-                    layout:
-                    <span :class="['px-1 mr-1', theme.text3]">layout</span>
+                    <span :class="['px-1 mr-1', theme.text3]">layout:</span>
                     <tailwind-badge
                         v-for="(layout, index) in ['contained', 'full width']"
                         :key="index"
@@ -87,8 +86,6 @@
                         :theme="theme.columns === index ? 'active' : 'inactive'"
                     >{{ columns }}</tailwind-badge>
                 </div>
-            </tailwind-card>
-            <tailwind-card>
                 <div class="my-2">
                     <span :class="['px-1 mr-1', theme.text3]">show/hide ui:</span>
                     <tailwind-badge
