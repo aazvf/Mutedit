@@ -10,7 +10,7 @@
         <tailwind-badge
             theme="focused"
             v-if="!waitingForArticles && !autoLoadMore"
-            class="px-5 py-3 text-lg block mt-8"
+            class="px-5 py-6 text-xl shadow-lg block mt-8"
             v-on:click="$fetchArticles()"
         >fetch more articles</tailwind-badge>
     </div>
