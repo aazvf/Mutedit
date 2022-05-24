@@ -9,6 +9,8 @@ class Theme {
     columns = 0;
     transform = 'lowercase';
 
+    hideAfterSeen = true;
+
     showSort = true;
     showTypes = true;
     showDescription = true;

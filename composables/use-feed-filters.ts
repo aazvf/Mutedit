@@ -9,11 +9,10 @@ export default function () {
         filterCount: useState('filter-count', () => 0), // How many articles were hidden by the filters
         blockedCount: useState('blocked-count', () => 0), // How many articles has the user seen already
         articleCount: useState('article-count', () => 0), // How many articles have been loaded so far.
-        hideAfterSeen: useState('hide-after-seen', () => false), // Whether to show articles already seen by the user
         showBlocked: useState('show-blocked', () => false), // Whether to show articles already seen by the user
         blocked: useState('blocked-ids', () => []), // Array of article ids already seen by the user
         mutedSubs: useState('muted-subs', () => []), // Array of words the user wants to mute
         mutedWords: useState('muted-words', () => []), // Array of subreddits the user wants to mute
-        autoLoadMore: useState('auto-load-more', () => false), // Whether to show articles already seen by the user
+        autoLoadMore: useState('auto-load-more', () => false), // Whether to auto load articles at end of feed
     }
 }

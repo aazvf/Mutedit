@@ -1,7 +1,7 @@
 <template>
     <div>
         <tailwind-toggle
-            :value="hideAfterSeen"
+            :value="theme.hideAfterSeen"
             v-on:toggle="onHideSeenToggle"
         >auto hide articles you scroll past</tailwind-toggle>
 
@@ -21,12 +21,13 @@
 <script>
 export default defineComponent({
     data() {
-        return { ...useFeedFilters() };
+        return { ...useFeedFilters(), theme: useTheme() };
     },
 
     methods: {
         onHideSeenToggle() {
-            this.hideAfterSeen = !this.hideAfterSeen;
+            this.theme.hideAfterSeen = !this.hideAfterSeen;
+            this.$localstorage.saveUserTheme();
             this.$fetchArticles(true);
         },
     },

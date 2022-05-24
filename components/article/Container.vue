@@ -30,9 +30,10 @@ export default {
         article: { type: Object, default: {} },
     },
     data() {
-        const { blocked, hideAfterSeen } = useFeedFilters();
+        const { blocked } = useFeedFilters();
         return {
-            ...{ blocked, hideAfterSeen },
+            ...{ blocked },
+            theme: useTheme(),
             scrolledPast: false,
             ratio: 0,
             observer: new IntersectionObserver(this.onObserve),
@@ -40,7 +41,7 @@ export default {
     },
 
     mounted() {
-        if (this.hideAfterSeen) {
+        if (this.theme.hideAfterSeen) {
             this.waitForArticle();
         }
     },
@@ -48,14 +49,6 @@ export default {
 
     methods: {
         offset() {
-            console.log(
-                this.$refs,
-                "reffsss",
-                this.$refs["content"]?.offsetTop,
-                this.$refs.content?.getBoundingClientRect(),
-                window.scrollY
-            );
-
             const offset =
                 this.$refs.content?.getBoundingClientRect().top +
                 window.scrollY;
@@ -82,7 +75,7 @@ export default {
         onScroll() {
             // Triggers on scroll after article enters viewport
 
-            if (this.$refs.content === null || !this.hideAfterSeen) {
+            if (this.$refs.content === null || !this.theme.hideAfterSeen) {
                 return this.stopWatchingScroll();
             }
 
@@ -119,7 +112,6 @@ export default {
             // check again if scrolled past the bottom of article
             if (top + height * 2 < 0) {
                 this.scrolledPast = true;
-                console.log("HIDDDINGGG");
                 // if (!this.blocked.includes(this.article.data.id)) {
                 //     this.blocked.push(this.article.data.id);
                 // }
