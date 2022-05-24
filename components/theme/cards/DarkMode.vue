@@ -1,5 +1,7 @@
 <template>
-    <tailwind-toggle class="align-middle" :value="theme.dark" v-on:toggle="toggleDark">dark mode</tailwind-toggle>
+    <tailwind-card class="my-2 pt-3 pb-3 mb-0">
+        <tailwind-toggle class="align-middle" :value="theme.dark" v-on:toggle="toggleDark">dark mode</tailwind-toggle>
+    </tailwind-card>
 </template>
 
 

@@ -18,7 +18,7 @@ class Theme {
 
 
     showing(component) {
-        return this.show.includes(component);
+        return component.split(',').some(c => this.show.includes(c));
     }
 
     toggleUi(component) {
