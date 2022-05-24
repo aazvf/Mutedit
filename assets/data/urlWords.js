@@ -606,13 +606,13 @@ mockingbird
 monoclonius
 mountaincat
 nightingale
-pikeperchÂ 
+pikeperch 
 pipistrelle
 planthopper
 polyturator
 rainbowfish
 rattlesnake
-sablefishÂ 
+sablefish 
 scarletibis
 schapendoes
 snowleopard
@@ -774,7 +774,7 @@ massasauga
 meadowhawk
 meadowlark
 megaraptor
-monkfishÂ 
+monkfish 
 mouse/mice
 needlefish
 needletail
@@ -1393,7 +1393,7 @@ mosasaur
 mosquito
 mudpuppy
 murrelet
-myotisÂ 
+myotis 
 nabarlek
 nagapies
 narwhale
@@ -1449,7 +1449,7 @@ thrasher
 tilefish
 titmouse
 toadfish
-tomtitÂ 
+tomtit 
 tortoise
 tragopan
 umbrette
@@ -2187,7 +2187,7 @@ langur
 limpet
 lizard
 locust
-lynxÂ 
+lynx 
 maggot
 magpie
 mammal
@@ -2215,7 +2215,7 @@ olingo
 oriole
 osprey
 oyster
-pacaÂ 
+paca 
 parrot
 phoebe
 pigeon
