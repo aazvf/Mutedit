@@ -60,7 +60,6 @@ export default defineComponent({
         },
     },
     mounted() {
-        console.log("MOUNTTINNNNGGG");
         this.$localstorage.restoreAll();
     },
 });

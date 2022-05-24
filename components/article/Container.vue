@@ -2,11 +2,8 @@
     <tailwind-card class="break-inside-avoid">
         <div ref="content" v-if="!scrolledPast">
             <article-title-meta-info :article="article" />
-
             <article-title :article="article" />
-
             <article-media :article="article" />
-
             <div class="px-1 pb-2 leading-7">
                 <article-comments-fetch-buttons :article="article" />
 
@@ -16,9 +13,10 @@
         </div>
         <div v-if="scrolledPast">
             <tailwind-badge theme="focused" v-on:click="scrolledPast = false">auto hidden (show)</tailwind-badge>
-            <span
-                class="text-xs"
-            >[{{ article.data.subreddit.toLowerCase() }}] {{ article.data.title.substr(0,30) }}{{ article.data.title.length > 30 ? '...' : '' }}</span>
+            <span class="text-xs">
+                <span :class="$theme().text3">[{{ article.data.subreddit.toLowerCase() }}]</span>
+                {{ article.data.title.substr(0,30) }}{{ article.data.title.length > 30 ? '...' : '' }}
+            </span>
         </div>
     </tailwind-card>
 </template>
@@ -46,8 +44,25 @@ export default {
             this.waitForArticle();
         }
     },
+    computed: {},
 
     methods: {
+        offset() {
+            console.log(
+                this.$refs,
+                "reffsss",
+                this.$refs["content"]?.offsetTop,
+                this.$refs.content?.getBoundingClientRect(),
+                window.scrollY
+            );
+
+            const offset =
+                this.$refs.content?.getBoundingClientRect().top +
+                window.scrollY;
+            console.log("offset", offset);
+            this.$forceUpdate();
+            return offset;
+        },
         // These next couple methods will use IntersectionObserver to wait
         //  for the article to enter the viewport. then it starts watching
         //  scroll events once the article is visible. it will mark the
@@ -71,16 +86,16 @@ export default {
                 return this.stopWatchingScroll();
             }
 
-            const { scrollY, innerHeight } = window;
-            const { offsetTop, offsetHeight } = this.$refs.content;
+            const { top, height } = this.$refs.content.getBoundingClientRect();
+            const { innerHeight } = window;
 
             // If scrolled enough past the bottom of article
-            if (scrollY > offsetTop + offsetHeight + innerHeight) {
+            if (top + height * 2 < 0) {
                 this.stopWatchingScroll();
                 setTimeout(this.blockArticleDelayed, 5000);
             }
             // If scrolled back up and article is out of view again
-            if (offsetTop > scrollY + innerHeight) {
+            if (top > innerHeight) {
                 this.stopWatchingScroll();
                 this.waitForArticle();
             }
@@ -99,11 +114,10 @@ export default {
                 return;
             }
 
-            const { scrollY } = window;
-            const { offsetTop, offsetHeight } = this.$refs.content;
+            const { top, height } = this.$refs.content.getBoundingClientRect();
 
             // check again if scrolled past the bottom of article
-            if (scrollY > offsetTop + offsetHeight) {
+            if (top + height * 2 < 0) {
                 this.scrolledPast = true;
                 console.log("HIDDDINGGG");
                 // if (!this.blocked.includes(this.article.data.id)) {
