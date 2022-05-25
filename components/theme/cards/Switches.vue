@@ -24,10 +24,9 @@ export default defineComponent({
     data() {
         return { ...useFeedFilters(), theme: useTheme() };
     },
-
     methods: {
         onHideSeenToggle() {
-            this.theme.hideAfterSeen = !this.hideAfterSeen;
+            this.theme.hideAfterSeen = !this.theme.hideAfterSeen;
             this.$localstorage.saveUserTheme();
             this.$fetchArticles(true);
         },
