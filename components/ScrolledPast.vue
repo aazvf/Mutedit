@@ -1,51 +1,35 @@
 <template>
-    <tailwind-card class="break-inside-avoid">
-        <div ref="content" v-if="!scrolledPast">
-            <article-title-meta-info :article="article" />
-            <article-title :article="article" />
-            <article-media :article="article" />
-            <div class="px-1 pb-2 leading-7">
-                <article-comments-fetch-buttons :article="article" />
-
-                <article-meta-badges :article="article" />
-            </div>
-            <article-comments :article="article" class="mb-1" />
+    <div>
+        <div ref="content">
+            <slot name="content" ref="content" v-if="!scrolledPast" />
         </div>
-        <div v-if="scrolledPast">
-            <tailwind-badge theme="focused" v-on:click="scrolledPast = false">auto hidden (show)</tailwind-badge>
-            <span class="text-xs">
-                <span :class="$theme().text3">[{{ article.data.subreddit.toLowerCase() }}]</span>
-                {{ article.data.title.substr(0,30) }}{{ article.data.title.length > 30 ? '...' : '' }}
-            </span>
-        </div>
-    </tailwind-card>
+        <slot name="replace" v-if="scrolledPast" />
+    </div>
 </template>
 
 
-
 <script>
+// Shows the content slot, and if the user scrolls far enough past, then
+//     the contents are replaced with the 'replace' slot
 export default {
-    name: "Article Container",
-    props: {
-        article: { type: Object, default: {} },
-    },
+    name: "Scrolled past watcher",
+
     data() {
         const { blocked } = useFeedFilters();
         return {
             ...{ blocked },
             theme: useTheme(),
             scrolledPast: false,
-            ratio: 0,
-            observer: new IntersectionObserver(this.onObserve),
+            observer: null,
         };
     },
 
     mounted() {
         if (this.theme.hideAfterSeen) {
+            this.observer = new IntersectionObserver(this.onObserve);
             this.waitForArticle();
         }
     },
-    computed: {},
 
     methods: {
         // These next couple methods will use IntersectionObserver to wait
@@ -88,11 +72,10 @@ export default {
         onObserve(entries, observer) {
             // This runs when the element comes into view
             const entry = entries[0];
-            this.ratio = entry.intersectionRatio;
             if (entry.intersectionRatio > 0) {
                 observer.disconnect();
                 this.watchScroll();
-                this.article.seen = true;
+                this.$emit("seen");
             }
         },
         blockArticleDelayed() {
@@ -105,9 +88,6 @@ export default {
             // check again if scrolled past the bottom of article
             if (top + height * 2 < 0) {
                 this.scrolledPast = true;
-                // if (!this.blocked.includes(this.article.data.id)) {
-                //     this.blocked.push(this.article.data.id);
-                // }
             } else {
                 this.waitForArticle();
             }

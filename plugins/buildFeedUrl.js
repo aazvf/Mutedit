@@ -18,9 +18,8 @@ const buildUrl = ({ query, sort, timeperiod, type } = {}) => {
     u += "/" + sort;
 
     // the timeperiod url param is optional, only if we're soring by top/controversial
-    if (["top", "controversial"].includes(sort)) {
-        u += "/" + timeperiod;
-    }
+
+    u += ["top", "controversial"].includes(sort) ? "/" + timeperiod : "";
 
     // The type param is also optional and doesnt matter if the timeperiod param
     //  was set or not, see /middleware/front-redirect for how this works.
