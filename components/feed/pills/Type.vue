@@ -13,15 +13,13 @@
 import articleTypes from "~/assets/data/articleTypes";
 
 export default {
+    name: "Article type nav buttons",
     data() {
         return {
             activeFeedType: useFeedTypeParam(),
             ...{ articleTypes },
             waiting: useWaitingForArticles(),
         };
-    },
-    mounted() {
-        console.log("PillsArticleTypes mounted.");
     },
     methods: {
         setType(type) {

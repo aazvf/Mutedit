@@ -4,6 +4,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article image",
     props: {
         src: { type: String, required: true },
     },

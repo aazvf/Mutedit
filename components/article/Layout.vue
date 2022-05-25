@@ -1,5 +1,5 @@
 <template>
-    <tailwind-card class="break-inside-avoid">
+    <tailwind-card>
         <div ref="content" v-if="!scrolledPast">
             <article-title-meta-info :article="article" />
             <article-title :article="article" />
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: "Article Container",
+    name: "Article layout",
     props: {
         article: { type: Object, default: {} },
     },
@@ -48,14 +48,6 @@ export default {
     computed: {},
 
     methods: {
-        offset() {
-            const offset =
-                this.$refs.content?.getBoundingClientRect().top +
-                window.scrollY;
-            console.log("offset", offset);
-            this.$forceUpdate();
-            return offset;
-        },
         // These next couple methods will use IntersectionObserver to wait
         //  for the article to enter the viewport. then it starts watching
         //  scroll events once the article is visible. it will mark the
@@ -100,6 +92,7 @@ export default {
             if (entry.intersectionRatio > 0) {
                 observer.disconnect();
                 this.watchScroll();
+                this.article.seen = true;
             }
         },
         blockArticleDelayed() {

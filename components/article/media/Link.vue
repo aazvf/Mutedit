@@ -10,6 +10,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article link",
     props: {
         article: { type: Object, required: true },
     },

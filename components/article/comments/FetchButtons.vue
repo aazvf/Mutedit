@@ -20,7 +20,7 @@
 
 <script>
 export default defineComponent({
-    name: "Comment Fetcher Buttons",
+    name: "Comment fetcher buttons",
     props: {
         article: { type: Object, required: true },
     },

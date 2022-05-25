@@ -8,16 +8,8 @@ class Theme {
     container = true;
     columns = 0;
     transform = 'lowercase';
-
     hideAfterSeen = true;
-
-    showSort = true;
-    showTypes = true;
-    showDescription = true;
-    showMutedSubs = true;
-
     show = "sort,type,description,subs,words,status";
-
 
     showing(component) {
         return component.split(',').some(c => this.show.includes(c));

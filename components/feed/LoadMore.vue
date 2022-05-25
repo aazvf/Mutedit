@@ -18,6 +18,7 @@
 
 <script>
 export default {
+    name: "Load more articles button",
     data() {
         const { autoLoadMore } = useFeedFilters();
         return {

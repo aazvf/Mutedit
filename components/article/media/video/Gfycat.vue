@@ -14,6 +14,7 @@
 import { defineComponent } from "@vue/composition-api";
 
 export default defineComponent({
+    name: "Gfycat embedded iframe",
     props: { src: { type: String, required: true } },
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <tailwind-card class="leading-squared break-inside-avoid">
+    <tailwind-card class="color-squares break-inside-avoid">
         <span :class="['px-1 mr-1 mt-0', theme.text3]">accent:</span>
         <theme-color
             v-for="(color, index) in theme.colors"
@@ -14,6 +14,7 @@
 
 <script>
 export default defineComponent({
+    name: "Theme accent colors",
     data() {
         return {
             theme: useTheme(),

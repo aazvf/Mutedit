@@ -7,6 +7,7 @@
 
 <script>
 export default defineComponent({
+    name: "Dark mode switch",
     data() {
         return {
             theme: useTheme(),

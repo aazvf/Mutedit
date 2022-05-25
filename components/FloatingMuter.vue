@@ -21,7 +21,7 @@
 import { isCommonWord } from "~/assets/data/ignoredWordlist";
 
 export default defineComponent({
-    name: "Floating Word Muter Helper",
+    name: "Floating word muter helper",
     data() {
         return {
             ...useFeedFilters(),

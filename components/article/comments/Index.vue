@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: "Article Comments",
+    name: "Article comments",
     props: { article: { type: Object, required: true } },
     data() {
         return {

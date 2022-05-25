@@ -11,6 +11,7 @@
 
 <script>
 export default defineComponent({
+    name: "Streamable embedded iframe",
     props: {
         src: { type: String, required: true },
     },

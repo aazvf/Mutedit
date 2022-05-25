@@ -1,16 +1,16 @@
 <template>
-    <article-container
+    <article-layout
         v-for="(article) in filtered"
         :key="article.id"
         :article="article"
         ref="article"
-    ></article-container>
+    ></article-layout>
 </template>
 
 
 <script>
 export default defineComponent({
-    setup() {},
+    name: "Filtered list of articles",
     data() {
         return {
             ...useFeedFilters(),

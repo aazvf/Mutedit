@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .preview-overlay {
     border-radius: 20px;
     position: absolute;

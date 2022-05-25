@@ -19,6 +19,7 @@
 
 <script>
 export default {
+    name: "Mute-able word list",
     data() {
         return {
             theme: useTheme(),
@@ -27,9 +28,6 @@ export default {
             focusWordlimit: 10,
             focusWordbite: 20,
         };
-    },
-    mounted() {
-        console.log("PillsWords mounted.");
     },
     computed: {
         wordcount() {
@@ -72,24 +70,13 @@ export default {
         },
 
         onClickWordmap(word) {
-            console.log(this.wordmap[word]);
-            const isMuted = this.isWordMuted(word);
-            const isFeatured = this.focusWord === word;
-
-            if (!isMuted && !isFeatured) {
-                this.mutedWords.push(word);
-                this.$localstorage.saveMutedWords();
-            }
-
-            if (isMuted && !isFeatured) {
-                this.focusWord = word;
-            }
-
-            if (isFeatured) {
-                this.focusWord = "";
+            if (this.isWordMuted(word)) {
                 this.mutedWords = this.mutedWords.filter((r) => r != word);
-                this.$localstorage.saveMutedWords();
+            } else {
+                this.mutedWords.push(word);
             }
+
+            this.$localstorage.saveMutedWords();
         },
     },
 };

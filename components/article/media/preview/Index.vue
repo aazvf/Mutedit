@@ -1,8 +1,13 @@
 <template>
     <div class="p-4 relative z-0 align-center mb-5">
-        <article-media-preview-underlay :src="article.previewSource" />
-
-        <img :src="article.previewSource" alt="preview" referrerpolicy="no-referrer" />
+        <article-media-preview-underlay v-if="article.seen" :src="article.previewSource" />
+        <tailwind-spinner v-if="!article.seen"></tailwind-spinner>
+        <img
+            v-if="article.seen"
+            :src="article.previewSource"
+            alt="preview"
+            referrerpolicy="no-referrer"
+        />
 
         <article-media-preview-play-icon v-if="article.isPlayable" />
     </div>
@@ -11,6 +16,7 @@
 
 <script>
 export default defineComponent({
+    name: "Lazy load preview",
     props: {
         article: { type: Object, required: true },
     },

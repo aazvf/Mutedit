@@ -46,7 +46,7 @@
 
 <script>
 export default defineComponent({
-    name: "Media Display Container",
+    name: "Article media presenter",
     props: {
         article: { type: Object, required: true },
     },

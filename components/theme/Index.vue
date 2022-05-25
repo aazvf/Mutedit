@@ -2,8 +2,7 @@
     <div class="select-none">
         <theme-cards-open-settings />
         <div v-if="settingsOpen">
-            <theme-cards-dark-mode />
-
+            <theme-cards-dark-mode v-if="settingsOpen" />
             <div class="md:columns-2 mt-4 gap-0">
                 <theme-cards-primary />
 
@@ -18,18 +17,12 @@
 
 <script>
 export default defineComponent({
+    name: "Theme settings menu",
     data() {
         return {
             theme: useTheme(),
-
             settingsOpen: useSettingsOpen(),
         };
     },
 });
 </script>
-
-<style scoped>
-.leading-squared {
-    line-height: 4.3rem;
-}
-</style>

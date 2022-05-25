@@ -11,6 +11,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article image gallery",
     props: {
         article: { type: Object, required: true },
     },

@@ -10,6 +10,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article selftext",
     props: {
         article: { type: Object, required: true },
     },

@@ -1,7 +1,7 @@
 <template>
-    <tailwind-alert
+    <tailwind-badge
         theme="inactive"
-        class="ml-0 px-1 mt-0"
+        class="ml-0 pl-1 pr-1 mt-1"
         v-on:click="expanded = !expanded"
         :class="{truncate: !expanded}"
     >
@@ -24,11 +24,12 @@
             from
             <span :class="focusColor">front page</span>
         </span>
-    </tailwind-alert>
+    </tailwind-badge>
 </template>
 
 <script>
 export default defineComponent({
+    name: "Feed sort dynamic description",
     data() {
         return {
             articles: useArticles(),

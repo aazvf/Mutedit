@@ -9,6 +9,7 @@
 
 <script>
 export default {
+    name: "Hide button",
     props: { hidden: { type: Boolean, required: true } },
 };
 </script>

@@ -40,6 +40,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article meta info title",
     props: {
         article: { type: Object, required: true },
     },

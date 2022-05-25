@@ -4,6 +4,7 @@
 
 <script>
 export default defineComponent({
+    name: "Hr",
     props: { attrs: { type: Object, required: false } },
     data() {
         return {
@@ -12,4 +13,3 @@ export default defineComponent({
     },
 });
 </script>
-1

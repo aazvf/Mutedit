@@ -22,7 +22,7 @@
 
 <script>
 export default defineComponent({
-    name: "Gfycat video embed",
+    name: "Gifv to mp4 video embed",
     props: {
         article: { type: Object, required: true },
     },

@@ -9,6 +9,7 @@
 
 <script>
 export default defineComponent({
+    name: "Article title",
     props: {
         article: { type: Object, required: true },
         attrs: { type: Object, required: false, default: {} },

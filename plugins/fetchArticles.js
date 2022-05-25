@@ -12,6 +12,7 @@ class Article {
     comments = []; // Gets populated by /components/article/comments/FetchButtons
     loadingComments = false;
     galleryIndex = 0; // Tracks which gallery image currently being shown
+    seen = false; // Whether the article has scrolled into view yet or not.
 
     constructor(data) {
         this.data = data;
@@ -161,19 +162,13 @@ const fetchArticles = (reset = false) => {
                 articles.value = [];
             }
 
-            console.info("Got response from api", { response });
-
             after.value = response.data.after;
 
             const children = response.data.children
                 .filter((a) => articles.value.find((article) => article.data.id === a.data.id) === undefined)
-                // .filter((a) => !a.data.stickied && !a.data.pinned) // ignore stickied and pinned articles
                 .map((a) => {
                     return new Article(a.data);
                 });
-            console.log(children);
-
-            console.log(articles);
             articles.value.push(...children);
             waitingForArticles.value = false;
         });

@@ -13,6 +13,7 @@
 <script>
 import sortTypes from "~/assets/data/sortTypes";
 export default defineComponent({
+    name: "Sort feed nav buttons",
     data() {
         return {
             ...{ sortTypes },

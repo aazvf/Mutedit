@@ -1,5 +1,5 @@
 <template>
-    <tailwind-card class="leading-squared mt-0">
+    <tailwind-card class="color-squares mt-0">
         <span :class="['px-1 mr-1', theme.text3]">primary:</span>
         <theme-color
             v-for="(color, index) in theme.colors"
@@ -13,6 +13,7 @@
 
 <script>
 export default defineComponent({
+    name: "Theme primary color",
     data() {
         return {
             theme: useTheme(),

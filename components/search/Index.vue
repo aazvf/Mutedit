@@ -6,6 +6,7 @@
 //            ?query=news&include_over_18=true&include_unadvertisable=true
 
 export default defineComponent({
+    name: "Search interface",
     setup() {},
 });
 </script>

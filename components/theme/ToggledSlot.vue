@@ -9,6 +9,7 @@
 
 <script>
 export default defineComponent({
+    name: "User toggled component",
     props: {
         uid: { type: String, required: true },
         button: { type: Boolean, default: true, required: false },

@@ -39,7 +39,7 @@
 
 <script>
 export default defineComponent({
-    name: "Comment List",
+    name: "Comment list",
     props: {
         comments: { type: Array, default: [] },
     },

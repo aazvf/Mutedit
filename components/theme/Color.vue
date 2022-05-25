@@ -4,6 +4,7 @@
 
 <script>
 export default defineComponent({
+    name: "Color square",
     props: {
         color: { type: String, required: true },
         accent: { type: String, default: "", required: false },
@@ -18,3 +19,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+.leading-squared {
+    line-height: 4.3rem;
+}
+</style>

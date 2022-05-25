@@ -1,7 +1,7 @@
 <template>
     <tailwind-card>
         <div class="my-2">
-            <span :class="['px-1 mr-1', theme.text3]">align:</span>
+            <span :class="['px-1 mr-1 inline-block sm:w-32', theme.text3]">align:</span>
             <tailwind-badge
                 v-for="(align, index) in ['left', 'center', 'right']"
                 :key="index"
@@ -11,7 +11,7 @@
         </div>
 
         <div class="my-2">
-            <span :class="['px-1 mr-1', theme.text3]">transform:</span>
+            <span :class="['px-1 mr-1 inline-block sm:w-32', theme.text3]">transform:</span>
             <tailwind-badge
                 v-for="(transform, index) in ['uppercase', 'lowercase', 'capitalize']"
                 :key="index"
@@ -22,7 +22,7 @@
         </div>
 
         <div class="my-2">
-            <span :class="['px-1 mr-1', theme.text3]">layout:</span>
+            <span :class="['px-1 mr-1 inline-block sm:w-32', theme.text3]">layout:</span>
             <tailwind-badge
                 v-for="(layout, index) in ['contained', 'full width']"
                 :key="index"
@@ -32,7 +32,7 @@
         </div>
 
         <div class="my-2 hidden lg:block">
-            <span :class="['px-1 mr-1', theme.text3]">columns:</span>
+            <span :class="['px-1 mr-1 inline-block sm:w-32', theme.text3]">columns:</span>
             <tailwind-badge
                 v-for="(columns, index) in ['one', 'two', 'three']"
                 :key="index"
@@ -41,7 +41,7 @@
             >{{ columns }}</tailwind-badge>
         </div>
         <div class="my-2">
-            <span :class="['px-1 mr-1', theme.text3]">show/hide ui:</span>
+            <span :class="['px-1 mr-1 inline-block sm:w-32', theme.text3]">show/hide ui:</span>
             <tailwind-badge
                 v-for="(component, index) in ['sort', 'type', 'description', 'subs', 'words', 'status']"
                 :key="index"
@@ -56,6 +56,7 @@
 
 <script>
 export default defineComponent({
+    name: "Theme style options",
     data() {
         return {
             theme: useTheme(),

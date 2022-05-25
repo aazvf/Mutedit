@@ -9,6 +9,7 @@
 
 <script>
 export default defineComponent({
+    name: "Blurred image underlay",
     props: {
         src: { type: String, required: true },
     },

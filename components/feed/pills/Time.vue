@@ -12,6 +12,7 @@
 <script>
 import timePeriods from "~/assets/data/timePeriods";
 export default {
+    name: "Time period nav buttons",
     data() {
         const activeTimeperiod = useFeedTimeperiodParam();
         return {

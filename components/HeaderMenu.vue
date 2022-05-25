@@ -70,7 +70,7 @@
 
 <script>
 export default defineComponent({
-    name: "Header Menu",
+    name: "Header menu",
     methods: {
         menuClass(path) {
             return this.$route.fullPath === path

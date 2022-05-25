@@ -19,6 +19,7 @@
 
 <script>
 export default {
+    name: "Mute-able subs list ",
     data() {
         return {
             theme: useTheme(),
@@ -66,27 +67,14 @@ export default {
         },
 
         onClickSubreddit(subreddit) {
-            const isMuted = this.isSubredditMuted(subreddit);
-            const isFeatured = this.focusSubreddit === subreddit;
-
-            if (!isMuted && !isFeatured) {
-                this.mutedSubs.push(subreddit);
-                this.$localstorage.saveMutedSubs();
-            }
-
-            if (isMuted && !isFeatured) {
-                this.focusSubreddit = subreddit;
-            }
-
-            if (isFeatured) {
-                this.focusSubreddit = "";
+            if (this.isSubredditMuted(subreddit)) {
                 this.mutedSubs = this.mutedSubs.filter((r) => r != subreddit);
-                this.$localstorage.saveMutedSubs();
+            } else {
+                this.mutedSubs.push(subreddit);
             }
+
+            this.$localstorage.saveMutedSubs();
         },
-    },
-    mounted() {
-        console.log("PillsSubreddit Component mounted.");
     },
 };
 </script>

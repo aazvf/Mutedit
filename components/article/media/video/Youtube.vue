@@ -12,6 +12,7 @@
 
 <script>
 export default defineComponent({
+    name: "Youtube embedded iframe",
     props: {
         src: { type: String, required: true },
     },

@@ -1,14 +1,13 @@
 <template>
-    <div>
+    <div class="px-3">
         <div v-if="articles.length === 0">
-            <tailwind-alert theme="bordered" :class="focusColor">waiting for articles...</tailwind-alert>
+            <tailwind-badge theme="focused" :class="focusColor">waiting for articles...</tailwind-badge>
         </div>
-
         <div v-if="articles.length > 0">
-            <tailwind-alert
-                theme="bordered"
+            <tailwind-badge
+                theme="focused"
                 v-if="focusWord === '' && focusSubreddit === '' && 
-            !showBlocked && !invertFilter"
+                        !showBlocked && !invertFilter"
             >
                 Muting
                 <span :class="['mr-1', focusColor]">
@@ -28,41 +27,39 @@
                 >{{ percentageArticlesHidden }}%</span>
                 of all
                 <span :class="[focusColor]">{{ articleCount }} articles</span> loaded so far.
-            </tailwind-alert>
+            </tailwind-badge>
 
-            <tailwind-alert
+            <tailwind-badge
                 theme="active"
                 v-if="invertFilter"
-            >Showing only the {{ filterCount }} article{{ $s(filterCount) }} that were caught and muted by your filters</tailwind-alert>
+            >Showing only the {{ filterCount }} article{{ $s(filterCount) }} that were caught and muted by your filters</tailwind-badge>
 
-            <tailwind-alert
+            <tailwind-badge
                 theme="active"
                 v-if="showBlocked"
-            >Showing only the {{ blockedCount }} article{{ $s(blockedCount) }} you've already seen</tailwind-alert>
+            >Showing only the {{ blockedCount }} article{{ $s(blockedCount) }} you've already seen</tailwind-badge>
 
-            <tailwind-alert theme="active" v-if="focusWord != ''">
+            <tailwind-badge theme="active" v-if="focusWord != ''">
                 Showing only articles containing the word "{{ $ucfirst(focusWord)}}"
                 <tailwind-badge theme="active" v-on:click="focusWord = ''">(undo?)</tailwind-badge>
-            </tailwind-alert>
-            <tailwind-alert
+            </tailwind-badge>
+            <tailwind-badge
                 theme="active"
                 v-if="focusSubreddit != ''"
-            >Showing only articles from /r/{{ $ucfirst(focusSubreddit)}}</tailwind-alert>
+            >Showing only articles from /r/{{ $ucfirst(focusSubreddit)}}</tailwind-badge>
         </div>
     </div>
 </template>
 
 <script>
 export default {
+    name: "Filter status text",
     data() {
         return {
             theme: useTheme(),
             ...useFeedFilters(),
             articles: useArticles(),
         };
-    },
-    mounted() {
-        console.log("StatusText mounted.");
     },
     computed: {
         focusColor() {
