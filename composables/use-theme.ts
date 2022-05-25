@@ -113,8 +113,8 @@ class Theme {
     }
 
     toggleDark() {
-        document.documentElement.classList.toggle("dark");
         this.dark = !this.dark;
+        this.setDark(this.dark);
     }
 
     setDark(dark) {

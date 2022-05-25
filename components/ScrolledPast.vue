@@ -3,7 +3,12 @@
         <div ref="content">
             <slot name="content" ref="content" v-if="!scrolledPast" />
         </div>
-        <slot name="replace" v-if="scrolledPast" />
+        <div v-if="scrolledPast">
+            <tailwind-badge theme="focused" v-on:click="scrolledPast = false">auto hidden (show)</tailwind-badge>
+            <span class="text-xs">
+                <slot name="message" />
+            </span>
+        </div>
     </div>
 </template>
 
@@ -13,25 +18,27 @@
 //     the contents are replaced with the 'replace' slot
 export default {
     name: "Scrolled past watcher",
+    props: { enabled: { type: Boolean, default: true, required: false } },
 
     data() {
         const { blocked } = useFeedFilters();
         return {
             ...{ blocked },
-            theme: useTheme(),
             scrolledPast: false,
             observer: null,
         };
     },
 
     mounted() {
-        if (this.theme.hideAfterSeen) {
-            this.observer = new IntersectionObserver(this.onObserve);
-            this.waitForArticle();
-        }
+        this.enable();
     },
 
     methods: {
+        // Start observing
+        enable() {
+            this.observer = new IntersectionObserver(this.onObserve);
+            this.waitForArticle();
+        },
         // These next couple methods will use IntersectionObserver to wait
         //  for the article to enter the viewport. then it starts watching
         //  scroll events once the article is visible. it will mark the
@@ -51,7 +58,7 @@ export default {
         onScroll() {
             // Triggers on scroll after article enters viewport
 
-            if (this.$refs.content === null || !this.theme.hideAfterSeen) {
+            if (this.$refs.content === null || !this.enabled) {
                 return this.stopWatchingScroll();
             }
 

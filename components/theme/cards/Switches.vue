@@ -28,7 +28,6 @@ export default defineComponent({
         onHideSeenToggle() {
             this.theme.hideAfterSeen = !this.theme.hideAfterSeen;
             this.$localstorage.saveUserTheme();
-            this.$fetchArticles(true);
         },
     },
 });

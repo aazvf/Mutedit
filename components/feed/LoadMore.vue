@@ -24,10 +24,11 @@ export default {
         return {
             ...{ autoLoadMore },
             waitingForArticles: useWaitingForArticles(),
-            observer: new IntersectionObserver(this.onObserve),
+            observer: null,
         };
     },
     mounted() {
+        this.observer = new IntersectionObserver(this.onObserve);
         this.$fetchArticles(true);
     },
     methods: {
