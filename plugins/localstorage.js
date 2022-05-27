@@ -10,7 +10,7 @@ class storageApi {
     }
 
     saveUserTheme() {
-        localforage.setItem("user-theme", JSON.stringify(this.theme.value.export));
+        localforage.setItem("user-theme", JSON.stringify(this.theme.value));
     }
     saveMutedWords() {
         localforage.setItem("muted-words", JSON.stringify(this.filters.mutedWords.value));
@@ -35,7 +35,7 @@ class storageApi {
                 if (value) {
                     value = JSON.parse(value);
                     if (typeof value === "object") {
-                        this.theme.value.import(value);
+                        this.theme.value = value;
                     }
                 }
             })

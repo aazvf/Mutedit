@@ -50,12 +50,11 @@ export default defineComponent({
         return {
             settingsOpen: useSettingsOpen(),
             sort: useFeedSortParam(),
-            theme: useTheme(),
         };
     },
     computed: {
         feedColumns() {
-            const c = this.$theme().columns;
+            const c = this.$theme.columns;
             return c > 1 ? `grid grid-cols-1 lg:grid-cols-${+c + 1}` : "";
         },
     },

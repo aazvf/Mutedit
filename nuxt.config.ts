@@ -2,7 +2,8 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-    ssr: false,
+    ssr: true,
+    telemetry: false,
     css: [
         '~/assets/sass/app.scss'
     ],
@@ -15,7 +16,9 @@ export default defineNuxtConfig({
         injectPosition: 0,
         viewer: true,
     },
-    // nitro: {
-    //     preset: 'aws-lambda'
-    //   }
+    cdnURL: "https://mutedit.icey.one/",
+    nitro: {
+        preset: 'aws-lambda',
+        serveStatic: false,
+      }
 })

@@ -20,7 +20,6 @@ export default defineComponent({
     name: "Theme settings menu",
     data() {
         return {
-            theme: useTheme(),
             settingsOpen: useSettingsOpen(),
         };
     },

@@ -1,7 +1,7 @@
 <template>
     <div class="p-3 leading-7">
-        <span :class="['px-1 mr-1', theme.text3]">mute words:</span>
-        <span :class="['px-1', theme.text2]" v-if="wordcount === 0">loading...</span>
+        <span class="px-1 mr-1" :class="$theme.text3">mute words:</span>
+        <span class="px-1" :class="$theme.text2" v-if="wordcount === 0">loading...</span>
 
         <tailwind-badge
             v-for="(word, index) in wordmapsorted"
@@ -22,7 +22,6 @@ export default {
     name: "Mute-able word list",
     data() {
         return {
-            theme: useTheme(),
             ...useFeedFilters(),
             articles: useArticles(),
             focusWordlimit: 10,

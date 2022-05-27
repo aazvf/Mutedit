@@ -1,6 +1,6 @@
 <template>
     <tailwind-card>
-        <span :class="['px-1 mr-1', theme.text3]">theme:</span>
+        <span :class="['px-1 mr-1', $theme.text3]">theme:</span>
         <theme-color :color="theme.color" :accent="theme.accent" :border="theme.accent" />
         <theme-color
             v-for="([color, accent], index) in randThemes"
@@ -49,7 +49,7 @@ export default defineComponent({
             this.randThemes = [];
             while (this.randThemes.length < 3) {
                 this.randThemes.push(
-                    this.theme.randTheme(this.randThemes.flat())
+                    this.$theme.randTheme(this.randThemes.flat())
                 );
             }
         },

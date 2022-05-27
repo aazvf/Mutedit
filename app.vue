@@ -37,20 +37,15 @@ useHead({
 
 <script>
 export default defineComponent({
-    data() {
-        return {
-            theme: useTheme(),
-        };
-    },
     computed: {
         containerClassList() {
             return [
                 "p-1 md:p-5",
-                this.theme.container ? "container mx-auto" : "",
+                this.$theme.container ? "container mx-auto" : "",
             ];
         },
         themeClassList() {
-            const { bg1, text1, align, transform } = this.theme;
+            const { bg1, text1, align, transform } = this.$theme;
             return [
                 "w-full min-h-screen subpixel-antialiased",
                 bg1,

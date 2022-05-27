@@ -17,14 +17,9 @@ export default defineComponent({
         theme: { type: String, required: false, default: "default" },
         attrs: { type: Object, required: false, default: {} },
     },
-    data() {
-        return {
-            userTheme: useTheme(),
-        };
-    },
     computed: {
         classNames() {
-            const baseclasses = [base, this.$theme().bg2].join(" ");
+            const baseclasses = [base, this.$theme.bg2].join(" ");
             return (
                 baseclasses +
                 (typeof classes[this.theme] === "string"

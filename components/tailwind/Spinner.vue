@@ -22,17 +22,12 @@
 <script>
 export default defineComponent({
     name: "Spinner",
-    data() {
-        return {
-            theme: useTheme(),
-        };
-    },
     computed: {
         classList() {
             return [
                 "mx-auto w-8 h-8 text-gray-200 animate-spin",
-                this.theme.text3,
-                this.theme.fill(700),
+                this.$theme.text3,
+                this.$theme.fill(700),
             ].join(" ");
         },
     },

@@ -4,7 +4,7 @@
 <template>
     <div>
         <NuxtLink
-            :class="['px-6 mb-3 block', $theme().text5]"
+            :class="['px-6 mb-3 block', $theme.text5]"
             :href="$buildUrl()"
         >&lt; back to front page</NuxtLink>
 
@@ -45,7 +45,7 @@
             </div>
         </tailwind-card>
         <NuxtLink
-            :class="['px-6 mb-3 block', $theme().text5]"
+            :class="['px-6 mb-3 block', $theme.text5]"
             href="/muted-words"
         >&gt; configure muted words</NuxtLink>
     </div>

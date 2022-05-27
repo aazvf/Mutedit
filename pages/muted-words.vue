@@ -4,7 +4,7 @@
 <template>
     <div>
         <NuxtLink
-            :class="['px-6 mb-3 block', $theme().text5]"
+            :class="['px-6 mb-3 block', $theme.text5]"
             :href="$buildUrl()"
         >&lt; back to front page</NuxtLink>
         <tailwind-card>
@@ -44,7 +44,7 @@
             </div>
         </tailwind-card>
         <NuxtLink
-            :class="['px-6 mb-3 block', $theme().text5]"
+            :class="['px-6 mb-3 block', $theme.text5]"
             href="/muted-subs"
         >&gt; configure muted subs</NuxtLink>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <tailwind-card>
-        <scrolled-past :enabled="theme.hideAfterSeen" v-on:seen="article.seen = true">
+        <scrolled-past :enabled="$theme.hideAfterSeen" v-on:seen="article.seen = true">
             <template #content>
                 <article-title-meta-info :article="article" />
                 <article-title :article="article" />
@@ -13,7 +13,7 @@
                 <article-comments :article="article" class="mb-1" />
             </template>
             <template #message>
-                <span :class="theme.text3">[{{ article.data.subreddit.toLowerCase() }}]</span>
+                <span :class="$theme.text3">[{{ article.data.subreddit.toLowerCase() }}]</span>
                 {{ article.data.title.substr(0,30) }}{{ article.data.title.length > 30 ? '...' : '' }}
             </template>
         </scrolled-past>
@@ -27,11 +27,6 @@ export default {
     name: "Article layout",
     props: {
         article: { type: Object, default: {} },
-    },
-    data() {
-        return {
-            theme: useTheme(),
-        };
     },
 };
 </script>

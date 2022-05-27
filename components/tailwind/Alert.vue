@@ -26,21 +26,16 @@ export default defineComponent({
         theme: { type: String, required: true },
         title: { type: String, required: false, default: "" },
     },
-    data() {
-        return {
-            userTheme: useTheme(),
-        };
-    },
     computed: {
         classNames() {
             const themed = {
-                active: [this.userTheme.bg(300, true), this.userTheme.text1],
-                inactive: [this.userTheme.bg2, this.userTheme.text2],
-                filled: [this.userTheme.bg3, this.userTheme.text1],
+                active: [this.$theme.bg(300, true), this.$theme.text1],
+                inactive: [this.$theme.bg2, this.$theme.text2],
+                filled: [this.$theme.bg3, this.$theme.text1],
                 bordered: [
                     "border",
-                    this.userTheme.border3,
-                    this.userTheme.text(900, false),
+                    this.$theme.border3,
+                    this.$theme.text(900, false),
                 ],
             };
             if (typeof themed[this.theme] === "object") {

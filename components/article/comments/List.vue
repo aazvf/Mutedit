@@ -46,14 +46,13 @@ export default defineComponent({
     data() {
         return {
             commmentLimit: 7,
-            theme: useTheme(),
         };
     },
     mounted() {},
     computed: {
         classList() {
             return [
-                this.theme.border5,
+                this.$theme.border5,
                 "w-100 text-sm font-medium border rounded-lg shadow-lg",
             ].join(" ");
         },
@@ -99,7 +98,7 @@ export default defineComponent({
                     index === this.filteredComments.length - 1 &&
                     !this.hasMoreComments,
             };
-            classes[this.theme.border5] = true;
+            classes[this.$theme.border5] = true;
             return classes;
         },
     },

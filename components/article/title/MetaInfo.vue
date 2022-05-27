@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="[' pl-1 block pt-1 text-xs w-full leading-4 truncate text-ellipsis overflow-hidden', $theme().text2]"
+        :class="[' pl-1 block pt-1 text-xs w-full leading-4 truncate text-ellipsis overflow-hidden', $theme.text2]"
     >
         <span v-if="article.isLink">Link</span>
         <span v-if="article.isImage">Image</span>
@@ -12,19 +12,19 @@
             target="blank"
             :href="'https://old.reddit.com' + article.data.permalink"
             rel="nofollow noopener"
-            :class="['font-italic ml-1', $theme().text4]"
+            :class="['font-italic ml-1', $theme.text4]"
             v-if="!article.data.pinned"
         >posted</a>
         <a
             target="blank"
             :href="'https://old.reddit.com' + article.data.permalink"
             rel="nofollow noopener"
-            :class="['font-italic ml-1', $theme().text4]"
+            :class="['font-italic ml-1', $theme.text4]"
             v-if="article.data.pinned"
         >pinned</a>
         {{ $timeSince(article.data.created) }} ago to
         <NuxtLink
-            :class="$theme().text4"
+            :class="$theme.text4"
             target="blank"
             rel="noopener noreferer"
             :href="$buildUrl({query: article.data.subreddit})"

@@ -18,19 +18,14 @@ const base =
 export default defineComponent({
     name: "Toggle",
     props: { value: { type: Boolean, required: true } },
-    data() {
-        return {
-            theme: useTheme(),
-        };
-    },
     computed: {
         classNames() {
             return [
                 base,
                 "peer-focus:ring-slate-700 dark:peer-focus:ring-slate-200 after:bg-slate-700 dark:after:bg-slate-400",
                 this.value ? "opacity-100" : "opacity-40",
-                this.theme.bg(500, true),
-                this.theme.border5,
+                this.$theme.bg(500, true),
+                this.$theme.border5,
             ].join(" ");
         },
     },

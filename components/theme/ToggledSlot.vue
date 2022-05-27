@@ -22,12 +22,12 @@ export default defineComponent({
     },
     computed: {
         show() {
-            return this.theme.showing(this.uid);
+            return this.$theme.showing(this.uid);
         },
     },
     methods: {
         toggle() {
-            this.theme.toggleUi(this.uid);
+            this.$theme.toggleUi(this.uid);
             this.$localstorage.saveUserTheme();
         },
     },

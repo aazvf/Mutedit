@@ -56,14 +56,13 @@ export default {
     name: "Filter status text",
     data() {
         return {
-            theme: useTheme(),
             ...useFeedFilters(),
             articles: useArticles(),
         };
     },
     computed: {
         focusColor() {
-            return this.theme.text3;
+            return this.$theme.text3;
         },
         percentageArticlesHidden() {
             return this.articleCount > 1

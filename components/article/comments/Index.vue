@@ -14,14 +14,10 @@
 export default {
     name: "Article comments",
     props: { article: { type: Object, required: true } },
-    data() {
-        return {
-            theme: useTheme(),
-        };
-    },
+
     computed: {
         themeClassList() {
-            const { bg1, text2 } = this.theme;
+            const { bg1, text2 } = this.$theme;
             return ["mb-5", bg1, text2].join(" ");
         },
     },

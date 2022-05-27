@@ -38,13 +38,12 @@ export default defineComponent({
             activeSortType: useFeedSortParam(),
             activeTimeperiod: useFeedTimeperiodParam(),
             activeFeedType: useFeedTypeParam(),
-            theme: useTheme(),
         };
     },
 
     computed: {
         focusColor() {
-            return this.theme.text3;
+            return this.$theme.text3;
         },
         subredditList() {
             return this.activeSubreddits.slice(0, 3).join(", ");

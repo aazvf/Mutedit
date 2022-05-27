@@ -19,37 +19,36 @@ const classes = {
     darker: "bg-zinc-800 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-400",
 };
 
+// $theme is the global theme plugin that gives tailwind classes based on user preferences.
+// this.theme is the prop like <tailwind-badge theme="active"
+// it can be static,active,inactive,disabled,focused,bordered which will use user theme
+//  based colors. otherwise can use the above keynames in `classes` for predefined colors.
 export default defineComponent({
     name: "Badge",
     props: {
         theme: { type: String, required: true },
     },
-    data() {
-        return {
-            userTheme: useTheme(),
-        };
-    },
     computed: {
         classNames() {
             const themed = {
-                static: [this.userTheme.bg(100, false), this.userTheme.text3],
+                static: [this.$theme.bg(100, false), this.$theme.text3],
                 active: [
-                    this.userTheme.bg(800, true),
-                    this.userTheme.text(100, false),
+                    this.$theme.bg(800, true),
+                    this.$theme.text(100, false),
                 ],
-                inactive: [this.userTheme.bg2, this.userTheme.text1],
-                disabled: [this.userTheme.bg2, "text-transparent"],
+                inactive: [this.$theme.bg2, this.$theme.text1],
+                disabled: [this.$theme.bg2, "text-transparent"],
                 focused: [
-                    this.userTheme.bg(300, true),
-                    this.userTheme.text1,
+                    this.$theme.bg(300, true),
+                    this.$theme.text1,
                     // "underline decoration-2",
                 ],
                 bordered: [
                     "border",
-                    this.userTheme.border5,
-                    this.userTheme.text(900, false),
-                    this.userTheme.bg(400, false),
-                    // this.userTheme.bg3,
+                    this.$theme.border5,
+                    this.$theme.text(900, false),
+                    this.$theme.bg(400, false),
+                    // this.$theme.bg3,
                 ],
             };
             if (typeof themed[this.theme] === "object") {

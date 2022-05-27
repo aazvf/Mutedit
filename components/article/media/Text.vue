@@ -25,8 +25,8 @@ export default defineComponent({
                 "overflow-hidden break-words mb-4 px-1",
                 "normal-case border-t pt-4 dark:text-gray-300 selftext",
                 this.showPreview ? "max-h-44" : "",
-                this.$theme().border5,
-                this.$theme().text2,
+                this.$theme.border5,
+                this.$theme.text2,
             ];
         },
         postHtml() {
