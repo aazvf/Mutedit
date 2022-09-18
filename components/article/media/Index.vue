@@ -5,6 +5,7 @@
                 :article="article"
                 v-show="showPreview"
                 v-on:click="onClickPreview"
+                v-if="article.hasPreview"
             />
         </Transition>
 
@@ -12,7 +13,10 @@
         <article-media-link :article="article" v-if="article.isLink" />
 
         <Transition>
-            <div class="relative z-0" v-if="!article.isText && !article.isLink && !showPreview">
+            <div
+                class="relative z-0"
+                v-if="(!article.isText && !article.isLink && !showPreview) || !article.hasPreview"
+            >
                 <article-media-preview-underlay
                     :src="isGallery ? article.gallerySource : article.previewSource"
                 />

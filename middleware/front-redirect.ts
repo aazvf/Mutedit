@@ -33,13 +33,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     // Make these params globally accessible using composables.
     useFeedQueryParam().value = "/";
-    if (sort) {
-        useFeedSortParam().value = sort;
-    }
-    if (time) {
-        useFeedTimeperiodParam().value = time;
-    }
-    if (articleType) {
-        useFeedTypeParam().value = articleType;
-    }
+    useFeedSortParam().value = sort;
+    useFeedTimeperiodParam().value = time;
+    useFeedTypeParam().value = articleType;
 });
