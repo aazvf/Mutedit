@@ -14,27 +14,37 @@ Hate & despise the privacy invading surveillance tactics used by reddit? Mutedit
 
 
 
-## How to mute words/subreddits
+
+## Features
+
+ - Browse the front page, a subreddit or multireddit using a url like /r/sub+sub 
+ - Lazy loading previews for links, images & videos. 
+ - Comments! Shows top level comments, click to expand the tree of child comments and load more.
+ - Sort by best,top,new,controversial,rising,hot
+ - Limit posts to a certain type like links, imgaes, videos and text posts.
+ - Mute custom words and subreddits from ever showing up in your feed, or toggle to show what it's hiding.
+ - Customize the theme to how you like it, choosing colours, alignments, layouts and more.
+ - Videos are played natively using html5 video and audio tags.
+ - Posts collapse after you've scrolled past so you can get back to the top quickly.
+ - Auto load more articles as you scroll
+
+
+
+The author invites you to view, modify, critique, learn from, re-host, and generally do anything with this code 
+
+
+### How to mute words/subreddits
 
 Wait for the posts to load, then draw your attention to the "mute words" area near the top, it shows you all the popular words from the posts that have loaded so far, clicking a word here will add it to your personal list of muted words. Similarly, the "mute subreddits" will work the same way.
 
+Additionally, you can highlight a word or phrase and use the popup to mute custom words
 
-## Theme ????
+### Theme ????
 
 My favourite feature. Click the coloured boxes at the top to set a random theme, or "more settings" to manually set colours and more.
 
-These settings and your muted words settings are stored in your browser's localstorage.
+These settings and your muted words settings are stored in your browser's localstorage, if something gets really broken you might need to clear it.
 
-
-## How it's made
-
-It's all vue.
-
-This project started as a single vue2 component in an empty laravel app. The single component became a few and a mixin. It found a new home after
-some decorations in a fresh nuxt 3 app. With aspirations to become fully static and hosted without a backend on s3, it slowly adapted to the new patterns and paradigms set forth by example in the nuxt 3 docs. 
-
-
-The author invites you, the reader, to view, modify, critique, learn from, re-host, and generally do anything with this code.
 
 ## definitions
 
@@ -44,10 +54,6 @@ article - an item from the feed, could be a link, image, video, text etc
 ## app.vue
 
 Sets some global meta data and uses `<NuxtPage>` to trigger the nuxt3 pages system and auto load the correct component from /pages/
-
-## nuxt.config.ts
-
-Disables server side rendering (ssr), loads custom scss from `/assets/sass` and registers the nuxt3 tailwind module.
 
 ## assets
 
@@ -66,18 +72,18 @@ Disables server side rendering (ssr), loads custom scss from `/assets/sass` and 
 
 ## composables
 
-use-articles - acts as a global array of all the articles got by the api, and related data
+    use-articles - acts as a global array of all the articles got by the api, and related data
 
-use-feed-filters - global state about what articles are being filtered
+    use-feed-filters - global state about what articles are being filtered
 
-use-feed-params - global state of what url params were requested. query, sort, time and type
+    use-feed-params - global state of what url params were requested. query, sort, time and type
 
 ## middleware
 
-front-redirect - enforces the url path `/{sort?}/{time?}/{type?}`
-sub-redirect - enforces the url path `/r/{query}/{sort?}/{time?}/{type?}`
+    front-redirect - enforces the url path `/{sort?}/{time?}/{type?}`
+    sub-redirect - enforces the url path `/r/{query}/{sort?}/{time?}/{type?}`
 
-Both middlewares also set the use-feed-params composables after validation.
+    Both middlewares also set the use-feed-params composables after validation.
 
 ## pages
 

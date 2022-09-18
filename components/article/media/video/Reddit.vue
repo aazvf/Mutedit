@@ -47,6 +47,7 @@ export default defineComponent({
         const { isVideoGif } = this.article;
         return {
             ...{ isVideoGif },
+            interacted: false,
         };
     },
     computed: {
@@ -73,6 +74,12 @@ export default defineComponent({
         },
     },
     methods: {
+        preventInteract() {
+            this.interacted = true;
+            setTimeout(() => {
+                this.interacted = false;
+            }, 100);
+        },
         muteAudio() {
             this.setVolume(0);
         },
@@ -82,18 +89,29 @@ export default defineComponent({
         setVolume(volume) {
             this.audio.volume = volume;
         },
+        onSeekVideo() {
+            if (typeof this.audio.play === "function") {
+                this.syncAudioToVideo();
+            }
+        },
         onPlayVideo() {
+            if (this.interacted) return;
+            this.preventInteract();
             if (typeof this.audio.play === "function") {
                 this.syncAudioToVideo();
                 this.audio.play();
             }
         },
         onPauseVideo() {
+            if (this.interacted) return;
+            this.preventInteract();
             if (typeof this.audio.play === "function") {
                 this.audio.pause();
             }
         },
         onPlayAudio() {
+            if (this.interacted) return;
+            this.preventInteract();
             this.silenceAudio();
             if (typeof this.video.play === "function") {
                 this.syncVideoToAudio();
@@ -101,6 +119,8 @@ export default defineComponent({
             }
         },
         onPauseAudio() {
+            if (this.interacted) return;
+            this.preventInteract();
             if (typeof this.video.play === "function") {
                 this.video.pause();
             }
