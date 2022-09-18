@@ -8,34 +8,39 @@ import sortTypes from "~/assets/data/sortTypes";
 import timePeriods from "~/assets/data/timePeriods";
 import articleTypes from "~/assets/data/articleTypes";
 
-
 export default defineNuxtRouteMiddleware((to, from) => {
-
     // Validate and get 3 params. sort, timeperiod and type.
-    const sort = sortTypes.includes(to.params.slug[0]) ? 
-        to.params.slug[0] : undefined;
+    const sort = sortTypes.includes(to.params.slug[0]) ? to.params.slug[0] : undefined;
 
-    const time = (['top', 'controversial'].includes(sort) &&
-        timePeriods.includes(to.params.slug[1])) ? 
-        to.params.slug[1] : undefined;
+    const time =
+        ["top", "controversial"].includes(sort) && timePeriods.includes(to.params.slug[1]) ? to.params.slug[1] : undefined;
 
-    const articleType = articleTypes.includes(to.params.slug[1]) ? 
-        to.params.slug[1] :  articleTypes.includes(to.params.slug[2]) ?
-        to.params.slug[2] : undefined;
+    const articleType = articleTypes.includes(to.params.slug[1])
+        ? to.params.slug[1]
+        : articleTypes.includes(to.params.slug[2])
+        ? to.params.slug[2]
+        : undefined;
 
-    let path = '/';
-    path += sort === undefined ? '' : sort;
-    path += time === undefined ? '' : '/' + time;
-    path += articleType === undefined ? '' : '/' + articleType;
+    let path = "/";
+    path += sort === undefined ? "" : sort;
+    path += time === undefined ? "" : "/" + time;
+    path += articleType === undefined ? "" : "/" + articleType;
 
     // Redirect to the correct path if the current path is not what we expect.
+    console.log({ fullpath: to.fullPath, path });
     if (to.fullPath !== path) {
         return navigateTo(path);
     }
 
     // Make these params globally accessible using composables.
-    useFeedQueryParam().value = '/';
-    useFeedSortParam().value = sort;
-    useFeedTimeperiodParam().value = time;
-    useFeedTypeParam().value = articleType;
+    useFeedQueryParam().value = "/";
+    if (sort) {
+        useFeedSortParam().value = sort;
+    }
+    if (time) {
+        useFeedTimeperiodParam().value = time;
+    }
+    if (articleType) {
+        useFeedTypeParam().value = articleType;
+    }
 });

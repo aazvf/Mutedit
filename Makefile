@@ -2,7 +2,6 @@ FN=testnuxtapp
 OUTPUT=output.zip
 
 s3:
-	npm run build
 	npm run generate
 	aws s3 sync .output/public s3://mutedit.icey.one/ --profile s3deploy --delete
 
