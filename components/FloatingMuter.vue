@@ -2,7 +2,7 @@
     <div
         v-if="selectedWord.length > 3 && !ignoredWords.includes(selectedWord)"
         id="toast-undo"
-        class="fixed flex transition-all top-0 left-0 items-center w-full max-w-xs px-4 py-2 text-gray-500 bg-white rounded-lg shadow dark:text-gray-300 dark:bg-purple-600"
+        class="fixed flex transition-all z-50 top-0 left-0 items-center w-full max-w-xs px-4 py-2 text-gray-500 bg-white rounded-lg shadow dark:text-gray-300 dark:bg-purple-600"
         role="alert"
         :style="{top: selTop + 'px', left: selLeft + 'px'}"
     >
@@ -44,7 +44,7 @@ export default defineComponent({
 
     methods: {
         onAgreeMuteWord() {
-            this.mutedWords.push({ s: this.selectedWord, w: false });
+            this.mutedWords.push(this.selectedWord);
             this.$localstorage.saveMutedWords();
         },
         waitForSelection() {

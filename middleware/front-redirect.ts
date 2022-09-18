@@ -27,7 +27,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     path += articleType === undefined ? "" : "/" + articleType;
 
     // Redirect to the correct path if the current path is not what we expect.
-    console.log({ fullpath: to.fullPath, path });
     if (to.fullPath !== path) {
         return navigateTo(path);
     }
