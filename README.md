@@ -1,4 +1,28 @@
-# Mutedit
+# Mutedit - Ignore topics on reddit front page.
+
+
+Live demo site: [http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/](http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/)
+
+
+Browse reddit front page and subreddits while ignoring posts containing words you define.
+
+Tired of hearing about the queen? or covid? or the next thing the media shoves in your face? Simply mute those words and never see posts about them as you browse.
+Think a subreddit is vile and has a wretched degenerate community? Simply mute that subreddit and never see posts from it again.
+Hate & despise the privacy invading surveillance tactics used by reddit? Mutedit is serverless, open source and has no tracking whatsoever.
+
+
+
+## How to mute words/subreddits
+
+Wait for the posts to load, then draw your attention to the "mute words" area near the top, it shows you all the popular words from the posts that have loaded so far, clicking a word here will add it to your personal list of muted words. Similarly, the "mute subreddits" will work the same way.
+
+
+## Theme ????
+
+My favourite feature. Click the coloured boxes at the top to set a random theme, or "more settings" to manually set colours and more.
+
+
+## How it's made
 
 It's all vue.
 This project started as a single vue2 component in an empty laravel app.
@@ -39,13 +63,11 @@ Disables server side rendering (ssr), loads custom scss from `/assets/sass` and 
 
 ## composables
 
-use-articles - acts as a global array of all the articles
-got by the api, and related data
+use-articles - acts as a global array of all the articles got by the api, and related data
 
 use-feed-filters - global state about what articles are being filtered
 
-use-feed-params - global state of what url params were requested.
-query, sort, time and type
+use-feed-params - global state of what url params were requested. query, sort, time and type
 
 ## middleware
 
@@ -82,79 +104,25 @@ Both middlewares also set the use-feed-params composables after validation.
 
 ---
 
-### Opinions, thoughts, wonders and comments
-
-Some ramblings of mine about nuxt3 having never used it before.
-
-I'm pretty happy how it compiles to a static site and worked perfectly when delpoyed to s3, it's exactly what I was looking for. The pages auto loading naming scheme is very flexible, but it took a moment at first to figure out the exact naming for what I wanted, in combination with middleware I was able to impose restrictions and validation on what data reaches the app from the url.
-
--   components
-    I don't know if I'm supposed to use defineComponent or not, seen it somewhere online and used it.
-
--   composables
-    These were used a couple different ways. I found that when using them in the vue `data()` function it worked as you might expect, but from a plugin or middleware I found myself having to use `.value` for it to work, and frequently hit fatal errors trying to figure out the exact syntax for what I wanted.
-
-I also found if the composable returns an object, like in use-feed-filters, it can be destructured easily in the vue component. like so.
-
-```
-data() {
-    const { focusWord } = useFeedFilters();
-    return {
-        ...useFeedFilters()
-    };
-}
-```
-
-I tried storing an object as a composable, but it would not destructure and keep reactivity.
-
--   dev server
-    Found myself having to restart the dev server every so often, especially after creating/removing files
-
--   plugins
-    I figured this is where I should put helper bits of code that many components might want to use. Globally accessible methods that don't make sense being a component.
 
 ### Todo & future ideas
 
-toggles & switches
+
 option compact mode
 option hide tags
 nsfw : allow, blur, hide
 mute domains
 mute users
-auto load more
 option for load amount
 regional front page
-
-fix auto hide on mobile or new header
-
-new sticky header
-
 show sub meta info
-
 multireddit system & import from api & predefined
 search subreddits and normal search
-sticky muter - make stuck on mobile
-
 favicon
 secrets
-
-padding on right align
-
-dont transform title
-
-subreddit muter options floating
-
-auto change background & fade slowly
-
 cleanup on load more
-
 match url to reddit and show single article
-
 fake votes
 live comments
-
 watch mode - invert filter and load more on interval
 
-hire me / donate button
-
-allow auth with reddit ?

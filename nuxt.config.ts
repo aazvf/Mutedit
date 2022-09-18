@@ -15,9 +15,9 @@ export default defineNuxtConfig({
         injectPosition: 0,
         viewer: true,
     },
-    cdnURL: "https://mutedit.icey.one/",
-    nitro: {
-        preset: "aws-lambda",
-        serveStatic: false,
-    },
+    cdnURL: "http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/",
+    // nitro: {
+    //     preset: "aws-lambda",
+    //     serveStatic: false,
+    // },
 });
