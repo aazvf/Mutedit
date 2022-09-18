@@ -46,10 +46,6 @@ My favourite feature. Click the coloured boxes at the top to set a random theme,
 These settings and your muted words settings are stored in your browser's localstorage, if something gets really broken you might need to clear it.
 
 
-## definitions
-
-feed - the main attraction of the app, the list of articles got from reddit
-article - an item from the feed, could be a link, image, video, text etc
 
 ## app.vue
 
@@ -66,16 +62,13 @@ Sets some global meta data and uses `<NuxtPage>` to trigger the nuxt3 pages syst
     feed - holds everything to do with getting articles
     pills - the menu that lets you navigate and mute things
     tailwind - reusable tailwind components taken from flowbite.com
-
     HeaderMenu - the very top navigation bar
     MuteditApp - the main app entry point that acts as a layout for the other components
 
 ## composables
 
     use-articles - acts as a global array of all the articles got by the api, and related data
-
     use-feed-filters - global state about what articles are being filtered
-
     use-feed-params - global state of what url params were requested. query, sort, time and type
 
 ## middleware
@@ -83,14 +76,12 @@ Sets some global meta data and uses `<NuxtPage>` to trigger the nuxt3 pages syst
     front-redirect - enforces the url path `/{sort?}/{time?}/{type?}`
     sub-redirect - enforces the url path `/r/{query}/{sort?}/{time?}/{type?}`
 
-    Both middlewares also set the use-feed-params composables after validation.
+Both middlewares also set the use-feed-params composables after validation.
 
 ## pages
 
     `r/[...slug].vue` - catches any requests starting with `/r/` and names the params `slug` when accessing `to.params` in middleware
-
     `[...slug].vue` - catches any request apart from the other named pages. names the params as `slug` when accessing `to.params` in middleware
-
     `muted-subs.vue` - shown when visiting /muted-subs
     `muted-words.vue` - shown when visiting /muted-words
 
@@ -111,7 +102,6 @@ Sets some global meta data and uses `<NuxtPage>` to trigger the nuxt3 pages syst
 
     images - just a play icon for the video preview
 
----
 
 
 ### Todo & future ideas
