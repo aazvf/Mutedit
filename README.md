@@ -10,7 +10,7 @@ Tired of hearing about the queen? or covid? or the next thing the media shoves i
 
 Think a subreddit is vile and has a wretched degenerate community? Simply mute that subreddit and never see posts from it again.
 
-Hate & despise the privacy invading surveillance tactics used by reddit? Mutedit is serverless, open source and has no tracking whatsoever.
+Hate & despise the privacy invading surveillance tactics used by reddit? Mutedit is serverless, open source and has no tracking whatsoever, not even cookies.
 
 
 
@@ -23,15 +23,16 @@ Wait for the posts to load, then draw your attention to the "mute words" area ne
 
 My favourite feature. Click the coloured boxes at the top to set a random theme, or "more settings" to manually set colours and more.
 
+These settings and your muted words settings are stored in your browser's localstorage.
+
 
 ## How it's made
 
 It's all vue.
-This project started as a single vue2 component in an empty laravel app.
-The single component became a few and a mixin. It found a new home after
-some decorations in a fresh nuxt 3 app. With aspirations to become fully
-static and hosted without a backend on s3, it slowly adapted to the
-new patterns and paradigms set forth by example in the nuxt 3 docs.
+
+This project started as a single vue2 component in an empty laravel app. The single component became a few and a mixin. It found a new home after
+some decorations in a fresh nuxt 3 app. With aspirations to become fully static and hosted without a backend on s3, it slowly adapted to the new patterns and paradigms set forth by example in the nuxt 3 docs. 
+
 
 The author invites you, the reader, to view, modify, critique, learn from, re-host, and generally do anything with this code.
 
@@ -110,21 +111,21 @@ Both middlewares also set the use-feed-params composables after validation.
 ### Todo & future ideas
 
 
-option compact mode
-option hide tags
-nsfw : allow, blur, hide
-mute domains
-mute users
-option for load amount
-regional front page
-show sub meta info
-multireddit system & import from api & predefined
-search subreddits and normal search
-favicon
-secrets
-cleanup on load more
-match url to reddit and show single article
-fake votes
-live comments
-watch mode - invert filter and load more on interval
+ - option compact mode
+ - option hide tags
+ - nsfw : allow, blur, hide
+ - mute domains
+ - mute users
+ - option for load amount
+ - regional front page
+ - show sub meta info
+ - multireddit system & import from api & predefined
+ - search subreddits and normal search
+ - favicon
+ - secrets
+ - cleanup on load more
+ - match url to reddit and show single article
+ - fake votes
+ - live comments
+ - watch mode - invert filter and load more on interval
 
