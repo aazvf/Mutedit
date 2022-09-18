@@ -3,7 +3,7 @@
         <Transition>
             <article-media-preview
                 :article="article"
-                v-show="article.hasPreview && showPreview"
+                v-show="showPreview"
                 v-on:click="onClickPreview"
             />
         </Transition>
@@ -12,10 +12,7 @@
         <article-media-link :article="article" v-if="article.isLink" />
 
         <Transition>
-            <div
-                class="relative z-0"
-                v-if="!article.isText && !article.isLink && !showPreview || !article.hasPreview"
-            >
+            <div class="relative z-0" v-if="!article.isText && !article.isLink && !showPreview">
                 <article-media-preview-underlay
                     :src="isGallery ? article.gallerySource : article.previewSource"
                 />

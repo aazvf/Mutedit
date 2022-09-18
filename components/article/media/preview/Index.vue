@@ -3,7 +3,7 @@
         <article-media-preview-underlay v-if="article.seen" :src="article.previewSource" />
         <tailwind-spinner v-if="!article.seen"></tailwind-spinner>
         <img
-            v-if="article.seen"
+            v-if="article.seen && article.hasPreview"
             :src="article.previewSource"
             alt="preview"
             referrerpolicy="no-referrer"

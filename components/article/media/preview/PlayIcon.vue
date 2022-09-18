@@ -10,6 +10,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    min-height: 200px;
     top: 0;
     left: 0;
     display: block;
