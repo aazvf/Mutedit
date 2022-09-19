@@ -6,11 +6,11 @@ Live demo site: [http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/](ht
 
 Browse reddit front page and subreddits while ignoring posts containing words you define.
 
-Tired of hearing about the queen? or covid? or the next thing the media shoves in your face? Simply mute those words and never see posts about them as you browse.
+Tired of hearing about the latest news story? Simply mute those words and never see posts about them as you browse.
 
-Think a subreddit is vile and has a wretched degenerate community? Simply mute that subreddit and never see posts from it again.
+Have absolutely no interest in a particular subreddit? Just mute it and never see their posts again.
 
-Hate & despise the privacy invading surveillance tactics used by reddit? Mutedit is serverless, open source and has no tracking whatsoever, not even cookies.
+Despise the privacy invading surveillance tactics used by reddit? Mutedit is serverless, open source and has no tracking whatsoever, not even cookies.
 
 
 
