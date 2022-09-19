@@ -1,9 +1,8 @@
-# Mutedit - A reddit browser where you can ignore topics and subreddits
-
-- nuxt3, vue, tailwind
+# Mutedit - Browse reddit but ignore topics and subreddits
 
 Live demo static site: [http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/](http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/)
 
+Built with nuxt3, vue & tailwind.
 
 Browse reddit front page and subreddits while ignoring posts containing words you define.
 
