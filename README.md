@@ -1,6 +1,6 @@
 # Mutedit - Browse reddit but ignore topics and subreddits
 
-Live demo static site: [http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/](http://mutedit.icey.one.s3-website.eu-west-1.amazonaws.com/)
+Live demo static site: [http://mutedit.aazvf.art/](http://mutedit.aazvf.art)
 
 Built with nuxt3, vue & tailwind.
 

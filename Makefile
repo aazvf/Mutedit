@@ -3,14 +3,14 @@ OUTPUT=output.zip
 
 s3:
 	npm run generate
-	aws s3 sync .output/public s3://mutedit.icey.one/ --profile s3deploy --delete
+	aws s3 sync .output/public s3://mutedit.aazvf.art/ --profile s3deploy --delete
 
 
 build: 
 	npm run build
 
 lambda:
-	NUXT_APP_CDN_URL=https://mutedit.icey.one/ NITRO_PRESET=aws-lambda npm run build
+	NUXT_APP_CDN_URL=https://mutedit.aazvf.art/ NITRO_PRESET=aws-lambda npm run build
 
 zip:
 	rm $(OUTPUT)

@@ -5,7 +5,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "deploy": "nuxt generate && aws s3 sync .output/public s3://mutedit.icey.one/ --profile mutedit --delete"
+    "deploy": "nuxt generate && aws s3 sync .output/public s3://mutedit.aazvf.art/ --profile s3deploy --delete"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.0.4",
